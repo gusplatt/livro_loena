@@ -1,0 +1,748 @@
+% Modifique de acordo com as suas necessidades
+
+\chapter{Equilíbrio termodinâmico líquido-vapor} \label{cap3aux}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+Este capítulo trata do equilíbrio de fases de sistemas não-reativos deduzindo as condições que devem ser satisfeitas para que o mesmo ocorra, mais especificamente será considerado o equilíbrio entre duas fases fluidas, líquida e vapor.
+
+As condições de equilíbrio são modeladas e delas derivam certas relações que permitem, em algumas circunstâncias, determinar as propriedades termodinâmicas de um sistema quando o mesmo estiver em equilíbrio. 
+ 
+Em geral, um sistema é dito \textit{fechado} se está isolado do exterior, {\em i.e.}, não apresenta troca de quantidades físicas com o seu entorno. Um sistema está em \textit{equilíbrio} se não ocorrem alterações no seu interior. 
+
+Assim, um sistema fechado está em \textit{equilíbrio mecânico} se não ocorrem variações de pressão, em \textit{equilíbrio térmico} se não ocorrem variações de temperatura, em \textit{equilíbrio de fases} se não ocorrem transformações de uma fase em outra, em \textit{equilíbrio termodinâmico} se estiver em equilíbrio mecânico, térmico e de fases, e em \textit{equilíbrio químico} se não ocorrem variações na composição química do mesmo. As condições de equilíbrio mecânico e térmico são de mais simples formulação, ao passo que as condições de equilíbrio químico e de fases podem ser bastante elaboradas.
+
+A maneira mais usual de representar o equilíbrio de fases é através da igualdade de potenciais químicos das substâncias nas duas fases, ou equivalentemente, através da igualdade das fugacidades como será visto mais a frente.
+
+\section{Balanço de massa}\label{secao1}
+
+Em uma mistura multicomponente, com $N$ substâncias componentes, e bifásica, com fases líquida (L) e vapor (V), denota-se o número de mols da componente $i$ na: 
+%
+\begin{itemize}
+\item fase líquida, por $n_i^{L}$;
+\item fase vapor, por $n_i^{V}$;
+\item mistura, por $n_i$.
+\end{itemize}
+E denota-se o número de mols da mistura na(s):
+\begin{itemize}
+\item fase líquida, por $n^L$;
+\item fase vapor, por $n^V$;
+\item duas fases (total), por $n$.
+\end{itemize}
+
+Assim, a conservação da massa do componente $i$ é expressa como 
+%
+\begin{subequations}\label{relacao}
+\begin{eqnarray}\label{ni}
+n_i^L + n_i^{V} = n_i.
+\end{eqnarray} 
+
+Em outras palavras, pode-se escrever a conservação da massa como a eq. \ref{ni}, com $2N$ incógnitas, $n_i^L$, $n_i^V$, e $N$ dados, $n_i$. Há assim, $N$ graus de liberdade.
+
+O número de mols nas fases líquida e vapor podem ser expressos em termos das quantidades anteriormente destacadas
+\begin{eqnarray}\label{ni_2}
+n^L = \sum_{i=1}^{N} n_i^L, \ \ \ n^V = \sum_{i=1}^{N} n_i^V.
+\end{eqnarray} 
+
+Como consequência, somando-se a eq. \ref{ni_2} e usando a eq. \ref{ni} tem-se 
+%
+\begin{eqnarray}\label{ni2}
+n = n^L + n^V = \sum_{i=1}^{N} (n_i^L + n_i^V) =  \sum_{i=1}^{N} n_i,
+\end{eqnarray}
+%
+donde
+\begin{eqnarray}\label{ni3}
+n =  \sum_{i=1}^{N} n_i.
+\end{eqnarray}
+
+Denota-se por $\mathbf{x}  = (x_1,x_2, ..., x_N)^t$, $\mathbf{y}=(y_1,\cdots, y_N)^t$ e $\mathbf{z}=(z_1,\cdots, z_N)^t$ as composições, isto é, as frações molares, líquida, vapor e global, respectivamente, cujas entradas são definidas por
+%
+\begin{eqnarray}\label{nil}
+x_i = \frac{n_i^L}{n^{L}}, \ \ \ y_i = \frac{n_i^{V}}{n^{V}}, \ \ \ z_i = \frac{n_i}{n}.
+\end{eqnarray}
+\end{subequations}
+
+Segue-se das definições o resultado: 
+%
+\begin{prop}\label{prop1} \begin{em}\ \ As composições satisfazem
+%
+\begin{eqnarray}\label{sum}
+ \sum_{i=1}^{N}x_i = 1, \ \  \sum_{i=1}^{N}y_i = 1 \ \ \text{e} \ \ \sum_{i=1}^{N}z_i = 1.
+\end{eqnarray}
+
+\dem \ Pela definição de $x_i$, eq. \ref{nil}, e pela eq. \ref{ni_2}, tem-se  
+\begin{eqnarray}
+ \sum_{i=1}^{N}x_i = \sum_{i=1}^{N} \frac{n_i^L}{n^L} = \frac{\sum_{i=1}^{N} n_i^L}{n^L} = \frac{n^L}{n^L} = 1.
+\end{eqnarray} 
+%
+As demonstrações dos resultados para $\mathbf{y}$ e $\mathbf{z}$ são análogas.
+\fim
+\end{em}
+\end{prop}
+
+Nota-se que conhecida a composição líquida, $\mathbf{x}$, e o número de mols na fase líquida, $n^L$, determina-se o número de mols das substâncias na fase líquida. Basta para tanto usar a definição da composição, eq. \ref{nil}, donde $n_i^L = x_in^L$. Analogamente, o mesmo ocorre para o número de mols da fase vapor.
+
+\begin{prop}\label{prop11} \begin{em} Conhecer $n_i^L$, com $i=1,\cdots,N$, é equivalente a conhecer $n^L$ e $\mathbf{x}$. Resultado análogo ocorre para $n_i^V$, com $i=1,\cdots,N$, e $n^V$ e $\mathbf{y}$.
+\end{em}
+\end{prop}
+\fim
+
+\begin{prop}\label{prop_extra} \begin{em} As equações de balanço de massa podem ser escritas, alternativamente,em função das frações molares, $\mathbf{x}$, $\mathbf{y}$, e do número de mols nas fases líquida e vapor, $n^L$, $n^V$,  
+%
+\begin{subequations} \label{nxny}
+\begin{eqnarray}
+n_i = n^L x_i + n^V y_i,
+\end{eqnarray}
+\begin{eqnarray} \label{soma}
+ \sum_{i=1}^{N}x_i = 1, \ \  \sum_{i=1}^{N}y_i = 1.
+\end{eqnarray}
+\end{subequations}
+
+\dem \ Da eq. \ref{ni_2}, das definições na eq. \ref{nil} e pela eq. de balanço de massa \ref{ni}, tem-se que
+%
+\begin{eqnarray*}
+\frac{n_i^L}{n^L} n^L + \frac{n_i^V}{n^V}n^V = n_i,
+\end{eqnarray*}
+%
+o que implica em
+%
+\begin{eqnarray}
+n_i=n^Lx_i + n^Vy_i.
+\end{eqnarray}
+
+Além disso, a eq. \ref{soma} já foi demonstrada na proposição \ref{prop1}.
+\fim
+\end{em}
+\end{prop}
+
+Observa-se que o sistema da eq. \ref{nxny} é equivalente ao sistema da eq. \ref{ni}. De fato, em \ref{ni} há $N+2$ equações a $2N+2$ incógnitas, e conhecendo-se $n_i$, $i=1,\ldots, N$, há $N$ graus de liberdade, exatamente como ocorre com a expressão da conservação da massa na eq. \ref{ni}.  
+
+Para usar as composições ao invés dos números de mol das fases, deve-se incorporar as equações obtidas na proposição \ref{prop1} na formulação da conservação da massa, isto é, a eq. \ref{soma}. Nota-se que, conhecendo-se $n_i$, tem-se $z_i/n$ e tendo-se $z_i$ e $n$, obtém-se $n_i$, ou seja, são equivalentes. Estas considerações estão resumidas na tabela \ref{tab:4nova}. 
+
+Claramente, as equações de conservação da massa são insuficientes para deteerminar as frações molares da mistura. Assim, outras propriedades físicas da mistura precisam ser consideradas para resolver esse problema. É o que é feito na próxima seção.
+%
+\begin{table}[h!]{}
+\centering
+	\caption{Problemas de misturas bifásicas}\label{tab:4nova}
+	    \begin{tabular}{  c | c | c | c | c   }
+			\hline
+			\textbf{formulação} & \textbf{dados} & \textbf{incógnitas} & \textbf{número de} & \textbf{número de equações da}\\
+			& & & \textbf{incógnitas} & \textbf{conservação da massa}\\  \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{frações molares} & $n_i$  & $n_i^L$, $n_i^V$  & $2N$ & {$N$ (eq. \ref{ni}) }  \\
+			& $i=1,\ldots,N$ & $i=1,\ldots, N$ & & \\  
+			& & & & \\ \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{composições} & $\mathbf{z}$, $n$  & $\mathbf{x}$, $\mathbf{y}$, $n^L$, $n^V$ & $2N+2$ & $N+2$ (eq. \ref{nxny}) \\ 
+			& & & & \\ \hline
+		\end{tabular}
+	
+\end{table}
+			
+
+\section{Equilíbrio termodinâmico}\label{4.2}
+
+Ao se misturar diversos componentes (substâncias) em temperaturas, pressões e fases distintas, num volume fixo, considerando um sistema fechado, esta mistura atingirá um equilíbrio termodinâmico. 
+
+Durante este processo, o número de mols da componente $i$ na fase líquida, $n_i^L$, e na fase vapor, $n_i^V$, podem variar. Mas, pelo balanço de massa, a soma deles tem que ser constante, eq. \ref{ni}.  
+
+Para um sistema fechado em equilíbrio termodinâmico em que as temperaturas e pressões de equilíbrio sejam denotadas por $T$ e $P$, para um dado volume, $\bar{V}$, contendo um mol de uma mistura com $N$ componentes, devem ser satisfeitas a igualdade dos potenciais químicos das fases de cada componente, $\mu$, e o balanço de massa (de cada componente). Isso se expressa como
+%
+\begin{subequations}\label{sistema1}
+\label{equilibrio}
+\begin{eqnarray}\label{mu1}
+\mu_i^L = \mu_i^{V}, 
+\end{eqnarray}
+\begin{eqnarray} 
+\label{Balancemass2}
+n_i^L + n_i^V = n_i,
+\end{eqnarray}
+\end{subequations}
+%
+com $ i = 1,\cdots, N$. Aqui, por exemplo,  $\mu_i^L = \mu_i^L(\mathbf{n}^L,P,T,Z)$, onde $\mathbf{n}^L=(n_1^L,n_2^L,\cdots,n_N^L)^t$ e $Z$ é o fator de compressibilidade, 
+%
+\begin{equation}\label{lab5}
+Z=\frac{PV}{nRT} \ \ \text{ou} \ \ Z=\frac{P\bar{V}}{RT}. 
+\end{equation}
+
+Neste sistema tem-se um conjunto de $2N$ equações. Existem $2N+3$ variáveis (que se deve a $2N$ variáveis, $n_i^L$ e $n_i^V$, das duas fases, à pressão $P$, à temperatura $T$ e ao volume $V$, ou alternativamente ao fator de compressibilidade $Z$). Assim, há a necessidade de considerar outras três equações para completar o sistema. Uma possibilidade é utilizar uma equação de estado, e fixar variáveis $P$ e $T$.  
+
+Em uma formulação alternativa, pode-se escrever que o potencial químico depende da composição, da pressão $P$ e da temperatura $T$. Por exemplo, como $\mathbf{x}$ é a composição da fase líquida, tem-se nessa fase $\mu_i^L(\mathbf{x}, P,T, Z)$. 
+
+Assumindo então a equação de estado \ref{eq7b}, o sistema de equações no equilíbrio termodinâmico é:
+%
+\begin{itemize}
+\begin{subequations}\label{sistema_1}
+\item igualdade dos potenciais químicos \begin{equation}\label{lab1}
+\mu_i^L(\mathbf{x}, P, T, Z) = \mu_i^V(\mathbf{y}, P, T, Z), \ \text{com} \ i=1,\cdots, N; 
+\end{equation} 
+\item conservação da massa
+\begin{equation}\label{lab2}
+n_i = x_in_L + y_i n_V , \ \text{com} \ i=1,\cdots, N;
+\end{equation}
+\item restrição da definição de composição\begin{equation}\label{lab3}
+\sum_{i=1}^{N} x_i = 1, 
+\end{equation}
+\begin{equation}\label{lab4}
+\sum_{i=1}^{N} y_i = 1; 
+\end{equation}
+\item equação de estado 
+\begin{equation}
+\label{eq7b22}
+Z^{3}+C Z^{2} +D Z +E = 0,
+\end{equation}  
+\end{subequations}
+\end{itemize}
+%
+constituindo um total de $2N+3$ equações e $2N+5$  variáveis ($\mathbf{x}_i$'s, $\mathbf{y}_i$'s, $P$, $T$, $Z$, $n^L$ e $n^V$). Observa-se que denotando a menor raiz cúbica da equação de estado por $Z_L$ e por $Z_V$ a maior, deve-se substituir $Z$ na eq. \ref{lab1} por $Z_L$ no lado esquerdo e por $Z_V$ no lado direito. Para fechar o sistema, pode-se especificar a pressão e a temperatura, originando o problema de flash, por exemplo, como mostra a tabela \ref{tab:Tabelaextra_nova}. 
+%
+\begin{table}[]{}
+\centering
+	\caption{Cálculo do problema flash.}\label{tab:Tabelaextra_nova}
+	    \begin{tabular}{  c | c | c | c | c   }
+			\hline
+			\textbf{problema} & \textbf{dados} & \textbf{calcular} & \textbf{incógnitas} & \textbf{equações}\\  \hline
+			\multirow{2}{*}{} & & & & \\
+			\multirow{2}{*}{flash} & $T$, $P$ e $n_i$'s & $\mathbf{x}$, $\mathbf{y}$, $Z$, $n^L$ e $n^V$ & $2N+3$ &  \ref{sistema_1} ($2N+3$) \\
+			\multirow{2}{*}{} & & & & \\  \hline
+		\end{tabular}	
+\end{table}
+
+
+%--------------------------------------------------------
+\section{Fugacidade}
+\label{secFUG}
+%------------------------------------------------------			
+
+Considerando a dificuldade de se manipular os potenciais químicos, torna-se mais conveniente expressar o equilíbrio termodinâmico em função da fugacidade, exigindo a igualdade da fugacidade das fases -- isofugacidade -- para cada umas das componentes da mistura em questão. O potencial químico relaciona-se com a fugacidade pela equação
+%
+\begin{equation}
+\label{eq11}
+\text{d} \mu_i = RT \text{d} \text{ln} f_i,
+\end{equation} 
+%
+na qual $\mu_i$ e $f_i$ são, respectivamente, o potencial químico e a fugacidade da componente $i$ na mistura, veja \cite{smith2000introducao}. 
+
+As principais equações de equilíbrio líquido-vapor são as que afirmam a igualdade das fugacidades das fases líquida e vapor, em cada uma das componentes da mistura, e que substituem a eq. \ref{lab1}. De fato, da eq. \ref{eq11} tem-se que $\mu_i = RT \text{ln}f_i$, que substituída na igualdade  de potenciais químicos, eq. \ref{lab1}, leva a 
+%
+ \begin{equation*}
+ RT \text{ln}f_i^L = RT\text{ln}f_i^V, 
+\end{equation*}
+%
+onde, por exemplo, $f_i^L$ é a fugacidade do componente $i$ na fase líquida da mistura. Logo, a igualdade dos potenciais químicos leva à igualdade das fugacidades,
+%
+\begin{equation*}
+\label{eq13}
+f_i^L = f_i^{V}.
+\end{equation*}
+
+O coeficiente de fugacidade (ou coeficiente de atividade) da componente $i$ é definido pelo quociente
+%
+\begin{equation}
+\label{bb10}
+\varphi_i = \frac{f_i}{Pz_i},
+\end{equation} 
+%
+onde a variável $z_i$ representa a fração molar da susbtância $i$, em determinada fase (notação que difere da seção \ref{secao1}, onde $z_i$ se refere a composição global). Ou seja, $z_i = x_i$ na fase líquida e $z_i=y_i$ na fase vapor. 
+
+Assim, em uma mistura líquido-vapor as fugacidades se escrevem $f_i^L = \varphi_i^L P x_i$ e  $f_i^V = \varphi_i^V P y_i$. 
+%
+Donde, a equação de isofugacidade para o componente $i$  é simplesmente
+%
+\begin{equation}
+\label{eqf}
+ \varphi_i^L x_i =  \varphi_i^V y_i, \ \ \text{com} \ \ i=1,\ldots, N.
+\end{equation}
+
+Em cada EDEC tem-se, devido às suas particularidades, uma expressão distinta para o coeficiente de fugacidade. Dentre as EDECs, a equação de PR é uma das equações de estado mais utilizadas atualmente em química e nas simulações da indústria do petróleo, devido à sua forma relativamente simples e boa acurácia. Por estes motivos, esta é utilizada nas simulações apresentadas neste livro. Na equação de PR, o logaritmo do coeficiente de fugacidade é dado pela equação
+%
+\begin{eqnarray}\label{eq15}
+\text{ln}\varphi_i &=& \frac{B_i}{B_m}(Z_m -1)-\text{ln}(Z_m -B_m) \nonumber \\
+&+& \frac{A_m}{2,282B_m}\left(\frac{B_i}{B_m}-2\frac{\psi_i}{a_m}\right)\text{ln}\left(\frac{Z_m +2,414B_m}{Z_m -0,414B_m}\right),
+\end{eqnarray}
+%
+onde $\psi_i = \sum_{j=1}^{N} a_{ij} z_j$ é o fator acêntrico, e o fator de compressibilidade, $Z_m$, é substituído (avaliado) por uma das raízes da eq. de estado termodinâmico \ref{eq7b22}, a menor, no caso da fase líquida, e a maior, no caso da fase vapor. Aqui, novamente $z_i$ representa a fração molar da componente $i$, em determinada fase. 
+
+Em outras palavras, conhecendo-se as raízes da equação de estado termodinãmico, eq. \ref{eq7b22}, pode-se  calcular os coeficientes de fugacidade do líquido e do vapor com a eq. \ref{eq15}. Se esses coeficientes produzirem fugacidades iguais, segundo a eq. \ref{eqf}, o equilíbrio termodinâmico ocorre.
+
+A Tabela \ref{tab:Tabela2} mostra as equações do logaritmo do coeficiente de fugacidade para alguns tipos de EDECs. Recorda-se que os parâmetros de energia e covolume, $A_m$ e $B_m$, na eq. \ref{eq15} e também os coeficientes das EDEC's ($C$, $D$, $E$, eq.\ref{eq7b22}), são escritos em função das regras de misturas de VDW-1.
+%
+\begin{table}[h!]{}
+	\caption{Expressão do logaritmo do coeficiente de fugacidade para o componente $i$ na mistura. }
+\label{tab:Tabela2} 
+\begin{tabular}{l|l}\hline
+{\tt \bf{EDEC}} & \multicolumn{1}{|c}{\textbf{coeficiente de fugacidade}} \\ \hline
+VDW & $\text{ln}\varphi_i = \frac{b_{c_i}}{V_m - b_m}-\text{ln}[Z_m (1-\frac{b_m}{V_m})]+ - \frac{2\sqrt{a_m a_i} }{RTV_m})$ \\ \hline
+SRK & $\text{ln}\varphi_i = \frac{B_i}{B_m}(Z_m -1)-\text{ln}(Z_m -B_m)+\frac{A_m}{B_m}\left(\frac{B_i}{B_m}-2\frac{\psi_i}{a_m}\right)\text{ln}\left(1 + \frac{B_m}{Z_m}\right)$ \\\hline
+PR & $\text{ln}\varphi_i = \frac{B_i}{B_m}(Z_m -1)-\text{ln}(Z_m -B_m)+\frac{A_m}{2,282B_m}\left(\frac{B_i}{B_m}-2\frac{\psi_i}{a_m}\right)\text{ln}\left(\frac{Z_m +2,414B_m}{Z_m -0,414B_m}\right)$\\\hline
+\end{tabular}
+\end{table}
+
+Finalmente, reescreve-se o sistema de equilíbrio termodinâmico \ref{sistema_1} como
+%
+\begin{itemize}
+\begin{subequations}\label{sistema_novo}
+\item isofugacidade das fases \begin{equation}\label{lab1.1}
+\varphi_i^L x_i =  \varphi_i^V y_i, \ \ \text{com} \ \ i=1, \cdots, N;
+\end{equation} 
+\item conservação da massa (de cada componente)
+\begin{equation}\label{lab2.2}
+n_i = x_in_L + y_i n_V , \ \text{com} \ i=1,\cdots, N;
+\end{equation}
+\item restrição da definição de composição\begin{equation}\label{lab3.3}
+\sum_{i=1}^{N} x_i = 1; 
+\end{equation}
+\begin{equation}\label{lab4.4}
+\sum_{i=1}^{N} y_i = 1; 
+\end{equation}
+\item equação de estado 
+\begin{equation}
+\label{eq7b22.22}
+Z^{3}+C Z^{2} +D Z +E = 0,
+\end{equation}  
+\end{subequations}
+\end{itemize}
+%
+onde os coeficientes de fugacidade e o fator de compressibilidade nas fases líquida e vapor são denotados, respectivamente, por 
+%
+\begin{equation}\label{varphinovo} 
+\varphi_i^L= \varphi_i^L(x_i, Z, P, T), \ \  \varphi_i^V= \varphi_i^V(y_i, Z, P, T), \ \  Z^L=Z^L(\mathbf{x}, P, T), \ \ 
+Z^V=Z^V(\mathbf{y}, P, T).
+\end{equation}  
+
+Pelo sistema dado pelas equações de \ref{sistema_novo}, tem-se $2N+5$ variáveis, a saber, $\mathbf{x}_i$'s, $\mathbf{y}_i$'s, $n^L$, $n^V$, $P$, $T$ e $Z$. Logo, são necessárias $2N+5$ equações. Como já exitem $2N+3$ equações, uma forma de completar o sistema é considerar o problema de flash, assumindo dadas a pressãp $P$ e a temperatura $T$, como feito para sistema \ref{sistema_1}. Outras problemas ainda serão considerados na próxima seção. 
+
+\section{Equilíbrio líquido-vapor}\label{secao4.4}
+
+Com a eq. \ref{sistema_1} (veja também a tabela \ref{tab:Tabelaextra_nova}), ou a eq. \ref{sistema_novo}, pode-se obter casos particulares de problemas de equilíbrio termodinâmico com um número reduzido de equações e incógnitas, como por exemplo, o problema de cálculo de ponto de orvalho. 
+
+Na tabela \ref{tab:Tabelaextra_1}, são apresentadas algumas possibilidades de problemas, os problemas de bolha, de orvalho e de flash. Para cada situação apresentada nesta tabela, tem-se o número de incógnitas do problema e as equações que devem ser usadas para obter o estado termodinâmico.
+%
+\begin{table}[h!]{}
+\centering
+	\caption{Possibilidades para o cálculo dos problemas de bolha, orvalho e flash.}\label{tab:Tabelaextra_1}
+	    \begin{tabular}{  c | c | c | c | c   }
+			\hline
+			\textbf{problema} & \textbf{dados} & \textbf{calcular} & \textbf{incógnitas} & \textbf{equações}\\  \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{bolha} & $\mathbf{x}$, $P$  & $\mathbf{y}$, $T$ e $Z$  & \multirow{2}{*}{$N+2$} & {\ref{lab1.1}, \ref{lab4.4}, \ref{eq7b22.22} } \\   
+			& $\mathbf{x}$, $T$  & $\mathbf{y}$, $P$ e $Z$ & & ($N+2$) \\
+			& & & & \\ \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{orvalho} & $\mathbf{y}$, $P$  & $\mathbf{x}$, $T$ e $Z$ & \multirow{2}{*}{$N+2$} & {\ref{lab1.1}, \ref{lab3.3}, \ref{eq7b22.22}} \\ 
+			& $\mathbf{y}$,$T$  & $\mathbf{x}$, $P$ e $Z$ & & ($N+2$) \\
+			& & & & \\ \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{flash} & $P$, $T$ e $n_i$'s & $\mathbf{x}$, $\mathbf{y}$, $Z$, $n^L$ e $n^V$ & $2N+3$ &  {\ref{sistema_novo}} \\
+			\multirow{2}{*}{} & & & & ($2N+3$) \\
+			\multirow{2}{*}{} & & & & \\  \hline
+		\end{tabular}
+	
+\end{table}
+
+
+\subsection{Sistema não-linear para o cálculo dos pontos de bolha e de orvalho}
+
+Como visto nesta seção, para o cálculo de pontos de bolha, pode-se fazer $N+1$ especificações assumindo que a composição de $\mathbf{x}$ é conhecida, assim como a pressão $P$ (ou a temperatura, $T$), conforme a Tabela \ref{tab:Tabelaextra_1}. Com isto, pode-se reduzir o problema a $N+2$ equações, (\ref{lab1.1}), (\ref{lab4.4}) e (\ref{eq7b22.22}), com $N+2$ incógnitas, $\mathbf{y}$, $P$ (ou $T$) e $Z=Z(\mathbf{y}, P, T)$. 
+ 
+Analogamente, o cálculo de ponto de orvalho é realizado assumindo $\mathbf{y}$ conhecido, e o sistema a ser resolvido envolve as equações \ref{lab1.1}, \ref{lab3.3}, \ref{eq7b22.22}, e $N+2$ incógnitas, $\mathbf{x}$, $P$ (ou $T$) e $Z=Z(\mathbf{x}, P, T)$.
+
+\begin{obs}\label{observ}\begin{em} 
+Como $Z$ depende da composição $\mathbf{x}$ (ou $\mathbf{y}$), da pressão, $P$, e da temperatura, $T$, e satisfaz uma equação cúbica, não há a necessidade de se considerar $Z$ como variável, já que esse fator pode ser facilmente calculado pela eq. \ref{eq7b22.22} e substituído nas demais equações.
+
+Considere, por exemplo, o problema de bolha e temperatura fixa, $T_{\star}$. Recorda-se que, na equação cúbica de estado, eq. \ref{eq7b22.22}, o parâmetro de energia, $A_m$, o covolume, $B_m$, e o fator acêntrico, $\mathbf{\psi}$, dependem da composição, da pressão e da temperatura. 
+
+Assim, justifica-se representar por $Z^L = Z^L(\mathbf{x}, P, T_{\star})$ a menor raiz da equação cúbica de estado, eq. \ref{eq7b22.22}, referente à fase líquida. 
+
+Também, representa-se por $Z^V = Z^V(\mathbf{y}, P, T_{\star})$, a maior raiz da equação de estado, agora com os coeficientes avaliados na composição do vapor, $\mathbf{y}$, e ainda da pressão, $P$, e da temperatura, $T_{\star}$. 
+
+Como $Z^L$ e $Z^V$ são funções analíticas dos coeficientes da equação de estado (e são facilmente calculáveis), pode-se substituí-los respectivamente no lado esquerdo e direito da equação de isofugacidade, eq. \ref{lab1.1}, e assim, o sistema para o cálculo de ponto de bolha, fica reduzido a $N+1$ equações, eq. \ref{lab1.1} e eq. \ref{lab4.4}, para a composição, $\mathbf{y}$, e pressão, $P$.
+
+Analogamente, o mesmo ocorre para o cálculo de ponto de orvalho.
+\fim
+\end{em} 
+\end{obs}
+
+Ainda outros casos poderiam ser considerados, envolvendo a determinação simultânea das frações molares das fases líquida e vapor quando há um fluxo de uma mistura em um reator (problema de flash), conforme indicado na tabela \ref{tab:Tabelaextra_1}.  
+
+Recorda-se que, pela Proposição \ref{prop1}, as frações molares satisfazem,  $\sum_{j=1}^{N} x_j = 1$ e $\sum_{j=1}^{N}y_j = 1$. Pode-se resolver a $N$-ésima entrada do vetor composição das fases líquida e vapor, em função das composições restantes
+%
+\begin{eqnarray}\label{manter}
+x_N = 1- \sum_{j=1}^{N-1}x_j, \ \ \ y_N = 1- \sum_{j=1}^{N-1}y_j.
+\end{eqnarray}
+
+Desta forma, $x_N$ e $y_N$ deixam de ser consideradas incógnitas (ou dados) em quaisquer dos problemas tratados, bastando para tanto substituir sua ocorrência pela representação dada pela eq. \ref{manter} em função das restantes composições. Denota-se por $\bar{\mathbf{x}}=(x_1,\cdots, x_{N-1})^t$ e analogamente $\bar{\mathbf{y}}=(y_1,\cdots, y_{N-1})^t$ os vetores da composição excluídas a última entrada de cada vetor composição. Assim, por exemplo, $\mathbf{x} = (\bar{\mathbf{x}}, x_N)^t$ e $x_N = 1- \sum_{i=1}^{N-1}x_i$, e as equações \ref{lab3.3} e \ref{lab4.4} passam a ser consideradas desnecessárias, sobrando apenas a eq. \ref{lab1.1}.
+
+Com o objetivo de propor um algoritmo para a obtenção dos pontos de bolha ou de orvalho, define-se a função vetorial $\mathbf{G}$, cujas entradas são  
+%
+\begin{equation}
+\label{G}
+\left\{\begin{array}{ll}
+G_i(\bar{\mathbf{x}}, \bar{\mathbf{y}}, P, T) = \varphi_i^L x_i - \varphi_i^V y_i, \ i=1,\cdots ,N-1 \ , \\ \\
+G_N(\bar{\mathbf{x}}, \bar{\mathbf{y}}, P, T) = \varphi_N^L (1- \sum_{j=1}^{N-1}x_j) - \varphi_N^V(1- \sum_{j=1}^{N-1}y_j).
+\end{array}\right.
+\end{equation}
+
+Com esta notação, pode-se reescrever a eq. \ref{lab1.1} como
+%
+\begin{equation}
+\label{G1}
+G_i(\bar{\mathbf{x}}, \bar{\mathbf{y}}, P, T) = 0, \ \text{com} \ i=1,\ldots,N,
+\end{equation} 
+%
+ou simplesmente,
+%
+\begin{equation}
+\label{G2}
+\mathbf{G}(\bar{\mathbf{x}}, \bar{\mathbf{y}}, P, T) = 0,
+\end{equation} 
+%
+onde $\mathbf{G} = (G_1, \ldots, G_N)^t$.
+
+Retoma-se a discussão do cálculo do ponto de orvalho, onde $\bar{\mathbf{y}}= \bar{\mathbf{y}}_{\star} $ e $T=T_{\star}$ são assumidos conhecidos. Define-se então a função $\mathbf{F}$, dada por 
+%
+\begin{eqnarray}\label{sistema2_2}
+\mathbf{F}(\bar{\mathbf{x}},P) = \mathbf{G}(\bar{\mathbf{x}}, \bar{\mathbf{y}}_{\star}, P, T_{\star}).
+\end{eqnarray}
+
+Finalmente, o sistema a ser resolvido para o problema de orvalho, com $N$ equações e $N$ incógnitas, $\bar{\mathbf{x}}$ e $P$, é
+%
+\begin{eqnarray}\label{sistema2_1}
+\mathbf{F}(\bar{\mathbf{x}},P) = 0.
+\end{eqnarray} 
+
+Analogamente, para o problema de bolha, assumindo-se conhecidos $\bar{\mathbf{x}}= \bar{\mathbf{x}}_{\star} $ e $T=T_{\star}$, e redefinindo-se $\mathbf{F}$ como $\mathbf{F} = \mathbf{F}(\bar{\mathbf{y}}, P) = \mathbf{G}(\bar{\mathbf{x}}_{\star}, \bar{\mathbf{y}}, P, T_{\star}).$ tem-se o sistema  
+%
+\begin{eqnarray}\label{sistema2_1_2}
+\mathbf{F}(\bar{\mathbf{y}},P) = 0.
+\end{eqnarray} 
+
+\section{Uma formulação alternativa das equações de equilíbrio termodinâmico} \label{secalternativa}
+
+Nesta seção são apresenta-se uma nova formulação da equação de equilíbrio termodinâmico em função de um conjunto alternativo de variáveis. Inicialmente, descrevem-se novas variáveis e em seguida obtém-se as equações de equilíbrio.
+
+\subsection{Variáveis para a descrição das frações molares da mistura}
+
+Como já observado, o número de mols das substâncias nas fases líquida e vapor, $n_i^L$, $n_i^V$, $i=1,\ldots, N$, podem ser descritos alternativamente pelas composições $x_i$, $y_i$, e pelo número de mols das fases líquida e vapor, $n^L$, $n^V$, veja proposição \ref{prop11} e a tabela \ref{tab:Tabelaextra_nova}.
+
+Agora, mostra-se que $x_i$, $y_i$, $n^L$ e $n^V$, podem ser substituídas pela composição global $z_i$, pela razão das composições vapor/líquido, $\beta_i = y_i / x_i$ --- chamados de coeficientes de distribuição ---, pela fração molar da fase líquida $\phi^L=n^L/n$ e pelo total de mols da mistura, $n$. Ou seja, troca-se $2N+2$ variáveis por igual número de variáveis, conforme a seguinte proposição.
+%
+\begin{prop}\label{prop12} \begin{em} Conhecer $x_i$, $y_i$, com $i=1,\cdots,N$, $n^L$ e $n^V$ é equivalente a conhecer $z_i$, $\beta_i$, $\phi^L$ e $n$, com $i=1,\ldots,N$. Ou seja, sabendo-se $x_i$, $y_i$, com $i=1,\cdots,N$, $n^L$ e $n^V$, obtém-se $z_i$, $\beta_i$, $\phi^L$ e $n$, com $i=1,\ldots,N$, e vice-versa, explicitamente, 
+%
+\begin{equation*}
+\beta_i = \frac{y_i}{x_i}, \ \ \phi^L = \frac{n^L}{n^L + n^V}, \ \ z_i = x_i \frac{n^L}{n^L + n^V} + y_i \frac{n^V}{n^L + n^V}, 
+\end{equation*} 
+%
+e, reciprocamente,
+%
+\begin{equation}\label{patati}
+x_i = \frac{z_i}{\phi^L + (1 - \phi^L \beta_i)}, \ \ y_i = \frac{z_i \beta_i}{\phi^L + (1 - \phi^L \beta_i)}, \ \ n^L = \phi^L n, \ n^V = (1-\phi^L)n.
+\end{equation} 
+
+\dem \ De fato, dados $x_i$, $y_i$, $i=1,\cdots,N$,  $n^L$ e $n^V$, obtém-se
+%
+\begin{equation}
+\beta_i=\frac{y_i}{x_i}, \ \ \phi^L=\frac{n^L}{n^L+n^V}, \ \ n=n^L+n^V,
+\end{equation} 
+%
+e dividindo a eq. \ref{lab2.2} por $n$, tem-se 
+%
+\begin{eqnarray}\label{4fk}
+z_i = x_i \phi^L + y_i \phi^V,
+\end{eqnarray}
+%
+de tal sorte que
+%
+\begin{eqnarray}\label{phi3}
+\phi^L + \phi^V = 1,
+\end{eqnarray} 
+%
+donde 
+%
+\begin{eqnarray}\label{phiex}
+z_i 
+&=& x_i \phi^L + y_i (1-\phi^L) = x_i \frac{n^L}{n^L+n^V} + y_i \left(1- \frac{n^L}{n^L+n^V}\right) \nonumber \\
+&=&  z_i = x_i \frac{n^L}{n^L + n^V} + y_i \frac{n^V}{n^L + n^V},
+\end{eqnarray} 
+%
+e assim, $z_i$ é função de $x_i$, $y_i$, $n^L$ e $n^V$.  
+
+A volta é, conhecendo-se $z_i$, $\beta_i$, $i=1,\cdots,N$, $\phi^L$, e $n$, obter-se $x_i$, $y_i$, $i=1,\cdots,N$, $n^L$, $n^V$. De fato, 
+%
+\begin{eqnarray}\label{phimod}
+n^L = \phi^L n, \ \ \ n^V = \phi^V n = (1-\phi^L)n.
+\end{eqnarray} 
+%
+Como $\beta_i = y_i/x_i$, substituindo $y_i$ na eq. \ref{4fk}, obtém-se 
+%
+\begin{eqnarray*}
+z_i = x_i\phi^L + x_i\beta_i\phi^V,
+\end{eqnarray*}
+%
+donde, resolvendo para $x_i$ e usando a eq. \ref{phi3}, tem-se
+%
+\begin{eqnarray}\label{nova}
+x_i = \frac{z_i}{\phi^L + (1-\phi^L)\beta_i},
+\end{eqnarray} 
+%
+e, finalmente, $y_i = \beta_i x_i$. 
+
+\fim
+\end{em}
+\end{prop}
+
+\subsection{Equações do equilíbrio segundo as novas variáveis}
+
+Para analisar-se o sistema de equilíbrio termodinâmico, eq. \ref{sistema_novo}, recorda-se que ainda é necessário considerar o fator de compressibilidade, $Z$, a pressão $P$ e temperatua $T$. Sendo assim, tem-se, na verdade, $2N+5$ variáveis, $x_i$, $y_i$, $n^L$, $n^V$, $P$, $T$ e $Z$, ou alternativamente, $z_i$, $\beta_i = y_i / x_i$, $\phi^L=n^L/n$, $n$, $P$, $T$ e $Z$, como indica a tabela \ref{tab:Tabelaextra_alternativa}.  
+
+A tabela \ref{tab:Tabelaextra_alternativa} mostra as variáveis composicionais e as variáveis alternativas que foram introduzidas nesta seção.
+%
+\begin{table}[h!]{}
+\centering
+	\caption{Variáveis segundo as duas opções observadas.}\label{tab:Tabelaextra_alternativa}
+	    \begin{tabular}{  c | c    }
+			\hline
+			\textbf{variáveis composicionais} & \textbf{variáveis alternativas} \\  \hline
+			 & \\ 
+			 $x_i$, $y_i$, $i=1,\ldots,N$, $n^L$, $n^V$, $P$, $T$, $Z$ & $z_i$, $\beta_i$, $i=1,\ldots,N$, $\phi^L$, $n$, $P$, $T$, $Z$ \\
+			 & \\  \hline
+		\end{tabular}	
+\end{table} 
+
+Conforme se queira fazer especificações, tornando algumas variáveis conhecidas, dá-se origem a alguns problemas, como os descritos na tabela \ref{tab:Tabelaextra_1}, por exemplo.
+
+A formulação alternativa das equações de equilíbrio termodinâmico, consiste em escrevê-las em função das novas variáveis $\mathbf{z}$, $\boldsymbol{\beta}$, $\phi^L$, $n$, $P$, $T$ e $Z$.
+
+Pela eq. \ref{lab1.1}, as equações de isofugacidade das fases são
+%
+\begin{eqnarray*}
+\varphi_i^L x_i - \varphi_i^V y_i = \left(\varphi_i^L - \varphi_i^V \frac{y_i}{x_i} \right)x_i = 0,
+\end{eqnarray*}
+%
+donde, $x_i=0$ ou, 
+%
+\begin{eqnarray*}\label{qua1}
+ \varphi_i^L - \varphi_i^V \frac{y_i}{x_i} = 0.
+\end{eqnarray*}
+
+Mudando-se as variáveis, considerando que $y_i /x_i = \beta_i$, obtém-se 
+%
+\begin{eqnarray*}
+ \varphi_i^L - \varphi_i^V \beta_i = 0,
+\end{eqnarray*}
+%
+onde recorda-se que $\phi^L$ e $\phi^V$ dependem de $x_i$ e $y_i$, mas $x_i$ e $y_i$ são escritas em função de $z_i$, $\beta_i$ e $\phi^L$, pela proposição \ref{prop12}. 
+
+Substituindo $x_i$, $n^L$, $y_i$ e $n^V$ pelas expressões dadas na proposição \ref{prop12} na equação de balanço de massa \ref{lab2.2}, obtém-se
+%
+\begin{eqnarray*}\label{balanco1}
+ n_i = \frac{z_i}{\phi^L + (1-\phi^L)\beta_i} \phi^L n + \beta_i \frac{z_i}{\phi^L + (1-\phi^L)\beta_i} (1-\phi^L)n,
+\end{eqnarray*}
+%
+ou simplesmente,
+%
+\begin{eqnarray*}\label{balanco2}
+ n_i = \frac{z_i n}{\phi^L + (1-\phi^L)\beta_i} (\phi^L + \beta_i(1-\phi^L)).
+\end{eqnarray*}
+
+Na eq. \ref{sistema_novo}, atenta-se para o fato de que $\varphi_i$ nas fases, é escrito em função ca composição de cada fase, da temperatura e da pressão (eq. \ref{varphinovo}). Aqui, pelas novas variáveis, tem-se que
+%
+\begin{equation}\label{varphinovo2} 
+\varphi_i^L=\varphi_i^L(z_i \beta_i, \phi^L, P, T), \ \ \varphi_i^V=\varphi_i^V(z_i, \beta_i, \phi^L, P, T).
+\end{equation}  
+ 
+Reescrevendo a eq. \ref{sistema_novo}, segundo as novas variáveis alternativas da tabela \ref{tab:Tabelaextra_alternativa}, tem-se o sistema de $2N+3$ equações e $2N+5$ variáveis. 
+%
+\begin{itemize}
+\begin{subequations}\label{sistema_alternativo}
+\item isofugacidade das fases \begin{equation}\label{lab1.1alt}
+ \varphi_i^L - \varphi_i^V \beta_i = 0, \ \ \text{com} \ \ i=1, \cdots, N,
+\end{equation} 
+\item conservação da massa (de cada componente)
+\begin{equation}\label{lab2.2alt}
+ n_i = \frac{z_i n}{\phi^L + (1-\phi^L)\beta_i} (\phi^L + \beta_i(1-\phi^L)), \ \ \text{com} \ \ i=1, \cdots, N,
+\end{equation}
+\item restrição da definição de composição\begin{equation}\label{lab3.3alt}
+\sum_{i=1}^{N}\frac{z_i}{\phi^L + (1-\phi^L)\beta_i} =1,
+\end{equation}
+\begin{equation}\label{lab4.4alt}
+\sum_{i=1}^{N} \beta_i \frac{z_i}{\phi^L + (1-\phi^L)\beta_i} =1,
+\end{equation}
+\item equação de estado 
+\begin{equation}
+\label{eq7b22.22alt}
+Z^{3}+C Z^{2} +D Z +E = 0. 
+\end{equation}  
+\end{subequations}
+\end{itemize}
+
+Considera-se que, por definição, os valores de $\phi^L$ e $\phi^V$ sejam dados conforme a tabela \ref{tab:Tabelaextra2}, para o cálculo dos problemas de bolha e de orvalho, e que $n=1$, reduzindo-se o número de variáveis do problema.
+%
+\begin{table}[h!]{}
+\centering
+	\caption{Valor de $\phi$ e nas fases líquida e vapor e de $n$, no cálculo de pontos de bolha e orvalho}\label{tab:Tabelaextra2}
+	    \begin{tabular}{  c | c | c  }
+			\hline
+			\textbf{ponto} & $\phi$ & $n$ \\  \hline
+			\text{bolha} & $\phi^L = 1$ \ \ $\phi^V = 0$ & $n=1$ \\ 
+			\text{orvalho} & $\phi^L = 0$ \ \ $\phi^V = 1$ & $n=1$\\ \hline
+		\end{tabular}
+	
+\end{table}
+
+Na tabela \ref{tab:Tabelaextra_2}, são apresentadas algumas possibilidades de problemas, os problemas de bolha, de orvalho e de flash, em função das variáveis alternativas apresentadas na tabela \ref{tab:Tabelaextra_alternativa}, equivalente a tabela \ref{tab:Tabelaextra_1}, escrita em função das variáveis composicionais.
+%
+\begin{table}[h!]{}
+\centering
+	\caption{Possibilidades para o cálculo dos problemas de bolha, orvalho e flash - variáveis alternativas.}\label{tab:Tabelaextra_2}
+	    \begin{tabular}{  c | c | c | c | c   }
+			\hline
+			\textbf{problema} & \textbf{dados} & \textbf{calcular} & \textbf{incógnitas} & \textbf{equações}\\  \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{bolha} &  $\mathbf{z}$, $\phi^L$, $n$, $P$  & $\boldsymbol{\beta}$, $Z$, $T$  & \multirow{2}{*}{$N+2$} & {\ref{lab1.1alt}, \ref{lab4.4alt}, \ref{eq7b22.22alt} } \\   
+			&  $\mathbf{z}$, $\phi^L$, $n$, $T$  & $\boldsymbol{\beta}$, $Z$, $P$  & & ($N+2$) \\
+			& & & & \\ \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{orvalho} & $\mathbf{z}$, $\phi^L$, $n$, $P$  & $\boldsymbol{\beta}$, $Z$, $T$ & \multirow{2}{*}{$N+2$} & {\ref{lab1.1alt}, \ref{lab3.3alt}, \ref{eq7b22.22alt}} \\ 
+			& $\mathbf{z}$, $\phi^L$, $n$, $T$  & $\boldsymbol{\beta}$, $Z$, $P$  & & ($N+2$) \\
+			& & & & \\ \hline
+			\multirow{2}{*}{} & & & & \\ 
+			\multirow{2}{*}{flash} & $P$, $T$, $n_i$'s & $\mathbf{z}$, $\boldsymbol{\beta}$, $\phi^L$, $n$, $Z$ & $2N+3$ &  {\ref{sistema_alternativo}} \\
+			\multirow{2}{*}{} & & & & ($2N+3$) \\
+			\multirow{2}{*}{} & & & & \\  \hline
+		\end{tabular}
+	
+\end{table} 
+
+\section{Sistema não-linear para o cálculo dos ponto de bolha e orvalho - variáveis alternativas}
+
+No caso das variáveis composicionais da tabela \ref{tab:Tabelaextra_alternativa}, quando se consideram as restrições sobre as composições, eq. \ref{sum}, $x_N$ e $y_N$ são automaticamente determinados a partir dos valores restantes das composições, eq. \ref{manter}. Neste caso, há então uma redução das variáveis a determinar, nomeadamente há a necessidade de determinar $2N+3$ variáveis, $x_i$, $y_i$, com $i=1,\ldots,N-1$, $n^L$, $n^V$, $P$, $T$ e $Z$. 
+
+Por outro lado, ao optar-se por escrever o sistema termodinâmico usando-se as variáveis $z_i$, $\beta_i$, com $i=1,\ldots,N$, $\phi^L$, $n$, $P$, $T$ e $Z$, há que se reduzir o número de variáveis. Da eq. \ref{sum}, obtém-se 
+%
+\begin{eqnarray*}\label{manter1}
+z_N = 1 - \sum_{j=1}^{N-1}z_j,
+\end{eqnarray*}
+%
+donde $z_N$ é dispensável quando se conhecem $z_i$, $i=1,\ldots,N-1$. É possível também verificar que, neste caso,  $z_i$, $\beta_i$, $i=1,\ldots,N-1$, $\phi^L$, $n$, $P$, $T$ e $Z$ ($2N+3$ variáveis), são suficientes para determinar $x_i$, $y_i$, $i=1,\ldots,N-1$, $n^L$, $n^V$, $P$, $T$ e $Z$. Basta seguir a demonstração da proposição ~\ref{prop12}. 
+
+Denota-se $\bar{\mathbf{z}} = (z_1,\ldots,z_{N-1})^t$, $\mathbf{z} = (\bar{\mathbf{z}}, z_n)^t$, com $z_N=1-\sum_{j=1}^{N-1}z_j$, e $\bar{\boldsymbol{\beta}}= (\beta_1,\ldots,\beta_{N-1})^t$, com 
+%
+\begin{eqnarray*}\label{manter2}
+\beta_N = \frac{y_N}{x_N} = \frac{1-\sum_{j=1}^{N-1} y_i}{1-\sum_{j=1}^{N-1} x_i} = \frac{1-\sum_{j=1}^{N-1} \frac{\beta_iz_i}{\phi^L + (1-\phi^L)\beta_i}}{1-\sum_{j=1}^{N-1} \frac{z_i}{\phi^L + (1-\phi^L)\beta_i}}.
+\end{eqnarray*} 
+
+Com o objetivo de propor um algoritmo para a obtenção dos pontos de bolha e orvalho, escrito em função das novas variáveis, pode-se fazer $N+3$ especificações como feito na seção \ref{secao4.4}. Assume-se conhecida a composição, $\bar{\mathbf{z}}$, a pressão, $P$ (ou a temperatura, $T$), assim como $\phi^L$ e $n$, definidos conforme a tabela \ref{tab:Tabelaextra2}. Recorda-se ainda que $Z$ não será variável, conforme a observação \ref{observ}. 
+
+Logo, tem-se $N$ variáveis, e são necessárias $N$ equações que são escritas utilizando-se a função $\mathbf{G} = (G_1, \ldots, G_N)^t$, com 
+%
+\begin{equation}
+\label{G}
+\left\{\begin{array}{ll}
+G_i(\bar{\mathbf{z}},\bar{\boldsymbol{\beta}}, P, T) = \varphi_i^L - \varphi_i^V \beta_i, \ i=1,\cdots ,N-1 \ , \\ \\
+G_N(\bar{\mathbf{z}},\bar{\boldsymbol{\beta}}, P, T) = \varphi_N^L  - \varphi_N^V\beta_N.
+\end{array}\right.
+\end{equation}
+
+Com esta notação, reescreve-se a eq. \ref{lab1.1alt} como
+%
+\begin{equation}
+\label{G1_2}
+G_i(\bar{\mathbf{z}},\bar{\boldsymbol{\beta}}, P, T) = 0, \ \text{com} \ i=1,\ldots,N.
+\end{equation} 
+%
+ou simplesmente,
+%
+\begin{equation}
+\label{G2_2}
+\mathbf{G}(\bar{\mathbf{z}},\bar{\boldsymbol{\beta}}, P, T) = 0.
+\end{equation} 
+
+Define-se a função $\mathbf{F}$, dada por 
+%
+\begin{eqnarray}\label{sistema2_2aux}
+\mathbf{F}(\bar{\boldsymbol{\beta}},P) = \mathbf{G}(\bar{\mathbf{z}}_{\star}, \bar{\boldsymbol{\beta}}, P, T_{\star}).
+\end{eqnarray}
+
+Finalmente, o sistema a ser resolvido com $N$ equações e $N$ incógnitas, $\bar{\boldsymbol{\beta}}, P$, é
+%
+\begin{eqnarray}\label{sistema2_1aux}
+\mathbf{F}(\bar{\boldsymbol{\beta}},P) = 0.
+\end{eqnarray} 
+
+\subsection{ Cálculo de ponto de bolha}
+
+No cálculo do ponto de bolha, são conhecidos $\bar{\mathbf{z}}= \bar{\mathbf{z}}_{\star}$ e $T=T_{\star}$; e são dados $\phi^L = 1$ e $\phi^V = 0$, de acordo com a tabela \ref{tab:Tabelaextra2}. Para a n-ésima entrada do vetor $\boldsymbol{\beta}$, $\beta_N$, tem-se para a fase líquida que 
+%
+\begin{eqnarray*}
+\beta_N^L = \beta_N^L(\bar{\boldsymbol{\beta}}^L, \bar{\mathbf{z}}_{\star}, P, T_{\star}) = \beta_N^L(\bar{\boldsymbol{\beta}}^L, P).
+\end{eqnarray*}
+
+Assim,  define-se a função $\mathbf{F}^L$, dada por 
+%
+\begin{eqnarray}\label{sistema2_2}
+\mathbf{F}^L(\bar{\boldsymbol{\beta}}^L,P) = \mathbf{G}^L(\bar{\mathbf{z}}_{\star}, \bar{\boldsymbol{\beta}}^L, P, T_{\star}).
+\end{eqnarray}
+
+Finalmente, o sistema a ser resolvido com $N$ equações e $N$ incógnitas, $\bar{\boldsymbol{\beta}}^L, P$, é
+%
+\begin{eqnarray}\label{sistema2_1}
+\mathbf{F}^L(\bar{\boldsymbol{\beta}}^L,P) = 0.
+\end{eqnarray} 
+
+\subsection{ Cálculo de ponto de orvalho}
+
+De forma análoga para o cálculo do ponto de orvalho, são conhecidos $\bar{\mathbf{z}}= \bar{\mathbf{z}}_{\star}$ e $T=T_{\star}$, e dados $\phi^V = 1$ e $\phi^L = 0$. Para $\beta_N^V$ tem-se 
+%
+\begin{eqnarray*}
+\beta_N^V = \beta_N^V(\bar{\boldsymbol{\beta}}^V, \bar{\mathbf{z}}_{\star}, P, T_{\star}) = \beta_N^V(\bar{\boldsymbol{\beta}}^V, P).
+\end{eqnarray*}
+
+Define-se a função $\mathbf{F}^V$, por 
+%
+\begin{eqnarray}\label{sistema2_2}
+\mathbf{F}^V(\bar{\boldsymbol{\beta}}^V,P) = \mathbf{G}^V(\bar{\mathbf{z}}_{\star}, \bar{\boldsymbol{\beta}}^V, P, T_{\star}).
+\end{eqnarray}
+
+O sistema a ser resolvido com $N$ equações e $N$ incógnitas, $\bar{\boldsymbol{\beta}}^V, P$, é
+%
+\begin{eqnarray}\label{sistema2_1}
+\mathbf{F}^V(\bar{\boldsymbol{\beta}}^V,P) = 0.
+\end{eqnarray} 
+
+
+
+%O que resulta que $\beta_i = \phi_i^L /\phi_i^V$. Pela razão das componentes líquida/vapor tem-se também que $\beta_i = y_i/x_i$. Sendo assim, pode-se escrever que 
+%%
+%\begin{eqnarray*}
+% \beta_i x_i - y_i = 0,
+%\end{eqnarray*}
+%%
+%
+%Pela eq. \ref{nova}, tem-se 
+%%
+%\begin{eqnarray}\label{qua2}
+% \frac{\beta_i z_i}{\phi^L + (1- \phi^L)\beta_i} - y_i = 0, \ \text{com} \ i=1,\cdots, N.
+%\end{eqnarray}
+%
+%Define-se então a função
+%%
+%\begin{eqnarray}\label{qua2}
+%H_i(\mathbf{\beta}, \mathbf{z}, \phi^L, n, P) = \frac{\beta_i z_i}{\phi^L + (1- \phi^L)\beta_i} - y_i,
+%\end{eqnarray}
+%%
+%e o sistema escreve-se como $\mathbf{H}(\mathbf{\beta}, \mathbf{z}, \phi^L, P) = 0$.
+%
+%
+%
+%
+%
+%
+%
+%\begin{eqnarray}\label{sistema5}
+%H_i(\mathbf{\beta}, P) = \frac{\beta_i z_i}{\phi^L + (1-\phi^L)\beta_i} - y_i, \ \ \ i=1,\cdots ,N
+%\end{eqnarray}
+%%
+%onde $\bar{\mathbf{z}} = (z_1, \cdots, z_{N-1})$ e $\mathbf{z} = (\bar{\mathbf{z}}, z_n)$, com $z_N=1-\sum_{j=1}^{N-1}z_j$.
+%
+%No sistema \ref{sistema5}, para o cálculo de ponto de bolha, obtém-se  para cada componente $i$, $x_i=z_i$ e $y_i=\beta_i z_i$ e para o cálculo de ponto de orvalho tem-se $y_i=z_i$ e $x_i=\frac{y_i}{\beta_i}$.        

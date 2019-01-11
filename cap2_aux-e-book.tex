@@ -1,0 +1,321 @@
+\chapter{Equação de estado de Peng-Robinson}\label{cap2aux}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo, apresenta-se um estudo mais detalhado da equação de estado escolhida para a solução dos problemas propostos em capítulos posteriores. Segue então, um estudo da equação de estado de Peng-Robinson (PR).
+
+\section{A equação de Peng-Robinson}
+
+Nesta seção, apresenta-se um estudo mais detalhado da equação de estado escolhida para a solução dos problemas propostos em capítulos posteriores. Segue então, um estudo da equação de estado de Peng-Robinson.
+
+Sejam $P$, $\bar{V}$ e $T$ a pressão, o volume molar (volume de um mol na substância) e a temperatura. O equilíbrio termodinâmico da equação de estado de Peng-Robinson é
+%
+ \begin{subequations}
+ \label{PReq}
+ \begin{equation}
+ P = \frac{RT}{\bar{V}-b}- \frac{a(T)}{\bar{V}^2+2b\bar{V}-b^2}\ ,
+  \end{equation}
+ com $R$ a constante universal dos gases, $a$  o parâmetro de energia, e $b$ o covolume. Aqui
+ \begin{equation}
+ a(T)= \frac{\Omega_a(RT_c)^2}{P_c}\alpha(T)\ ,
+ \end{equation}
+ com
+ \begin{equation}
+ \alpha(T)=[ 1+ S(\omega)
+ (1-({T}/{T_c})^\frac{1}{2})]^2\ ,
+ \\
+ S(\omega)=S_0+S_1 \omega+ S_2 \omega^2 \ ,
+ \end{equation}
+ e
+ \begin{equation}
+ b=\Omega_b \frac{RT_c}{P_c}\ .
+ \end{equation}
+ \end{subequations}
+%
+$T_c$, $P_c$ são temperatura e pressão críticas, respectivamente e $\omega$ é o fator acêntrico da substância. Note que
+   $S$ é uma constante que depende da substãncia. 
+  Outras constantes são $\Omega_a$, $\Omega_b$ and $S_i$, $i=0,1,2$.
+  A Tabela \ref{const} apresenta algumas dessas constantes.
+  \begin{table}
+  \caption{Algumas constantes termodinâmicas\label{const}}
+  \begin{center}
+  \begin{tabular}{c|c|c|c|c}
+  $S_0$ & $S_1$ & $S_2$ & $\Omega_a$ &  $\Omega_b$
+  \\
+  \hline
+  & & & &
+  \end{tabular}
+  \end{center}
+  \end{table}
+
+Por uma simples manipulação algébrica, a equação de PR pode ser reescrita como uma equação cúbica para o volume  $\bar{V}$, 
+com coeficientes dependentes em $T$ e $\bar{V}$,
+\begin{equation}
+P\bar{V}^3+(Pb-RT)\bar{V}^2-(3b^2P+2bRT-a(T))\bar{V}-Pb^3+b^2RT-a(T)b=0.
+\label{PRcubic}
+\end{equation}
+
+Apresenta-se a seguir uma série de observações sobre esta equação: 
+%
+\begin{enumerate}
+\item Este modelo termodinâmico do estado de equilíbrio
+de uma substância admite que a substância esteja no estado de vapor, líquido e também em um
+estado bifásico líquido + vapor.
+\item Em princípio, pode-se verificar a Equação \ref{PReq} ou
+\ref{PRcubic} define uma superfície em $ \mathbb{R}^ 3 $. Isto é
+equivalente a escrever, localmente perto de cada ponto que
+satisfaz a equação, uma das variáveis, $ P $, $ \bar{V} $ ou $ T $,
+como uma função das outras duas.
+\item Denota-se por $ F (P, \bar{V}, T) $ o lado esquerdo da Equação \ref {PRcubic}, e calculando-se seu gradiente, obtém-se
+%
+\begin{subequations}
+\begin{equation}
+\frac{\partial F}{\partial P}= \bar{V}^3+b\bar{V}^2-3b^2\bar{V}-b^3\ ,
+\end{equation}
+\begin{equation}
+\frac{\partial F}{\partial \bar{V}}= 3\bar{V}^2P+2(Pb-RT)\bar{V}-(3b^2P+2bRT-a(T))\ ,
+\end{equation}
+\begin{equation}
+\frac{\partial F}{\partial T}= -R\bar{V}^2-(2bR-a'(T))\bar{V}+b^2R-a'(T)b\ .
+\end{equation}
+\end{subequations}
+Pelo teorema da função implícita em qualquer ponto satisfazendo e
+Equação \ref{PRcubic}, tal que o gradiente de $ F $ é não nulo,
+digamos, por exemplo, que $ \partial F / \partial \bar{V} $ difere de zero,
+então, localmente, $ \bar{V} $ pode ser escrita como uma função de $ P $ e $ T $.
+\item Devido à interpretação física das variáveis, restringe-se aa variáveis $ P \geq 0 $, $ \bar{V} \geq 0 $ e $ T \geq 0 $.
+\item Observe que a Equação \ref{PReq} define $ P $ em função de $ \bar{V} $
+e $ T $ globalmente, sempre que o lado direito da eq. \ref{PReq}
+pode ser calculado.
+Para isso, no entanto, $ \bar{V} $ e $ T $ têm que satisfazer algumas restrições.
+De fato, devido: 
+\begin{itemize}
+\item à definição de $ \alpha (T) $, obtém-se que $ T \geq 0 $;
+\item aos quocientes na expressão, obtém-se
+\begin{equation}
+\bar{V}\neq b\ ,\ 
+\bar{V}\neq (\sqrt{2}-1)b \text{, e } \bar{V}\neq -(1+\sqrt{2})b\ .
+\end{equation}
+\end{itemize}
+
+Essas restrições podem ser descartadas se considerarmos que
+$ \bar{V}> b^*> b $, onde $ b^* $ é definido a seguir.
+Isto é justificado considerando o limite de 
+pressão infinita, quando o volume atingiria seu valor assintótico mínimo. Ao dividir Equação \ref{PRcubic} por $ P $ e deixar
+$ P \rightarrow \infty $, com temperatura fixa, obtem-se
+\begin{equation}
+\bar{V}^3+b\bar{V}^2-3b^2\bar{V}-b^3=0\ . \label{pol}
+\end{equation}
+Reescrevendo, fica-se com
+\begin{equation}
+(\bar{V}^2-b^2)(\bar{V}+b)=2b^2\bar{V}\ .
+\end{equation}
+À esquerda, tem-se um polinômio que é
+positivo para $ \bar{V}> b $ e igual a $ (\sqrt{2} +1) b ^ 3 $
+em $ \bar{V} = \sqrt{2} $ e $ 9b^3 $ em $ \bar{V} = 2b $,
+e à direita uma função linear, igual a $ 4 \sqrt{2} b^3 $ em
+$ \bar{V} = \sqrt {2} b $ e $ 8b^3 $ a $ \bar{V} = 2b $.
+ Portanto, existe um valor, $ b^*$, entre $ \sqrt{2} b $ e $ 2b $,
+$ \sqrt{2} b <b^*<2b $, raiz do polinômio Equação \ref{pol}.
+\item
+ Pode-se verificar que $ \bar{V} $ não é globalmente,
+uma função de $ P $ e $ T $, uma vez que na Equação \ref{PRcubic}, $ \bar{V} $ pode ter
+(e em alguns casos tem) três soluções reais.
+\item Em princípio, quando se escolhe $ P = P_c $ e $ T = T_c $,
+Equação \ref{PRcubic} deve ter apenas uma solução, denotada
+por $ \bar{V}_c $, o
+volume crítico.
+\item Da Equação \ref{PReq}, definindo $ P $ como uma função de $ \bar{V} $
+e $ T $, pode-se considerar o sistema de equações não lineares para
+$ \bar{V} $ e $ T $,
+\begin{equation}
+\frac{\partial P}{\partial \bar{V}}=0\ , \ 
+\frac{\partial^2 P}{\partial \bar{V}^2}=0 \ ,
+\end{equation}
+que, em princípio, tem solução $ \bar{V}_c $, $ T_c $.
+\item Em princípio, se $ P <P_c $ e $ T <T_c $, Equação \ref{PReq} tem
+três raízes reais, denotadas ordenadamente por
+\begin{equation}
+\bar{V}^l<\bar{V}^b< \bar{V}^\bar{V}\ .
+\end{equation}
+Os sobrescritos $ l $, $ b $ e $ \bar{V} $ significam líquido, bifásico e
+vapor.
+ É relevante apontar que cada uma dessas raízes depende da
+ substância para a qual a equação PR é escrita e dependem da temperatura e da pressão, assim, em particular,
+ \begin{equation}
+ \bar{V}^l=\bar{V}^l(T,P)\ , \  \bar{V}^\bar{V}=\bar{V}^\bar{V}(T,P)\ .
+ \end{equation}
+ \item Dada uma substância, e especificada uma temperatura $ T $,
+  uma pressão $ P $ e
+  um volume $ \tilde{V} $, satisfazendo
+  \begin{equation}
+  \tilde{V}> \bar{V}^v(T,P)\ ,
+  \end{equation}
+  a substância está no estado de vapor. Se a temperatura e
+  a pressão é mantida e o volume é diminuído até
+  \begin{equation}
+  \tilde{V}=\bar{V}^v(T,P)\ ,
+  \end{equation}
+encontra-se o ponto de orvalho 
+  (transição do estado de vapor para o estado bifásico). Diminuindo
+    mais ainda o volume,
+     a substância entra em um estado bifásico,
+    líquido + vapor, até atingir
+    o volume
+    \begin{equation}
+    \tilde{V}> \bar{V}^l(T,P)\ ,
+    \end{equation}
+  quando se obtém o fenómeno do ponto de bolha (transição do estado líquido para o estado bifásico), e todo o vapor
+  muda de fase para estado líquido.
+  
+Tabela \ref{states} resume a teoria termodinâmica de
+estado de uma substância com estado termodinâmico $ (P, \bar{V}, T) $
+  satisfazendo Equação \ref{PReq}.
+
+  \begin{table}
+  \begin{center}
+  \caption{Estado termodinâmico} \label{states}
+  \begin{tabular}{c|l}
+  $\bar{V}<\bar{V}^l(T,P) $ & estado líquido
+  \\
+  \hline
+  $\bar{V}=\bar{V}^l(T,P) $ &  ponto de bolha
+  \\
+  \hline
+$\bar{V}^l(T,P)<\bar{V}<\bar{V}^v(T,P) $ & estado bifásico
+\\
+\hline
+$\bar{V}=\bar{V}^v(T,P) $ &  ponto de orvalho
+  \\
+  \hline
+  $\bar{V}>\bar{V}^v(T,P) $ & estado vapor
+  \end{tabular}
+  \end{center}
+  \end{table}
+\end{enumerate}
+\section{Equação de estado de Peng-Robinson para misturas}
+A equação PR para misturas é obtida a partir da eq. \ref{PReq} ou
+a partir de sua forma cúbica Equação \ref{PRcubic}, substituindo
+$ a $ e $ b $ por $ a_m $ e $ b_m $, o parâmetro de energia e o
+covolume da mistura de substâncias.
+
+Estes parâmetros são obtidos a partir da mistura de van der Walls e
+regras de combinação,
+\begin{subequations}
+\begin{equation}
+a_m(T,\mathbf{z})=\sum_{i=1}^N\sum_{j=1}^N 
+\sqrt{a_i(T)a_j(T)}(1-c_{ij})z_iz_j \ ,
+\\
+b_m(\mathbf{z})=\sum_{i=1}^Nb_iz_i\ ,
+\end{equation}
+com $ c_ {ij} $, os coeficientes binários de interação e
+$ \mathbf {z} = (z_1, \ldots, z_N) $ a fração molar no
+$ \mathbf {z} $ fase ($ \mathbf {x} $, para a fase líquida, e
+$ \mathbf {x} $, para a fase de vapor). Em particular,
+$ \sum_{i = 1} ^ N z_i = 1 $.
+\end{subequations}
+
+Portanto, a equação PR para misturas, em sua forma cúbica, é
+\begin{small}
+\begin{equation}
+P\bar{V}^3+(Pb_m-RT)\bar{V}^2-(3b_m^2P+2b_m
+RT-a_m)\bar{V}-Pb_m^3+b_m^2RT-a_mb_m=0 \ .
+\label{PRcubicm}
+\end{equation}
+\end{small}
+Como $ b_m = b_m (\mathbf {z}) $, $ a_m = a_m (T, \ mathbf {z}) $, o
+coeficientes da equação cúbica dependem de $ P $, $ T $ e também de
+as frações molares $ \mathbf {z} $, suas raízes dependem
+bem sobre essas variáveis, e escrevemos para os menores e maiores
+raizes
+\begin{equation}
+\bar{V}^l=\bar{V}^l(P,T, \mathbf{z})< \bar{V}^v(P,T, \mathbf{z})=\bar{V}^v\ .
+\end{equation}
+\section{Equação de quilíbrio de fases}
+Para a equação PR, o logaritmo do coeficiente de fugacidade é
+dado por
+\begin{eqnarray}
+\ln \phi_i & =&  \frac{b_i}{b_m}(\frac{P\bar{V}}{RT}-1)- \ln(\bar{V}-b_m)
+\\
+&& +
+\frac{b_m}{2\sqrt{2}b_m}\left[\frac{b_i}{b_m}-
+\frac{2\psi_i}{a_m} \right]\ln \left(
+\frac{\bar{V}+(1+\sqrt{2})b_m}{\bar{V}+(1-\sqrt{2})b_m}
+\right)\ ,
+\end{eqnarray}
+com $\psi_i= \sum_{j=1}^N a_{ij}z_j$. Aqui, 
+\begin{equation}
+\bar{V}= \bar{V}^{\kappa} \ ,
+\end{equation}
+onde
+$ \kappa = l $ ou $ v $, 
+para as fases líquido e vapor, são
+respectivamente as menores e maiores raízes da equação
+ \ref{PRcubicm}. 
+
+ Denote por
+ \begin{equation}
+ \phi^{\kappa}_i (P,T,\mathbf{z})=\phi_i(P,T,\mathbf{z},\bar{V}^{\kappa})
+ \end{equation}
+ o coeficiente de isifugacidade para a fase ${\kappa}=l$, ou $v$.
+
+ As fugacidades são dada por $f_i=\phi_i^{\kappa}Pz_i$. Assim sendo,
+ as equações de isofugacidade (de ambas as fases) é
+ \begin{equation}
+ x_i\phi_i( P,T,\mathbf{x},\bar{V}^{l}(P,T,\mathbf{x}))
+ =y_i\phi_i(P,T, \mathbf{y}, \bar{V}^{v}(P,T,\mathbf{y}))\ . 
+ \label{isofug}
+ \end{equation}
+
+ \section{Mistura binária}
+ Das equações de isofugacity \ref{isofug} para um binário
+ mistura, $ N = 2 $, temos um sistema de quatro equações com seis incógnitas ($x_1$, $x_2$, $y_1$, $y_2$, $P$, $T$)
+ \begin{subequations}
+ \begin{equation}
+ x_1\phi_1(P,T,x_1,x_2, \bar{V}^{l}(P,T,x_1,x_2)) 
+ =y_1\phi_1(P,T,y_1,y_2,\bar{V}^{v}(P,T,y_1,y_2)) \label{1e}
+ \end{equation}
+\begin{equation}
+x_1\phi_2(P,T,x_1,x_2, \bar{V}^{l}(P,T,x_1,x_2))
+ =y_1\phi_2(P,T,y_1,y_2,\bar{V}^{v}(P,T,y_1,y_2))\label{2e}
+ \end{equation}
+ \begin{equation}
+ x_1+x_2=1 \label{3e}
+ \end{equation}
+ \begin{equation}
+ y_1+y_2=1\label{4e}
+ \end{equation}
+ \end{subequations}
+Agora, por exemplo,
+especificando a composição da fase líquida (na verdade,
+só é necessário saber $ x_1 $ desde $ x_2 $ é imediatamente
+determinado), e a temperatura (ou pressão), $ T = T_f $ 1 é capaz
+para resolver o sistema. De eqs. Substituindo Equação \ref{3e} e
+\ref{4e} nas Equações \ref{1e} e \ref{2e},
+nós temos
+\begin{subequations}
+\begin{equation}
+x_1\phi_1(P,T_f,x_1,(1-x_1), \bar{V}^{l}(P,T_f,x_1,(1-x_1))) \nonumber
+\\
+ =y_1\phi_1(P,T_f,y_1,(1-y_1),\bar{V}^{v}(P,T_f,y_1,(1-y_1))) \ ,
+\\
+(1-x_1)\phi_2(P,T_f,x_1,(1-x_1), \bar{V}^{l}(P,T_f,x_1,(1-x_1)))\nonumber
+\\
+ =(1-y_1)\phi_2(P,T_f,y_1,(1-y_1),\bar{V}^{v}(P,T_f,y_1,(1-y_1)))\ .
+\end{equation}
+\end{subequations}
+Este é um sistema de duas equações em duas incógnitas, $ y_1 $ e $ P $.
+As restrições sobre as variáveis são
+\begin{equation}
+0\leq y_1 \leq 1\ \text{, e } 0\leq P \leq P_c .
+\end{equation}
