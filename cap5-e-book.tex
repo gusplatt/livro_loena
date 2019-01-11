@@ -1,0 +1,385 @@
+\chapter{Algoritmo de redução} \label{cap5}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo, passa-se a descrição do algorítmo de redução no cálculo do equilíbrio líquido-vapor. 
+
+Uma forma de se aplicar este método de redução de dimensionalidade é através da minimização da norma de Frobenius do erro de aproximação da matriz, problema caracterizado teoricamente pelo teorema de Eckart-Young-Mirsky \cite{markovsky2007left}. Nesta formulação deseja-se obter uma aproximação de posto baixo (em inglês,``\textit{low-rank approximation}") da matriz $\mathbf{C}$, conforme o teorema citado, e uma discussão deste assunto é dada a seguir.
+
+%Equações 101...170
+%--------------------------------------------------------
+\section{Formulação variacional do método de redução na norma de Frobenius}
+%--------------------------------------------------
+
+Inicialmente observa-se que a matriz de interação binária,\ $\mathbf{C}$, é simétrica. Assim, pelo teorema espectral para matrizes simétricas reais existem autovalores reais, $\lambda_i$, e autovetores ortonormais correspondentes, $\mathbf{v}_i$, com $i = 1,...,N$, tais que $\mathbf{C} = \sum_{i=1}^{N} \lambda_i \mathbf{v}_i \mathbf{v}_i^t$. 
+
+Suponha-se que os autovalores sejam ordenados de tal forma que $\vert \lambda_1 \vert \geq \vert \lambda_2 \vert \geq ... \geq \vert \lambda_N \vert$ e que $\vert \lambda_i \vert \leq \varepsilon, \ \ i = r + 1, ..., N$, onde $\varepsilon$ é uma tolerância. Então, define-se a matriz de iteração binária reduzida, $\mathbf{C}^*$, por
+%
+\begin{equation}
+\label{eq103}
+\mathbf{C}^* = \sum_{i=1}^{r} \lambda_i \mathbf{v}_i \mathbf{v}_i^t.
+\end{equation}  
+
+Esta matriz aproxima a matriz $\mathbf{C}$ na norma de Frobenius,
+%
+\begin{eqnarray*}
+\Vert \mathbf{C} - \mathbf{C}^* \Vert_F^2  
+&=& \Vert \sum_{i = r +1}^{N} \lambda_i  \mathbf{v}_i \mathbf{v}_i^t \Vert_F^2 = \sum_{i = r +1}^{N} \lambda_i ^2 \leq (N - r) \varepsilon^2.
+\end{eqnarray*}
+
+De fato, pelo teorema de Eckart-Young-Mirsty enunciado a seguir,
+$\mathbf{C}^*$ é o minimizador de $H(\mathbf{R}) = \Vert \mathbf{C} - \mathbf{R} \Vert_F$, quando $\mathbf{R}$ varia nas matrizes de posto $r$, {\em i.e.},
+%
+\begin{eqnarray*}
+\Vert \mathbf{C} - \mathbf{C}^* \Vert_F =  \displaystyle\min_{\mathbf{R}, \text{posto}(\mathbf{R})\leq r}   H(\mathbf{R}) = \displaystyle\min_{\mathbf{R}, \text{posto} (\mathbf{R})\leq r} \Vert \mathbf{C} - \mathbf{R} \Vert_F.
+\end{eqnarray*}
+
+Em outras palavras, para se minimizar $H(\mathbf{R})$ basta obter-se a fatoração SVD de $\mathbf{C}$ e a partir desta construir-se $\mathbf{C}^*$ como na Equação \ref{eq103}. O teorema de Eckart-Young-Mirsky garante então que $\mathbf{C}^*$ minimiza $H(\mathbf{R})$. 
+
+Por completude enuncia-se o teorema Teorema de Eckart-Young-Mirsky.
+%
+\begin{teore} \ Teorema de Eckart-Young-Mirsky \cite{markovsky2007left}: Seja $\mathbf{A}$ uma matriz real, $M \times N$, e $0 < r \leq \text{min} (M, N) = s$. Seja ainda $\mathbf{U}\mathbf{\Sigma}\mathbf{V}^t$ a decomposição em valores singulares de $\mathbf{A}$, com $\mathbf{U}$ e $\mathbf{V}$ matrizes ortogonais de ordem $M \times M$ e $N \times N$, respectivamente, e $\mathbf{\Sigma} = \text{diag} (\sigma_1,..., \sigma_r, 0,...,0)$, uma matriz de ordem $M \times N$. 
+%
+Sejam ainda $\mathbf{U}_1$, $M \times r$ e $\mathbf{V}_1$, $N \times r$, obtidos de $\mathbf{U}$ e $\mathbf{V}$, respectivamente, mantendo as primeiras $r$ colunas. Seja ainda $\mathbf{\Sigma}_1 = \text{diag}(\sigma_1, ..., \sigma_r)$, e $\mathbf{A}^* = \mathbf{U}_1\mathbf{\Sigma}_1\mathbf{V}_1$. Então a matriz $\mathbf{A}^*$, de posto menor ou igual a $r$, satisfaz o seguinte problema de minimização.
+%
+\begin{eqnarray*}\label{82b}
+\Vert \mathbf{A} - \mathbf{A}^* \Vert_F^2 = \displaystyle\min_{ \widehat{\mathbf{A}}| \text{posto}(\widehat{\mathbf{A}}) \leq r} \Vert \mathbf{A} - \widehat{\mathbf{A}} \Vert_F^2 = \sigma_{r+1}^2 +  \sigma_{r+2}^2  + ... +  \sigma_{s}^2.
+\end{eqnarray*}
+A solução é única se e somente se $\sigma_{r+1} \neq \sigma_r$
+\end{teore}
+
+\section{Aplicação do método} \label{algoritmo2}
+
+Reescrevendo o parâmetro de energia da mistura, $a_m$, utilizando o método da decomposição em valores singulares (SVD) na matriz de parâmetros de interação binários, $\mathbf{C}$, 
+%
+\begin{eqnarray}\label{eq4a2}
+a_m 
+&=& \sum_{i=1}^{N}\sum_{j=1}^{N} \sqrt{a_i a_j}(1-c_{ij})z_i z_j =  \mathbf{z}^t (\bar{\mathbf{A}} \bullet\mathbf{C}) \mathbf{z}.
+\end{eqnarray}
+
+Aqui, $\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j \mathbf{v}_j \mathbf{v}_j^t$, é uma aproximação de $\mathbf{C} = \sum_{j=1}^{N} \lambda_j \mathbf{v}_j \mathbf{v}_j^t \mathbf{z}$, considerando apenas os $r$ maiores autovalores $\mathbf{v}_j$. Assim, ao se reduzir o número de autovetores $\mathbf{v}_j$ e o número de autovalores correspondentes, respectivamente, tem-se a redução dos parâmetros $\mathbf{q}, \ \text{com} \ k=1,\cdots,r$, que por sua vez dependem de $m_{ik}= \sqrt{a_i}v_{ik}$. É neste momento que ocorre efetivamente a redução da dimensão do problema, uma vez que o parâmetro de energia $a_m$ e $\psi_i$ dependem do parâmetro de redução $\mathbf{q}$,
+%
+\begin{eqnarray*}
+a_m(\mathbf{q}) 
+& = & \mathbf{z}^t(\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)\bullet \mathbf{C}^{\star}) \mathbf{z} \\
+& \approx &  \mathbf{z}^t\left( (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)\bullet \left( \sum_{k=1}^{r} \lambda_k \mathbf{v}_k \mathbf{v}_k^t \right)\right) \mathbf{z} \\
+& = &  \sum_{k=1}^{r} \lambda_k \mathbf{z}^t \left( (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)\bullet(\mathbf{v}_k \mathbf{v}_k^t) \right)  \mathbf{z} \\
+& = &  \sum_{k=1}^{r} \lambda_k \mathbf{z}^t \left( (\sqrt{\mathbf{a}} \bullet \mathbf{v}_k) (\sqrt{\mathbf{a}} \bullet \mathbf{v}_k)^t \right)  \mathbf{z} \ \ (\text{pelo item 6 da Proposição \ref{proposta}}) \\
+& = & \sum_{k=1}^{r} \lambda_k (\mathbf{q}_k)^2 \ \ (\text{pela Equação \ref{eq18} $\mathbf{q}_k = (\sqrt{\mathbf{a}}\bullet \mathbf{v}_k)^t \mathbf{z} = M_k^t\mathbf{z}$}).
+\end{eqnarray*}
+
+Como $\psi_i = \sum_{j=1}^{N} a_{ij} \mathbf{z}_j$ também pode ser aproximado por  
+%
+\begin{eqnarray*}
+\boldsymbol{\psi}(\mathbf{q})
+& \approx & (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t \bullet \mathbf{C}^{\star})\mathbf{z} = \sum_{k=1}^{r} \lambda_k (\sqrt{\mathbf{a}} \bullet \mathbf{v}_k)(\sqrt{\mathbf{a}}\bullet \mathbf{v}_k)^t\mathbf{z}\\
+&=& \sum_{k=1}^{r} \lambda_k M_k \mathbf{q}_k. 
+\end{eqnarray*}
+
+Assim, em função de $\mathbf{q}$ pode-se calcular os valores de $a_m$  e $\psi_i$ na forma reduzida
+%
+\begin{equation}
+\label{eq32}
+a_m (\mathbf{q}) = \sum_{k=1}^{r} \lambda_k \mathbf{q}^2_k; \ \psi_i (\mathbf{q}) = \sum_{k=1}^{r} \lambda_k m_{ki} q_k; \ \text{com} \ i = 1, ... ,N,
+\end{equation}
+%
+com fugacidade na componente $i$
+%
+\begin{equation}
+\begin{array}{c}
+\label{eq33}
+{\displaystyle
+\text{ln}\left(\varphi_i\right)(\mathbf{q}) = \frac{B_i}{B_m}(Z_m (\mathbf{q}) -1)-\text{ln}(Z_m (\mathbf{q}) -B_m)
+}\\ \\
+{\displaystyle
++ \frac{1}{2,282B_m}\left(\frac{B_i}{B_m} A_m (\mathbf{q}) -2\frac{\psi_i (\mathbf{q})}{a_m (\mathbf{q})}\right)\text{ln}\left(\frac{Z_m (\mathbf{q}) +2,414B_m}{Z_m (\mathbf{q}) -0,414B_m}\right).
+} 
+\end{array}
+\end{equation}
+
+Logo, tem-se uma quantidade reduzida $r$ de equações da fugacidade a serem calculadas. Observa-se que o parâmetro $b_m$, Equação \ref{eq4}, não sofre redução uma vez que depende da composição e não do parâmetro de redução $\mathbf{q}$.   
+
+Com as raízes da Equação \ref{eq7b} pode-se, a princípio, calcular os coeficientes de fugacidade do líquido e do vapor na Equação \ref{eq15}. Se esses coeficientes produzirem fugacidades iguais, tem-se o equilíbrio termodinâmico. 
+
+Para obter o coeficiente de fugacidade para alguma das EDEC's mencionadas, basta utilizar as equações da Tabela \ref{tab:Tabela2}.  Os valores da composição global da mistura $z_i$, da temperatura e pressão no ponto crítico $T_{ci}$ e $P_{ci}$, respectivamente, do fator acêntrico, $\omega_i$, e dos coeficientes (ou parâmetros) de interação binária, $c_{ij}$, são dados do problema. Com uma estimativa inicial para a pressão/temperatura e especificando a temperatura/pressão, pode-se então calcular todos os parâmetros necessários para a solução das equações de fugacidade. Substituindo os valores dados nas Equações \ref{Lo} e na Equação  \ref{eq15}, pode-se obter as raízes da Equação \ref{eq7b}. Tomando-se a menor raiz e fazendo-se $Z=Z_m$ na Equação \ref{eq15}, pode-se obter o coeficiente de fugacidade da fase líquida. De forma análoga, tomando-se a maior raiz  e fazendo-se $Z=Z_m$ pode-se obter o coeficiente de fugacidade da fase vapor para a mesma equação que calcula o coeficiente de fugacidade (naturalmente as composições são distintas em cada fase).
+
+A composição global $\mathbf{z}$ de uma mistura em análise é conhecida, mas a composição da fase líquida e a composição da fase vapor, $\mathbf{x}$ e $\mathbf{y}$ respectivamente, não são conhecidas a princípio. Assim, pode-se considerar a composição da fase líquida conhecida fazendo-se $\mathbf{x} = \mathbf{z}$ e calcula-se $\mathbf{y}$ ou a composição do vapor como conhecida fazendo-se $\mathbf{y} = \mathbf{z}$ e calcula-se $\mathbf{x}$. Têm-se, portanto, cálculos de pontos de bolha ou de orvalho, respectivamente.
+
+Como não se aplica o método de redução para as duas fases, então,  se $\mathbf{x} = \mathbf{z}$, a composição da fase líquida é conhecida e com a menor raiz da Equação \ref{eq7b}  pode-se calcular o coeficiente de fugacidade do líquido, visto que os demais parâmetros são facilmente obtidos como já descrito anteriormente. Para a fase vapor tem-se composição $\mathbf{y}$ desconhecida e, então, aplica-se o método de redução para calcular o coeficiente de fugacidade do vapor; VERIFICAR ISSO
+
+De forma análoga, se $\mathbf{y} = \mathbf{z}$, pode-se calcular o coeficiente de fugacidade do vapor e aplicar o método de redução para calcular o coeficiente de fugacidade da fase líquida.
+
+Escolhendo-se a composição da fase vapor como conhecida, aplica-se o método de redução para calcular o coeficiente de fugacidade da fase líquida e encontrar uma solução aproximada para o equilíbrio de fases.  
+
+Segundo \cite{nichita2007phase}, na fase líquida, a chave para a redução é expressar os parâmetros $a_m$ e $b_m$ e $\psi_i$ da Equação \ref{eq15} em termos de um pequeno número de produtos escalares, os chamados parâmetros de redução, na Equação \ref{eq18}.
+
+A redução é efetivamente conseguida pela decomposição espectral da matriz $\mathbf{C}^{\star}$ que melhor aproxima a matriz de interação binária $\mathbf{C}$, na norma de Frobenius. A dimensionalidade do problema depende somente do número de parâmetros de redução $r+1$ (onde $r$ é o posto da matriz $\mathbf{C}^{\star}$ e 1 é devido  ao parâmetro de covolume da mistura) e é independente do número de componentes $N$ da mistura. Reduzindo-se a dimensionalidade desta matriz, reduzem-se também a dependência dos parâmetros $a_m$ e $\psi_i$, visto que estes parâmetros estão escritos em função dos elementos  da matriz $\mathbf{C}$ e se utilizará em seu lugar a matriz $\mathbf{C}^{\star}$, representada por sua decomposição espectral. O parâmetro $b_m$ não sofre modificação, pois não depende de $\mathbf{C}$. Assim, estes parâmetros são os mesmos calculados para a fase vapor (onde não se aplica a redução).
+
+Como a composição da fase onde se aplica a redução (neste caso a fase líquida) não é conhecida, então $\mathbf{Q}^L$ não pode ser calculado diretamente, assim como o covolume $b_m$ da fase líquida, que depende da composição. Então, como será mostrado no algoritmo a seguir, $\mathbf{Q}^L$ e $b_m$ são dados por uma estimativa inicial.
+ 
+A seguir, será descrita, de forma algorítmica, a metodologia empregada para o cálculo de pressão de saturação (em particular, a pressão de orvalho --- fase vapor) usando a técnica de redução. Para o cálculo do ponto de bolha --- fase líquida --- a técnica é aplicada de maneira semelhante. 
+
+Considere uma mistura de $N$ componentes, e assuma que os valores da composição global da mistura, da temperatura e pressão no ponto crítico para componentes puros, do fator acêntrico e dos coeficientes de interação binária são dados. Seja dada ainda uma estimativa inicial para pressão e especificada a temperatura.
+
+O algoritmo descrito a seguir é a expressão do método de redução de dimensionalidade no cálculo do equilíbrio de fases desenvolvido neste trabalho. 
+
+Um algoritmo semelhante pode ser desenvolvido se, ao invés de se especificar a temperatura, especifica-se a pressão e fornece-se uma estimativa inicial para a temperatura. \\
+%
+\begin{center}ALGORITMO 2\end{center}
+%
+\textbf{1ª Etapa}: Montar e diagonalizar a matriz de interação binária $\mathbf{C}$; \\
+%
+\textbf{2ª Etapa}: Construir a matriz reduzida $\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j v_{j} v_j^t$, assumindo que os autovalores sejam ordenados de tal forma que $\vert \lambda_1 \vert \geq \vert \lambda_2 \vert \geq ... \geq \vert \lambda_N \vert$ e que $\vert \lambda_i \vert \leq \varepsilon, \ \ i = r + 1, ..., N$, onde $\varepsilon$ é uma tolerância; \\
+%
+\textbf{3ª Etapa}: Escrever o parâmetro de redução $\mathbf{q}^L$, $k = 1, \cdots , r$  e $b_m$, que são dados por uma estimativa inicial; \\
+%
+\textbf{4ª Etapa}: Fornecer estimativa inicial para a pressão, gerando o vetor de incógnitas $\boldsymbol{\xi}$, que é o vetor $\mathbf{q}^L$ concatenado com o covolume $b_m$ e a pressão; \\
+%
+\textbf{5ª Etapa}: Calcular em função de $\mathbf{q}^L$ os valores de $a_m$  e $\psi_i$ na forma reduzida; \\
+%
+\textbf{6ª Etapa}: Calcular os parâmetros de mistura dados em função do parâmetro de redução $\mathbf{Q}^L$. Estes parâmetros são $A_m$ e $B_m$; \\
+% 
+\textbf{7ª Etapa}: Calcular as raízes da equação cúbica, escolhendo a menor raiz (uma vez que a fase incipiente é a fase líquida, cálculo de ponto de orvalho); \\
+%
+\textbf{8ª Etapa}: Calcular os coeficientes de fugacidade da fase líquida em função das coordenadas reduzidas; \\
+%
+\textbf{9ª Etapa}: Calcular os coeficientes de fugacidade da fase vapor, via abordagem tradicional (sem coordenadas reduzidas), apresentada no Capítulo \ref{cap3aux}; \\
+%
+\textbf{10ª Etapa}: Re-estimar a composição da fase líquida; \\
+%
+\textbf{11ª Etapa}: Calcular o erro das equações de equilíbrio; \\
+%
+\textbf{12ª Etapa}: Iterar via método Newton-Raphson multivariável para obter uma estimativa melhor para o parâmetro $\mathbf{q}^L$ e para pressão, de maneira que a norma da diferença entre dois valores de $\mathbf{q}^L$ consecutivos seja menor do que uma tolerância especificada. \\
+
+\begin{center}DESCRIÇÃO DAS ETAPAS DO ALGORITMO 2\end{center}   
+% 
+\textbf{1ª Etapa}: Para montar a matriz  $\mathbf{C}$, cujas entradas são dadas por $1 - c_{ij}$, basta observar os valores $ c_{ij}$ tabelados para cada mistura. Nos exemplos de misturas que serão utilizadas neste livro, observa-se que a interação dada é da primeira componente $C_1$ com todas as componentes da mistura, ou seja, $c_{C_1 - j}$ com $j=1,...,N$. Então, a matriz $\mathbf{C}$ terá apenas a primeira linha e primeira coluna diferentes de zero. As demais entradas são zero por não haver interação entre as componentes. Ou seja, para uma mistura de 3 componentes $C_1$, $C_2$ e $C_3$, por exemplo, tem-se 
+%
+\begin{eqnarray*}
+ \left(\begin{array}{ccc}
+1-c_{11} & 1-c_{12} & 1-c_{13} \\
+1-c_{21} & 0 & 0 \\
+1-c_{31} & 0 & 0 \\
+\end{array}\right).
+\end{eqnarray*}   
+%
+\textbf{2ª Etapa}:Obtém-se a decomposição espectral de $\mathbf{C}^{\star}$,
+%
+\begin{equation*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j \mathbf{v}_j \mathbf{v}_j^t ,
+\end{equation*}  
+%
+com os $\mathbf{v}_j$'s ortonormais, onde se assume a seguinte ordenação dos autovalores $|\lambda_1|\geq ...\geq |\lambda_r|$. 
+
+Assim, tem-se que os elementos da matriz $\mathbf{C}$ são aproximados pelos correspondentes elementos da matriz $\mathbf{C}^{\star}$, {\em i.e.}
+%
+\begin{equation*}
+\label{eq23}
+(1- c_{ij}) \approx  \sum_{k=1}^{r} \lambda_k v_{ik} v_{jk};\
+ \text{com}\ i,j=1,...,N.
+\end{equation*} 
+ 
+Pela Equação \ref{eq1} tem-se que
+%
+\begin{eqnarray*}\label{24}
+a_{ij}
+&=& \sqrt{a_i a_j}(1-c_{ij}) \approx \sqrt{a_i a_j} \sum_{k=1}^{r} \lambda_k v_{ik} v_{jk} = \sum_{k=1}^{r} \lambda_k \sqrt{a_i}v_{ik}\sqrt{a_j} v_{jk} = \sum_{k=1}^{r} \lambda_k m_{ik} m_{jk},
+\end{eqnarray*}
+%
+na qual o termo $a_i$ é dado pela Equação \ref {eq3}, $\lambda_k$ é o $k$-ésimo autovalor não nulo da matriz $\mathbf{C}^{\star}$ e $m_{ik} = \sqrt{a_i} v_{ik}$, com $k=1,\cdots,r$, e $i,j=1,\cdots,N$. Define-se o vetor $\mathbf{m}_k$ por suas entradas $\mathbf{m}_k(i) = \sqrt{a_i}\mathbf{v}_k(i)$. \\ \\
+%
+\textbf{3ª Etapa}: Com os autovetores associados aos autovalores não nulos de $\mathbf{C}^{\star}$, pode-se escrever os parâmetros de redução definidos por 
+%
+\begin{equation*}
+\label{eq27}
+\mathbf{q} = \sum_{i=1}^{N} m_{ki} x_i; \ \text{quando} \ k=1,...,r, \ \ b_m = \sum_{i=1}^{N} b_{c_i} z_i.
+\end{equation*}
+%
+onde $x_i$ é a fração molar do composto $i$ na fase líquida. Nota-se que o parâmetro $b_m$ é equivalente ao da Equação \ref{eq1} que também foi utilizada para calcular o coeficiente de fugacidade da fase vapor, apenas $\mathbf{q}^L$, com $k=1,...,r$,  sofre efetivamente redução. Assim o vetor de parâmetros de redução é dado por
+%
+\begin{equation*}
+\label{eq28}
+\boldsymbol{\xi} = (\mathbf{q}_1, ..., \mathbf{q}_r, b_m)^t.
+\end{equation*}
+
+Embora com o cálculo dos autovetores de $\mathbf{C}^{\star}$ associados aos autovalores não nulos, $\mathbf{v}_k$, os vetores $\mathbf{m}_k$ sejam agora conhecidos, as composições $x_i$ para a fase líquida não o são. Assim, para calcular o vetor de parâmetros de redução $\mathbf{q}^L$ utiliza-se um método iterativo a partir de uma estimativa inicial. Tomando-se o conjunto dos vetores $\mathbf{m}_k$, com $k=1,\cdots,r$, a estimativa inicial para o parâmetro de redução $\mathbf{q}^L$ é calculado pela média entre o vetor mínimo e o vetor máximo obtidos desse conjunto de vetores, ou seja, 
+%
+\begin{equation*}
+\label{eq29}
+\mathbf{q}_k^m = \displaystyle\min_{i = 1,\cdots,N} m_{ki};\
+\mathbf{q}_k^M = \displaystyle\max_{i = 1,\cdots,N} m_{ki}, \ \mathbf{q}_k^{in} = \frac{(\mathbf{q}_k^m + \mathbf{q}_k^M)}{2}.
+\end{equation*}
+
+Assim, tem-se
+%
+\begin{equation*}
+\label{eq30}
+m_{ki} \in [\mathbf{q}_k^m , \mathbf{q}_k^M], \forall \ k \ \text{com} \ k = 1,\cdots,r, \ i=1,\cdots,N. 
+\end{equation*}
+
+No intervalo $[\mathbf{q}_k^m,\mathbf{q}_k^M]$ estão os possíveis valores que a componente $k$ do vetor  $\mathbf{q}^L$, $\mathbf{q}_k^L$ com $k=1,\cdots,r$, pode assumir. A estimativa inicial de $b_m$ é obtida com a composição global conhecida $b_m = \sum_{i=1}^{N} b_{c_i} z_i$.\\ \\
+%
+\textbf{4ª Etapa}: As variáveis do problema são o vetor $\mathbf{q}$, a pressão (ou a temperatura). Pode-se assim especificar um valor para a temperatura $T$ e dar uma estimativa inicial para a pressão $P$ (ou especificar um valor para pressão $P$ e fornecer uma estimativa inicial para a temperatura $T$). 
+    
+Como o foco neste trabalho é o cálculo de pontos de orvalho, faz-se, para a fase vapor, $\mathbf{y}=\mathbf{z}$ e para a fase líquida têm-se $\mathbf{x}$ como incógnitas, mas calculados a posteriori, após a convergência do problema nas coordenadas reduzidas $\mathbf{q}$.
+    
+As $N$ equações de equilíbrio (igualdade de fugacidade) foram substituídas por apenas $r+1$ equações. Concatenando o vetor de parâmetros de redução $\mathbf{q}$ com uma estimativa inicial para a temperatura (pressão), têm-se agora $r+2$ equações com $r+3$ variáveis no sistema não linear, isto é, as $r+1$ variáveis reduzidas para a fase incipiente, $\mathbf{q}$, e a pressão (ou temperatura), o restante são as especificações. Assim, o vetor de variáveis independentes é 
+%
+\begin{equation*}
+\label{eq31}
+\boldsymbol{\xi} = (\mathbf{q}_1,\cdots,\mathbf{q}_{r}, b_m,P)^t.
+\end{equation*}
+
+É dada uma estimativa inicial para o vetor $\boldsymbol{\xi}$  e através do método de Newton-Raphson-multivariável (NRM) uma nova aproximação é calculada para este vetor (como será visto mais adiante).  Aqui, é utilizada uma especificação para a temperatura $T$ e uma estimativa inicial é dada para a pressão $P$. \\ \\
+%
+\textbf{5ª Etapa}: Como $a_m = \mathbf{z}(\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)\bullet \mathbf{C} \mathbf{z}$ e $\mathbf{C}$ é aproximada por $\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j \mathbf{v}_j \mathbf{v}_j^t$, obtem-se a seguinte aproximação de $a_m$,
+%
+\begin{eqnarray*}
+a_m(\mathbf{q}) 
+& = & \sum_{k=1}^{r} \lambda_k (\mathbf{q}_k)^2 \ \ (\text{pela Equação \ref{eq18a} $\mathbf{q}_k = (\sqrt{\mathbf{a}}\bullet \mathbf{v}_k)^t \mathbf{z} = \mathbf{m}_k^t\mathbf{z}$}).
+\end{eqnarray*}
+%
+e
+%
+\begin{eqnarray*}
+\boldsymbol{\psi}(\mathbf{m})
+&=& \sum_{k=1}^{r} \lambda_k \mathbf{m}_k \mathbf{q}_k. 
+\end{eqnarray*}
+
+De acordo com Nichita (2008), $a_m$ e $\psi_i$ são funções apenas dos parâmetros de redução (e não das composições da mistura), $b_m$ é um parâmetro de redução de si mesmo e o fator de compressibilidade depende da pressão e da temperatura dadas nos parâmetros de redução, $Z=Z[A(\mathbf{q}),B(\mathbf{q})]=
+Z(\mathbf{q})$.\\  \\
+%
+\textbf{6ª Etapa}: Com o parâmetro $a_m$ calculado em função do parâmetro de redução $\mathbf{q}$, a pressão $P$ e a temperatura $T$, pode-se obter os parâmetros $A_m$ e $B_m$ na forma reduzida, dados pela Equação \ref{Lo}. \\  \\
+%
+\textbf{7ª Etapa}: Com o parâmetro $A_m(\mathbf{m})$ na forma reduzida e $B_m$, pode se obter as raízes $Z$ da Equação \ref{eq7b}. Como neste caso a redução é aplicada para a fase líquida, toma-se a raiz de menor valor dentre as raízes reais obtidas. \\  \\
+% 
+\textbf{8ª Etapa}: Com a Equação \ref{eq32}, $A_m  (\mathbf{q})$, $B_m$ e a raiz $Z_m(\mathbf{q})$ da Equação \ref{eq7b}, pode-se obter uma expressão semelhante à Equação \ref{eq15}, só que com os parâmetros reduzidos
+%
+\begin{equation}
+\begin{array}{c}
+\label{eq33}
+{\displaystyle
+\text{ln}\left(\frac{f_i}{Px_i}\right)(\mathbf{q}) = \frac{B_i}{B_m}(Z_m (\mathbf{q}) -1)-\text{ln}(Z_m (\mathbf{q}) -B_m)
+}\\ \\
+{\displaystyle
++ \frac{1}{2,282B_m}\left(\frac{B_i}{B_m} A_m (\mathbf{q}) -2\frac{\psi_i (\mathbf{q})}{a_m (\mathbf{q})}\right)\text{ln}\left(\frac{Z_m (\mathbf{q}) +2,414B_m}{Z_m (\mathbf{m}) -0,414B_m}\right).
+} 
+\end{array}
+\end{equation}
+
+Então, com a temperatura $T$ especificada e uma estimativa inicial para a pressão $P$ pode-se calcular os coeficientes de fugacidade para a fase líquida com a Equação \ref{eq33}, já que a composição da fase vapor é conhecida ($\mathbf{y} = \mathbf{z}$). De maneira análoga, caso escolha-se a composição da fase líquida $\mathbf{x}= \mathbf{z}$ aplica-se o método de redução para a fase vapor. \\  \\
+%
+\textbf{9ª Etapa}: Calculam-se os coeficientes de fugacidade da fase vapor via abordagem tradicional com a Equação \ref{eq15}, sem redução. A temperatura especificada $T$ e a estimativa inicial para a pressão $P$ são  as mesmas utilizadas para a fase líquida.\\  \\ 
+%
+\textbf{10ª Etapa}: Após a obtenção dos coeficientes de fugacidade para a fase líquida via técnica de redução, ou seja, calculados pela Equação \ref{eq33} e pelos coeficientes de fugacidade da fase vapor gerados pela abordagem tradicional (sem redução, via Equação \ref{eq15}), uma nova estimativa para as composições da fase líquida é obtida pelo critério de isofugacidades (a composição global é idêntica à composição do vapor, $\mathbf{z}=\mathbf{y}$):
+%
+\begin{equation}
+\label{eq34}
+x_i = y_i \frac {\varphi_i^V}{\varphi_i^L(\mathbf{q})}.
+\end{equation}  
+
+Como é visto a seguir, quando variáveis reduzidas são utilizadas, é possível calcular os pontos de saturação, resolvendo um conjunto reduzido de apenas $r+2$ equações. Pretende-se com isto calcular o erro para os pontos de saturação, visto que os valores de $\mathbf{q}$ e da pressão (temperatura) foram dados por uma estimativa inicial e não se sabe a qualidade desta estimativa em função dos resultados para os coeficientes de fugacidade do líquido e do vapor. \\  \\
+%
+\textbf{11ª Etapa}: As equações de erro para os pontos de saturação são dadas pelo sistema 
+
+\begin{equation}
+\label{eq35}
+\left\{ \begin{array}{ll}
+\mathcal{E}_k = \mathbf{q}_{k}^L - (\sum_{i=1}^{N} m_{ki} x_i ) = 0,\ \text{com} \ k = 1,...,r,\\
+\mathcal{E}_{r+1} = b_m - \sum_{i=1}^{N}b_{c_i}x_i = 0, \\
+\mathcal{E}_{r+2} = (\sum_{i=1}^{N} x_i ) - 1 = 0. \end{array} \right.
+\end{equation}  
+
+Esse sistema é resolvido computacionalmente, via método NRM, de maneira que o erro seja o mais próximo possível de zero.
+
+No sistema dado pela Equação \ref{eq35} deseja-se que, após obter-se via NRM um valor aproximado para $\mathbf{q}_{k}$ com $k=1,\cdots,r+1$  e um novo valor para a pressão, a diferença entre estes valores de  $\mathbf{q}_k$ e os valores de $\mathbf{q}_k = \sum_{i=1}^{N} m_{ki} x_i$, calculados com os valores $x_i$ agora conhecidos, seja aproximadamente zero. Para a última equação tem-se que a soma das frações molares (composição) dos $N$ compostos da mistura deve ser próxima de um. \\ \\
+%
+\textbf{12ª Etapa}: Para aplicar o método de NRM, calcula-se a matriz jacobiana para o sistema obtido da  Equação \ref{eq35}. Os elementos da matriz Jacobiana são
+%
+\begin{equation*}
+\label{eq36}
+J_e = \left(\begin{array}{cccc}
+\frac{\partial \mathcal{E}_1}{\partial q_1} & 
+\ldots  & 
+\frac{\partial \mathcal{E}_1}{\partial m_{r+1}} &  \frac{\partial \mathcal{E}_1}{\partial P}\\
+\vdots &
+ \ddots &
+  \vdots & 
+  \vdots \\
+  \frac{\partial \mathcal{E}_{r+1}}{\partial m_1} & 
+\ldots & 
+\frac{\partial \mathcal{E}_{r+1}}{\partial m_{r+1}} & \frac{\partial \mathcal{E}_{r+1}}{\partial P}\\
+\frac{\partial \mathcal{E}_{r+2}}{\partial m_1} &
+ \ldots &  
+ \frac{\partial \mathcal{E}_{r+2}}{\partial m_{r+1}} & \frac{\partial \mathcal{E}_{r+2}}{\partial P}\\
+\end{array}\right).
+\end{equation*}  
+
+Essa matriz é quadrada de ordem $r+2$. Outra possibilidade para obter a matriz jacobiana é calcular as derivadas por diferenças finitas cuja implementação é computacionalmente mais fácil (embora com custo computacional maior). Neste trabalho, emprega-se o cálculo da matriz jacobiana por diferenças finitas.
+Seja o sistema formado pela Equação \ref{eq35}. Pelo método de NRM deseja-se encontrar um valor aproximado para $\mathbf{\xi} = (\mathbf{q}_{1},\cdots,\mathbf{q}_{r},b_m,P)^t$, que inicialmente é dado por uma estimativa inicial, tal que o sistema
+%
+\begin{equation}
+\label{eq37}
+\left\{ \begin{array}{ll}
+\mathcal{E}_1 (\mathbf{q}_{1},\cdots,\mathbf{q}_{r},b_m,P) = 0\\
+\mathcal{E}_2 (\mathbf{q}_{1},\cdots,\mathbf{q}_{r},b_m,P) = 0\\
+\vdots \\
+\mathcal{E}_{r+1} (\mathbf{q}_{1},\cdots,\mathbf{q}_{r},b_m,P) = 0\\
+\mathcal{E}_{r+2} (\mathbf{q}_{1},\cdots,\mathbf{q}_{r},b_m,P) = 0 \end{array} \right.
+\end{equation}  
+%
+é satisfeito aproximadamente. A aproximação de Taylor no caso de funções a várias variáveis é 
+%
+\begin{equation}
+\label{eq38}
+\mathbf{\mathcal{E}}(\mathbf{\xi}) = \mathbf{\mathcal{E}}(\mathbf{\xi}^k) + J_e(\mathbf{\xi}^k)(\mathbf{\xi}- \mathbf{\xi}^k) + \mathbf{E},
+\end{equation}  
+%
+sendo $\mathbf{E}$ o erro cometido, cuja forma não explicita-se, é um vetor que representa o erro da aproximação linear e $J_e(\mathbf{\xi}^k)$ é a derivada de uma função vetorial com variável vetorial. Esta derivada por ser representada por uma matriz que contém as derivadas parciais de primeira ordem de todas as componentes da função $\mathbf{\mathcal{E}}(\mathbf{\xi})$, a matriz jacobiana de $\mathbf{\mathcal{E}}(\mathbf{\xi})$.
+
+Para estabelecer o método iterativo, a aproximação da solução da equação na iteração $k+1$ dada por $\mathbf{\xi}^{k+1}$ será definida pelo vetor que anula a parte linear da Equação \ref{eq38}, isto é, o vetor $\mathbf{\xi}^{k+1}$ é tal que
+%
+\begin{equation}
+\label{eq39}
+\mathbf{\mathcal{E}}(\mathbf{\xi}^k) + J_e(\mathbf{\xi}^k)(\mathbf{\xi}^{k+1}- \mathbf{\xi}^k)= 0.
+\end{equation} 
+
+Pré-multiplicando a Equação \ref{eq39} pela inversa da matriz jacobiana, tem-se
+%
+\begin{equation}
+\label{eq40}
+\mathbf{\xi}^{k+1} = \mathbf{\xi}^k - J_e^{-1}(\mathbf{\xi}^k)\mathcal{E}(\mathbf{\xi}^k) .
+\end{equation}
+
+Como a inversão de matrizes é uma operação cara, pode-se trabalhar com a Equação \ref{eq39} encontrando a aproximação da iteração $k+1$ resolvendo um sistema linear para calcular $\Delta\mathbf{\xi}^k = \mathbf{\xi}^{k+1} - \mathbf{\xi}^k$
+%
+\begin{equation}
+\label{eq41}
+Je(\mathbf{\xi}^k)\Delta\mathbf{\xi}^k = -\mathbf{\mathcal{E}}(\mathbf{\xi}^k).
+\end{equation}
+
+Desta forma, a nova aproximação será
+%
+\begin{equation}
+\label{eq42}
+\mathbf{\xi}^{k+1} = \mathbf{\xi}^k + \Delta\mathbf{\xi}^k.
+\end{equation}
+
+É por vezes conveniente introduzir um parâmetro do passo, $\eta$, e definir a nova aproximação por
+%
+\begin{equation}
+\label{eq43}
+\mathbf{\xi}^{k+1} = \mathbf{\xi}^k + \eta^k \Delta\mathbf{\xi}^k.
+\end{equation}
+
+Quando o parâmetro é um, $\eta^k = 1$, obtém-se novamente a Equação \ref{eq42}. Assim, dada uma estimativa inicial $\mathbf{\xi}^0$ para a solução da Equação \ref{eq37}, pode-se encontrar uma nova solução aproximada para a Equação \ref{eq37} usando a Equação \ref{eq41}, para o cálculo de $\Delta\mathbf{\xi}^k$, e a Equação \ref{eq42} para o cálculo de $\mathbf{\xi}^{k+1}$. Aqui é utilizada uma estimativa inicial como a descrita nas 6ª e 7ª etapas do método de redução. Esse novo valor fornece, para uma temperatura especificada e uma estimativa de pressão, um valor convergido para a  pressão (e naturalmente, para as coordenadas reduzidas). Para cada temperatura especificada obtém-se uma pressão de equilíbrio (após a convergência do método). Um tempo de processamento será calculado com a finalidade de comparar o método utilizado (com redução de dimensionalidade para a fase líquida) com um método clássico, onde os coeficientes de fugacidade para ambas as fases são calculados sem redução de dimensionalidade, utilizando a Equação \ref{eq15}.

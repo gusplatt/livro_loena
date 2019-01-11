@@ -1,0 +1,464 @@
+\chapter{Resultados da aplicação para alguns exemplos de misturas} \label{cap11}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo são apresentados os resultados obtidos para o cálculo do equilíbrio de fases utilizando o método da evolução diferencial, comparando-o ao método da decomposição em valores singulares e o método clássico (resolução das igualdades das fugacidades). Todos os programas foram implementados em linguagem Scilab 5.5 e rodados em uma máquina de processador $\text{Intel Core}^{TM} i5-3337U CPU@1.80GHz$, com $4,00GB$ de memória e sistema operacional Windows de 64 Bits.
+
+As misturas utilizadas neste trabalho são denotadas por MHA5, MI e MHA5(2), de 5, 10 e 6 componentes, respectivamente e utiliza-se a equação cúbica de Peng-Robinson para exemplificar os métodos. A mistura MHA5(2) é uma modificação da mistura MHA5, como será comentado neste capítulo.
+
+As Tabelas \ref{Tabela4}, \ref{Tabela5} e \ref{Tabela6}, apresentam as  propriedades das misturas utilizadas. Esses dados são obtidos experimentalmente e os parâmetros $c_{C_1-j}$ são os valores dos coeficientes de interação binária da componente $C_1$ com os $j$ componentes da mistura, com $j=1,...,N$.  
+%
+\begin{table}[!ht]{10cm}
+\centering     
+	\caption{Propriedades da mistura MHA5.}\label{Tabela4} 
+	 \begin{tabular}{|c|c|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Componente}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$\mathbf{z}$}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{$T_{ci}(K)$}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$P_{ci}(bar)$}} &  \multicolumn{1}{|c|}{$\omega_i$ } & \multicolumn{1}{|c|}{$c_{C_1-j}$} \\ & & & & &   \\ \hline
+$C_1$ & $0$ & $191,1$ & $46,393$ & $0,013$ & 0 \\ \hline
+$C_2$ & $0,3977$ & $305,6$ & $48,926$ & $0,105$ & $0$ \\ \hline
+$C_3$ & $0,2926$ & $370,0$ & $42,544$ & $0,152$ & $0$  \\ \hline
+$nC_4$ & $0,1997$ & $425,2$ & $37,986$ & $0,201$ & $0,009770$ \\ \hline
+$nC_5$ & $0,0713$ & $469,6$ & $33,731$ & $0,252$ & $0,011852$ \\ \hline
+$C_6$ & $0,0369$ & $507,7$ & $30,287$ & $0,290$ & $0,013934$ \\ \hline
+$C_7$ & $0$ & $549,471$ & $32,191$ & $0,3178$ & $0,016016$ \\ \hline
+$C_8$ & $0$ & $565,267$ & $30,332$ & $0,3428$ & $0,018098$ \\ \hline
+\end{tabular}
+\end{table} 
+
+\pagebreak
+\begin{table}[!ht]{10cm}     
+	\caption{Propriedades da mistura MI.}\label{Tabela5} 
+	 \begin{tabular}{|c|c|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Componente}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$\mathbf{z}$}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{$T_{ci}(K)$}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$P_{ci}(bar)$}} &  \multicolumn{1}{|c|}{$\omega_i$ } & \multicolumn{1}{|c|}{$c_{C_1-j}$} \\ & & & & &   \\ \hline
+$C_1$ & $0,35$ & $190,55$ & $45,99$ & $0,011$ & - \\ \hline
+$C_2$ & $0,03$ & $305,33$ & $48,71$ & $0,099$ & $0$ \\ \hline
+$C_3$ & $0,04$ & $369,85$ & $42,47$ & $0,152$ & $0$  \\ \hline
+$C_4$ & $0,06$ & $425,25$ & $37,92$ & $0,199$ & $0,020$ \\ \hline
+$C_5$ & $0,04$ & $469,80$ & $33,75$ & $0,251$ & $0,020$ \\ \hline
+$C_6$ & $0,03$ & $507,90$ & $30,35$ & $0,299$ & $0,025$ \\ \hline
+$C_7$ & $0,05$ & $540,15$ & $27,35$ & $0,350$ & $0,025$ \\ \hline
+$C_8$ & $0,05$ & $568,95$ & $24,90$ & $0,397$ & $0,035$ \\ \hline
+$C_{10}$ & $0,30$ & $617,65$ & $21,05$ & $0,490$ & $0,045$ \\ \hline
+$C_{14}$ & $0,05$ & $693,00$ & $16,10$ & $0,654$ & $0,045$ \\ \hline
+\end{tabular}
+\end{table} 
+%
+\begin{table}[!ht]{10cm}     
+	\caption{Propriedades da mistura MHA5(2).}\label{Tabela6} 
+	 \begin{tabular}{|c|c|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Componente}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$\mathbf{z}$}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{$T_{ci}(K)$}} & \multicolumn{1}{|c|}{\multirow{2}{*}{$P_{ci}(bar)$}} &  \multicolumn{1}{|c|}{$\omega_i$ } & \multicolumn{1}{|c|}{$c_{C_1-j}$} \\ & & & & &   \\ \hline
+$C_1$ & $0,0018$ & $191,1$ & $46,393$ & $0,013$ & 0 \\ \hline
+$C_2$ & $0,3977$ & $305,6$ & $48,926$ & $0,105$ & $0$ \\ \hline
+$C_3$ & $0,2926$ & $370,0$ & $42,544$ & $0,152$ & $0$  \\ \hline
+$nC_4$ & $0,1997$ & $425,2$ & $37,986$ & $0,201$ & $0,009770$ \\ \hline
+$nC_5$ & $0,0713$ & $469,6$ & $33,731$ & $0,252$ & $0,011852$ \\ \hline
+$C_6$ & $0,0369$ & $507,7$ & $30,287$ & $0,290$ & $0,013934$ \\ \hline
+$C_7$ & $0$ & $549,471$ & $32,191$ & $0,3178$ & $0,016016$ \\ \hline
+$C_8$ & $0$ & $565,267$ & $30,332$ & $0,3428$ & $0,018098$ \\ \hline
+\end{tabular}
+\end{table} 
+\pagebreak
+
+\section{Processo isotérmico} 
+
+Para processos sob temperatura constante, chamados de processos isotérmicos, apresentam-se os resultados obtidos para cada mistura.
+
+O valor especificado da temperatura foi de $T=350$ K para as misturas MHA5 e $T=565$ K para a mistura MI. A estimativa inicial para a pressão foi de $P=20$ bar para ambas as misturas.
+
+Os autovalores da matriz $\mathbf{C}$ são calculados utilizando a decomposição em valores singulares  (SVD). Considerando-se não só autovalores reais não nulos mas aqueles maiores (em valor absoluto) que uma tolerância especificada, ou seja, somente os autovalores não desprezíveis, tem-se para cada mistura os autovalores e seus respectivos autovetores. Em seguida, estes valores são comparados aos autovalores (chamados apenas de escalares), e seus respectivos autovetores (vetores), obtidos pela evolução diferencial (ED).  Os valores obtidos são apresentados nas Tabelas \ref{Aut1} e \ref{Aut2}, para uma dada temperatura constante.
+%
+\begin{table}[!ht]{12cm}     
+	\caption{MHA5: autovalores maiores que $10^{-2}$, com $T=350$ K.}\label{Aut1} 
+	 \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\   
+& & & \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  & $\mathbf{v}_2$ & $\mathbf{w}_2$ \\ 
+ $0,44529$ & $0,44485$ & $-0,79973$  & $-0,79948$  \\
+$0,44848$ & $0,44817$  & $-0,17489$ &  $-0,17227$  \\ 
+$0,44761$ & $0,44742$   & $0,23617$ & $0,23639$\\ 
+$0,44742$ & $0,44730$  & $0,32377$ &  $0,32070$ \\ 
+$0,44724$ & $0,44708$  & $0,41136$ &  $0,41660$\\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  & $\mathbf{\lambda}_2$ & $\mathbf{\mu}_2$  \\
+$4,98580$ & $4,99011$ & $0,01900$ & $0,01615$ \\ \hline
+\end{tabular}
+\end{table} 
+% 
+\begin{table}[!ht]{12cm}     
+	\caption{MI: autovalores maiores que $0,03$, com $T=565$ K.}\label{Aut2} 
+	 \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\   
+& & & \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  & $\mathbf{v}_2$ & $\mathbf{w}_2$ \\ 
+$-0,31074$ & $-0,31258$ & $-0,80423$ & $-0,80308$  \\
+$-0,31757$ & $-0,31837$ & $-0,18402$ & $-0,18667$ \\ 
+$-0,31757$ & $-0,31737$ & $-0,18402$ & $-0,18290$ \\ 
+$-0,31695$ & $-0,31660$ & $0,04364$ & $0,03966$ \\ 
+$-0,31695$ & $-0,31655$ & $0,04364$ & $0,04228$ \\
+$-0,31679$ & $-0,31671$ & $0,10056$ & $0,10039$ \\
+$-0,31679$ & $-0,31662$ & $0,10056$ & $0,10132$ \\
+$-0,31648$ & $-0,31648$ & $0,21439$ & $0,22453$ \\
+$-0,31617$ & $-0,31521$ & $0,32823$ & $0,32751$ \\
+$-0,31617$ & $-0,31587$ & $0,32823$ & $0,32959$ \\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  & $\mathbf{\lambda}_2$ & $\mathbf{\mu}_2$  \\
+$9,95735$ & $9,96893$ & $0,07065$ & $0,07214$ \\ \hline
+\end{tabular}
+\end{table} 
+
+Nota-se que os autovalores e seus respectivos autovetores são bem próximos dos obtidos pelo SVD como descrevem as Tabelas \ref{Aut1} e \ref{Aut2}. Para as duas misturas tem-se, respectivamente, o valor da função erro, $\epsilon$,
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 1,033 \times 10^{-10},  \ \ \text{(MHA5)} \ \ \ \ \ \  \epsilon_{ED} = 5,232 \times 10^{-11}, \ \ \text{(MHA5)}
+\end{eqnarray*}
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 7,595 \times 10^{-8}, \ \ \text{(MI)} \ \ \ \ \ \ \epsilon_{ED} = 6,449 \times 10^{-8}, \ \ \text{(MI)}
+\end{eqnarray*}
+%
+que obtém valor menor com o método ED para ambas as misturas testadas.
+%
+\begin{table}[!ht]{12cm}     
+	\caption{Pressão (bar), tempo de processamento ($s$) e erro percentual para MHA5 com $T$=350 K e tolerância no NRM de $10^{-6}$.}\label{Temp1} 
+	 \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Mistura}}} &\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Clássico}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\ 
+& & & \\ \hline
+Pressão & $14,219$ & $14,203$  & $14,210$ \\ 
+$T_p$ & $0,13$ & $0,12$ & $0,10$  \\ 
+Erro relativo & --- & $0,11620 \%$  & $0,06167 \%$  \\ \hline 
+\end{tabular}
+\end{table} 
+%
+\begin{table}[!ht]{12cm}     
+	\caption{Pressão (bar), tempo de processamento (s) e erro percentual para MI com $T=$565 K e tolerância no NRM de $10^{-6}$.}\label{Temp2} 
+	 \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Mistura}}} &\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Clássico}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\ 
+& & & \\ \hline
+Pressão & $27,232$ & $26,576$  & $27,259$  \\ 
+$T_p$ & $0,33$ & $0,29$ & $0,27$  \\ 
+Erro relatico & --- & $2,40998 \%$  & $0,10043\%$  \\ \hline
+\end{tabular}
+\end{table} 
+
+O tempo de processamento gasto para cada método, comparados ao método denotado por ``clássico", onde não se utiliza redução, podem ser observados (para as misturas citadas acima), nas Tabelas \ref{Temp1} e \ref{Temp2}. Pode-se observar também as pressões obtidas por cada método e o erro percentual entre elas, que é calculado de acordo com a seguinte expressão:
+%
+\begin{eqnarray}
+\text{erro} = \left|\frac{P_{\text{novo}} - P_{\text{clássico}}}{P_{\text{clássico}}} \right| \times 100.
+\end{eqnarray}
+
+Nas Tabelas \ref{Temp1} e \ref{Temp2} observa-se que há um ganho de tempo com o método ED, embora não haja uma diferença tão grande se comparado ao SVD . Porém, o método ED obteve valores de pressão bem mais próximos das pressões obtidas pelo método clássico, mostrando-se mais acurado, com erro percentual das pressões menor.
+
+Nas duas misturas testadas para o processos isotérmicos, foram obtidos dois autovalores e seus respectivos autovetores. Na tentativa de alcançar uma redução ainda maior, toma-se a mistura MI, por exemplo, para uma tolerância de autovalores maiores que $0,08$. Com isso, tem-se um único autovalor e os resultados segundo a Tabela \ref{Aut21}, onde observa-se que os autovalores e autovetores ainda são bem próximos.  
+%
+\begin{table}[!ht]{12cm}     
+\caption{MI: autovalores maiores que $0,08$, com $T=565 K$.}\label{Aut21} 
+\begin{tabular}{|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  \\   
+& \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  \\ 
+$-0,31074$ & $-0,30980$  \\
+$-0,31757$ & $-0,31926$ \\ 
+$-0,31757$ & $-0,31642$  \\ 
+$-0,31695$ & $-0,31730$  \\ 
+$-0,31695$ & $-0,31946$ \\
+$-0,31679$ & $-0,31899$  \\
+$-0,31679$ & $-0,31701$  \\
+$-0,31648$ & $-0,31618$  \\
+$-0,31617$ & $-0,31751$  \\
+$-0,31617$ & $-0,31741$  \\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$ \\
+$9,95735$ & $9,92485$ \\ \hline
+\end{tabular}
+\end{table} 
+%
+Nota-se que ainda é possível obter-se resultados muito próximos do método clássico aplicando uma redução ainda maior, com valor da função $\epsilon$
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 5 \times 10^{-7} \ \ \text{(MI)}, \ \ \ \ \epsilon_{ED} = 4 \times 10^{-7} \ \ \text{(MI)},
+\end{eqnarray*}
+%
+que ainda é menor com o método ED.
+
+A pressão, o tempo de processamento e o erro percentual estão apresentados na Tabela \ref{Temp21}. O erro percentual obtido por esse método ainda é menor que o obtido pelo SVD e o valor da pressão muito próximo ao apresentado pelo método clássico. 
+%
+\begin{table}[!ht]{12cm}     
+	\caption{Pressão (bar), tempo de processamento (s) e erro percentual para MI com $T$=565 K e tolerância no NRM de $10^{-6}$.}\label{Temp21} 
+	 \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Mistura}}} &\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Clássico}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\ 
+& & & \\ \hline
+Pressão & $27,232$ & $28,257$  & $27,223$ \\ 
+$T_p$ & $0,25$ & $0,21$ & $0,17$   \\ 
+Erro relativo & --- & $3,76524 \%$  & $0,03258 \%$  \\ \hline 
+\end{tabular}
+\end{table} 
+
+Na próxima seção, as misturas são testadas para o caso não-isotérmico, afim de avaliar o desempenho do método quando a temperatura varia.
+
+Uma ponto importante aqui observado está relacionado a composição global da mistura MHA5, cuja soma das composições globais de todas as componentes não soma um. Isso foi mantido, mesmo com essa observação, a fim de comparar os métodos com a bibliografia utilizada, fonte de onde os dados foram retirados e por tanto mantidos.  Isso pode ser perfeitamente observado na Tabela \ref{Tabela4}. Ainda assim, os resultados foram satisfatórios como observado acima, não gerando problemas na aplicação do método. Para tanto, montou-se uma nova mistura MHA5 com valor de $C_1$ difetente de zero, de forma que a soma da composição dê um. Como no caso isotérmico avalia-se apenas para uma temperatura constante, o teste com essa nova mistura será feito para  o caso não-isotérmico, como será visto na próxima seção.
+
+\section{Processo não-isotérmico}
+
+Para processos não-isotérmicos, tem-se para cada mistura uma dada faixa de temperatura. Para a obtenção das curvas de ponto de orvalho, é feito um laço de temperaturas, obtendo-se a pressão de orvalho para cada temperatura especificada. Para o primeiro laço, é empregada uma estimativa inicial conforme descrita na 3ª etapa do algoritmo do capítulo anterior. Para os pontos seguintes, o valor convergido do ponto anterior será a estimativa inicial para o ponto atual. Naturalmente, se os pontos forem próximos (e serão), a convergência deve ser acelerada. Para que se tenha uma boa possibilidade de convergência (com uma estimativa inicial que pode ser de baixa qualidade), deve-se utilizar, para o primeiro conjunto de iterações NRM (ou seja, para o primeiro ponto do laço), um passo pequeno (menor que um) na Equação \ref{eq43} com a finalidade de tornar o andamento do método mais ``lento" (e, naturalmente, sem convergência quadrática nas vizinhanças da raiz). Feito o primeiro conjunto de iterações e obtendo-se uma estimativa melhor para $\mathbf{q}$, pode-se agora utilizar um passo de valor $1,0$ para as demais iterações. Os resultados para esta abordagem serão referenciados como método ``ED" (evolução diferencial) e comparado aos métodos já utilizados anteriormente, chamados ``SVD" (decomposição em valores singulares) e ``clássico".
+
+O passo utilizado no método de NRM para a primeira iteração de acordo com cada método foi de $1,0$ para as todas misturas testadas. Não houve a necessidade de diminuir o valor do passo na primeira iteração, uma vez que com passo $1,0$ o método encontrou bons resultados, com menos esforço computacional. A faixa de variação da temperatura para todos os casos foi de $0,1$. Pode-se observar que a faixa de variação de temperatura é bem pequena em alguns casos. Isto porque, com uma estimativa inicial ruim, o primeiro ponto do laço obtido pelo primeiro conjunto de iterações NRM é ruim e, com faixas de variação de temperatura pequenas, muitos pontos são gerados e o ``efeito'' do primeiro NRM ruim tende a ser diluído dentre muitos pontos. Isto pode ser observado nas Figuras \ref{Mestrado1} e \ref{Mestrado2}, onde têm-se, respectivamente, poucos pontos obtidos por uma variação maior de temperatura e muitos pontos quando se tem uma variação de temperatura pequena. 
+%%
+%\begin{figure}[!ht]{8cm}
+%  \caption{Método de Newton para uma variação maior no laço de temperatura.} \label{Mestrado1}
+%  \fbox{\includegraphics[scale=0.5]{Figuras/FigNRM1.png}}
+%  \legend{Pontos obtidos para um laço de temperatura.}
+%  \source{O autor, 2013.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{8cm}
+%  \caption{Método de Newton para pequena variação no laço de temperatura.} \label{Mestrado2}
+%  \fbox{\includegraphics[scale=0.5]{Figuras/FigNRM2.png}}
+%  \legend{Pontos obtidos para um laço de temperatura com faixa de variação menor.}
+%  \source{O autor, 2013.}
+%\end{figure}
+
+Conforme descrito  para o processo isotérmico, calcula-se de forma análoga os autovalores e autovetores, agora para uma faixa de temperatura, como pode ser observado nas Tabelas \ref{Aut3} e \ref{Aut4}. Pode-se notar que os autovalores, e seus respectivos autovetores, econtrados pelo método ED são próximos aos obtidos pelo SVD. 
+%
+\begin{table}[!ht]{12cm}     
+	\caption{MHA5: autovalores maiores que $10^{-2}$, com $T=[350,390]$ K.}\label{Aut3} 
+	\begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\   
+& & & \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  & $\mathbf{v}_2$ & $\mathbf{w}_2$ \\ 
+ $0,44529$ & $0,44528$ & $-0,79973$  & $-0,79982$  \\
+$0,44848$ & $0,44838$  & $-0,17489$ &  $-0,17505$  \\ 
+$0,44761$ & $0,44759$   & $0,23617$ & $0,23644$\\ 
+$0,44742$ & $0,44746$  & $0,32377$ &  $0,32713$ \\ 
+$0,44724$ & $0,44720$  & $0,41136$ &  $0,41295$\\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  & $\mathbf{\lambda}_2$ & $\mathbf{\mu}_2$  \\
+$4,98580$ & $4,98481$ & $0,01900$ & $0,02050$ \\ \hline
+\end{tabular}
+\end{table} 
+%
+\begin{table}[!ht]{12cm}     
+	\caption{MI: autovalores maiores que $0,03$, com $T=[500,565]$ K.}\label{Aut4} 
+	  \begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\   
+& & & \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  & $\mathbf{v}_2$ & $\mathbf{w}_2$ \\ 
+$-0,31074$ & $-0,31236$ & $-0,80423$ & $-0,80084$  \\
+$-0,31757$ & $-0,31872$ & $-0,18402$ & $-0,18435$ \\ 
+$-0,31757$ & $-0,31827$ & $-0,18402$ & $-0,16581$ \\ 
+$-0,31695$ & $-0,31742$ & $0,04364$ & $0,04514$ \\ 
+$-0,31695$ & $-0,31736$ & $0,04364$ & $0,03123$ \\
+$-0,31679$ & $-0,31697$ & $0,10056$ & $0,11054$ \\
+$-0,31679$ & $-0,31705$ & $0,10056$ & $0,11181$ \\
+$-0,31648$ & $-0,31652$ & $0,21439$ & $0,21631$ \\
+$-0,31617$ & $-0,31591$ & $0,32823$ & $0,32245$ \\
+$-0,31617$ & $-0,31599$ & $0,32823$ & $0,30453$ \\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  & $\mathbf{\lambda}_2$ & $\mathbf{\mu}_2$  \\
+$9,95735$ & $9,94220$ & $0,07065$ & $0,08643$ \\ \hline
+\end{tabular}
+\end{table}  
+
+Nota-se também que, para as duas misturas, o valor da função erro, $\epsilon$, é menor com o método ED, com
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 8,026 \times 10^{-8} \ \ \text{(MHA5)}, \ \ \ \ \epsilon_{ED} = 5,859 \times 10^{-8} \ \ \text{(MHA5)},
+\end{eqnarray*}
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 4,342 \times 10^{-8} \ \ \text{(MI)}, \ \ \ \ \epsilon_{ED} = 1,240 \times 10^{-9} \ \ \text{(MI)}.
+\end{eqnarray*} 
+
+Comparando o método clássico para o equilíbrio de fases fluidas com o método SVD e o método ED, obtém-se, para cada uma das misturas utilizadas, o valor do tempo de processamento conforme observado na Tabela \ref{Tempo}, para uma dada faixa de temperaturas. Escolhe-se $T=[350;390]$ para a mistura MHA5 e $T=[500;565]$ para a mistura MI. Esta tabela mostra que o método ED, além de manter a acurácia dos resultados e obter menor valor para a função $\epsilon$, é também mais eficiente no que se refere ao tempo de processamento para o cálculo do equilíbrio de fases quando a temperatura varia. 
+
+Para ambas as misturas manteve-se a estimativa  inicial para a pressão $P_0=20$ bar. Os valores das pressões obtidas para cada temperatura da faixa escolhida geram o diagrama pressão-temperatura da curva de orvalho (onde a redução é calculada na fase líquida e a composição do vapor é conhecida a priori). As curvas são obtidas apenas para baixas pressões, gerando apenas a parte inferior da mesma. Utilizando-se valores maiores para estimativas iniciais da pressão é possível obter o ramo superior da curva (pontos de orvalho retrógrados), ou pode-se ainda gerar as curvas de pontos de bolha (onde a princípio a composição do líquido é conhecida e calcula-se a composição do vapor). Os diagramas podem ser observado nas Figuras \ref{MHA5} e \ref{MI}.
+
+Pode-se observar nos diagramas pressão-temperatura que as curvas produzidas pelo método clássico e pelo método ED são praticamente coincidentes. Ampliando-se uma faixa da curva gerada por cada mistura, conforme as Figuras \ref{MHA5_faixa} e \ref{MI_faixa}, percebe-se que a curva gerada pelo método clássico fica totalmente coberta pela curva gerada pela ED, ficando inperceptível. 
+%
+\begin{table}[!ht]{12cm}     
+	\caption{Tempo de processamento, com tolerância no NRM de $10^{-6}$.}\label{Tempo} 
+	 \begin{tabular}{|c|c|c|c|}\hline	\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Mistura}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Clássico}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\ 
+	 & & & \\ \hline
+MHA5 & $26,87$ & $14,28$ & $13,29$  \\
+MI & $134,92$ & $56,78$ & $54,57$  \\ \hline
+\end{tabular}
+\end{table} 
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Diagrama pressão temperatura - mistura MHA5} \label{MHA5}
+% \includegraphics[scale=0.5]{Figuras/MHA5.png}
+%  \legend{Curva de ponto de orvalho para mistura MHA5.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Diagrama pressão temperatura --- mistura MI} \label{MI}
+%  \includegraphics[scale=0.5]{Figuras/MI.png}
+%  \legend{Curva de ponto de orvalho para mistura MI.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Faixa do diagrama pressão temperatura --- mistura MHA5.} \label{MHA5_faixa}
+%  \includegraphics[scale=0.5]{Figuras/MHA5_faixa.png}
+%  \legend{Faixa ampliada de uma parte da curva de orvalho MHA5.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Faixa do diagrama pressão temperatura --- mistura MI.} \label{MI_faixa}
+%  \includegraphics[scale=0.5]{Figuras/MI_faixa.png}
+%  \legend{Faixa ampliada de uma parte da curva de orvalho MI.}
+%\end{figure}
+
+Os erros percentuais entre as pressões obtidas para as faixas de temperatura especificadas são apresentados nas Figuras \ref{Erro_MHA5_cont2} e \ref{MI_Erro}, para as misturas MHA5 e MI, respectivamente. Em ambos os casos, vê-se claramente que o erro é bem menor utilizando o método ED, variando no máximo entre 0 e 0,3.
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Erro percentual --- mistura MHA5} \label{Erro_MHA5_cont2}
+%  \includegraphics[scale=0.5]{Figuras/Erro_MHA5_cont2.png}
+%  \legend{Erro percentual das pressões calculadas para cada temperatura.}
+%  \source{O autor, 2017.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Erro percentual --- mistura MI} \label{MI_Erro}
+%  \includegraphics[scale=0.5]{Figuras/MI_Erro.png}
+%  \legend{Erro percentual das pressões calculadas para cada temperatura.}
+%  \source{O autor, 2017.}
+%\end{figure}
+
+Mantendo-se a faixa de temperatura $T=[500;565]K$, a estimativa inicial $P_0=10$ bar para a pressão e tolerância $10^{-6}$ no método de Newton para a mistura MI, tentou-se ainda mais uma redução selecionando apenas autovalores maiores que $0,08$ (como feito no caso isotérmico). Os resultados são apresentados na Tabela \ref{Aut41}, onde observa-se que os autovalores e autovetores obtidos pelo método ED são bem próximos aos obtidos pelo método SVD, com valor da função $\epsilon$ 
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 4,879 \times 10^{-9} \ \  \text{(MI)}, \ \ \ \ \epsilon_{ED} = 2,866 \times 10^{-10} \ \ \text{(MI)},
+\end{eqnarray*}
+%
+que é bem menor com o método ED, mostrando que esse método é muito eficiente quando se deseja reduzir ainda mais a dimensão do problema.  A curva de orvalho gerada pelo método ED ainda é bem próxima ao método clássico mesmo que com um único autolavor como mostra a Figura \ref{MI2}. Isso pode ser melhor observado na Figura \ref{MI2_faixa},
+%
+\begin{table}[!ht]{12cm}     
+	\caption{MI: autovalores maiores que $0,08$, com $T=[500,565]K$.}\label{Aut41} 
+	 \begin{tabular}{|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}   \\   
+&  \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  \\ 
+$-0,31074$ & $-0,31200$  \\
+$-0,31757$ & $-0,31745$ \\ 
+$-0,31757$ & $-0,31946$  \\ 
+$-0,31695$ & $-0,31674$  \\ 
+$-0,31695$ & $-0,31712$  \\
+$-0,31679$ & $-0,31760$  \\
+$-0,31679$ & $-0,31742$  \\
+$-0,31648$ & $-0,31787$  \\
+$-0,31617$ & $-0,31699$  \\
+$-0,31617$ & $-0,31669$ \\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  \\
+$9,95735$ & $9,93949$ \\ \hline
+\end{tabular}
+\end{table}  
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Diagrama pressão temperatura --- mistura MI, considerando um autovalor} \label{MI2}
+%  \includegraphics[scale=0.5]{Figuras/MI2.png}
+%  \legend{Curva de ponto de orvalho para a mistura MI.}
+%  \source{O autor, 2017.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Faixa do diagrama pressão temperatura --- mistura MI, considerando um autovalor} \label{MI2_faixa}
+%  \includegraphics[scale=0.5]{Figuras/MI2_faixa.png}
+%  \legend{Faixa ampliada de uma parte da curva de MI.}
+%  \source{O autor, 2017.}
+%\end{figure}
+%
+%O erro percentual da pressão para cada temperatura no intervalo escolhido para a mistura MI, e utilizando apenas um autovalor, pode ser observado na Figura \ref{Erro}.  
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Erro percentual considerando um autovalor --- mistura MI} \label{Erro}
+%  \includegraphics[scale=0.5]{Figuras/Erro.png}
+%  \legend{Erro percentual das pressão para cada temperatura.}
+%  \source{O autor, 2017.}
+%\end{figure}
+
+Para a terceira mistura MHA5(2), cujos dados são apresentados na Tabela \ref{Tabela6}, tem-se que a matriz de coeficientes de interação binária passa a contar com a componente $C_1$, tornando-se uma matriz  de ordem $6 \times 6$, com a primeira linha e coluna relacionadas aos coeficientes de interação da componente $C_1$ com as demais componentes da mistura. Escolhe-se um valor para $C_1$ de $0,0018$, tal que a soma da composição de todas as componentes seja igual a um. Desta forma, o problema pode ser contornado e pode-se observar que os resultados foram satisfatórios, não gerando problemas na aplicação do método. Manteve-se a faixa de variação da temperatura de $0,1$, tolerância de $10^{-6}$ no método de Newton e o intervalo de temperatura $T=[350;390]$K. Os resultados são apresentados a seguir.
+%
+\begin{table}[!ht]{12cm}     
+	\caption{MHA5(2): autovalores maiores que $10^{-2}$, com $T=[350,390]$ K.}\label{MHA52} 
+	\begin{tabular}{|c|c|c|c|}\hline	
+\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\   
+& & & \\ \hline
+$\mathbf{v}_1$ & $\mathbf{w}_1$  & $\mathbf{v}_2$ & $\mathbf{w}_2$ \\ 
+ $0,40662$ & $0,40629$ & $-0,77436$  & $-0,79230$  \\
+$0,40905$ & $0,40871$  & $-0,12888$ &  $-0,13314$  \\ 
+$0,40905$ & $0,40854$   & $-0,12888$ & $-0,12870$\\ 
+$0,40839$ & $0,40809$  & $0,26027$ &  $0,26410$ \\ 
+$0,44824$ & $0,40807$  & $0,34321$ &  $0,32376$\\
+$0,40810$ & $0,40797$  & $0,42614$ &  $0,43239$\\ \hline
+$\mathbf{\lambda}_1$ & $\mathbf{\mu}_1$  & $\mathbf{\lambda}_2$ & $\mathbf{\mu}_2$  \\
+$5.98817  $ & $5.99591 $ & $0.01944$ & $0,01337$ \\ \hline
+\end{tabular}
+\end{table} 
+ 
+Na Tabela \ref{MHA52} pode observar que os autovalores e os respectivos autovetores  encontrados pelo método ED, são próximos aos obtidos pelo método SVD, mantendo a eficiência do método para essa nova mistura, uma vez que a função erro, $\epsilon$, tem valores  
+%
+\begin{eqnarray*}
+\epsilon_{SVD} = 1,590 \times 10^{-8} \ \  \text{(MHA5(2))}, \ \ \ \ \epsilon_{ED} =  1,471 \times 10^{-8} \ \ \text{(MHA5(2))},
+\end{eqnarray*}
+%
+para o método SVD e ED, respectivamente, e o diagrama pressão-temperatura gerado é apresentado na Figura \ref{MHA5(2)}. Na Figura \ref{MHA5(2)_faixa}, apresenta-se uma faixa ampliada do diagrama, onde pode-se observar que a curva gerada pelo método ED é mais próxima da curva gerada pelo método clássico. O tempo de processamento é apresentado na Tabela \ref{TEMPO2}, onde observa-se que o tempo gasto pelo método ED é menor. Além de mais rápido, o método ED também teve erro relativo percentual da pressão menor, conforme mostra a Figura \ref{Erro_MHA5(2)}. 
+%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Diagrama pressão temperatura --- mistura MHA5(2)} \label{MHA5(2)}
+%  \includegraphics[scale=0.5]{Figuras/MHA5(2).png}
+%  \legend{Curva de ponto de orvalho para mistura MHA5(2).}
+%  \source{O autor, 2017.}
+%\end{figure}
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Faixa do diagrama pressão temperatura --- mistura MHA5(2).} \label{MHA5(2)_faixa}
+%  \includegraphics[scale=0.5]{Figuras/MHA5(2)_faixa.png}
+%  \legend{Faixa ampliada de uma parte da curva de orvalho MHA5(2).}
+%  \source{O autor, 2017.}
+%\end{figure} 
+%%
+\begin{table}[!ht]{12cm}     
+	\caption{Tempo de processamento, com tolerância no NRM de $10^{-6}$.}\label{TEMPO2} 
+	 \begin{tabular}{|c|c|c|c|}\hline	\multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Mistura}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{Clássico}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{SVD}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\bf{ED}}} \\ 
+	 & & & \\ \hline 
+MHA5(2) & $31,94$ & $17,03$ & $16,69$ \\ \hline
+\end{tabular}
+\end{table} 
+%%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Erro percentual --- mistura MHA5(2)} \label{Erro_MHA5(2)}
+%  \includegraphics[scale=0.5]{Figuras/Erro_MHA5(2).png}
+%  \legend{Erro percentual das pressões calculadas para cada temperatura.}
+%  \source{O autor, 2017.}
+%\end{figure}
+
+\section{Conclusões}
+
+Neste trabalho são obtidos lugares geométricos de pontos de orvalho para misturas-testes (MHA5 e MI) empregando-se uma metodologia denominada técnica de redução com o método da evolução diferencial. O objetivo primário da técnica de redução é resolver um conjunto menor de equações algébricas não-lineares quando da resolução de problemas de equilíbrio líquido-vapor. Os resultados obtidos com a técnica de redução são comparados com aqueles produzidos por métodos clássicos (resolução das equações de isofugacidades) e com os obtidos pelo SVD, feito anteriormente por alguns autores.
+
+Para todas as misturas-testes consideradas, a dimensionalidade do problema é reduzida; no entanto, esta redução parece ser mais vantajosa para o caso de misturas com mais componentes.  Quanto maior o número de componentes, mais eficiente o método proposto deverá ser, em termos de tempo de computação.
+
+Percebe-se também que o método se mostra bastante eficiente quando uma redução maior no posto da matriz $\mathbf{C}^{\star}$ é aplicada, considerando um número menor de autovalores e, seus respectivos autovetores, e isso também é mais vantajoso quando utiliza-se uma mistura com número maior de componentes. 
+
+Além de permitir que a dimensionalidade do problema seja reduzida, o método ED garante a manutenção da acurácia dos resultados. Mesmo desprezando-se um ou mais autovalores não nulos, as pressões de orvalho ficaram próximas àquelas produzidas com a metodologia clássica e superaram o SVD.
+
+Embora as composições das fases incipientes não tenham sido apresentadas, elas estão imediatamente disponíveis após a convergência do método numérico (NRM) empregado na técnica de redução.
+
+As reduções nos tempos de computação podem ser extremamente significativas em problemas de escoamento com mudança de fases ou na simulação/projeto/otimização de separadores (por exemplo, colunas de destilação).
+
+Um contribuição de grande importância desse trabalho, quanto à literaturas já disponíves sobre o assunto \cite{gaganis2013improved}, está associada ao formalismo matemático com dedução das equações e detalhamento de grande parte da metodologia utilizada, esmiuçando o conteúdo pesquisado para estudo e desenvolvimento deste trabalho. Isto será muito útil para os leitores interessados no assunto.
+
+Como sugestões para trabalhos futuros, identificam-se:
+\begin{itemize}
+\item o estudo de outras misturas  com número maior de componentes;
+\item a otimização dos códigos em Scilab;
+\item a geração de diagramas (P-T) completos, com a parte retrógrada da curva de pontos de orvalho e a curva de pontos de bolhas; 
+\item testar o método para o caso de misturas com coeficientes de interação binária todos não nulos;
+\item a incorporação da metodologia em um simulador simplificado de colunas de destilação;
+\item o estudo e identificação de outras técnicas de redução neste tipo de problema;
+\item aplicação em outras áreas.
+\end{itemize} 
+ 

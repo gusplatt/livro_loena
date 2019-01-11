@@ -1,0 +1,171 @@
+% TEMPLATE DOS MINI-CURSOS DAS NOTAS EM MATEMÁTICA APLICADA 2005.
+
+% Caros autores, favor não modificar o cabeçalho abaixo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%a4paper %esse comando foi incluido para aumentar a letra
+\documentclass[12pt,a4paper,twoside]{book}
+
+\usepackage[brazil,portuges]{babel}
+%\usepackage[dvips]{graphicx,color,epsfig}
+%
+\usepackage{graphicx,color,epsfig}
+\usepackage{lscape, rotating}
+\usepackage{varioref,float,amssymb,amsmath}
+\usepackage{float,amsfonts,amsthm}
+\usepackage{changebar,longtable}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyheadings}
+\usepackage{makeidx}
+%\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage{hyperref}
+\usepackage{multirow} 
+\usepackage{revsymb} 
+
+%esse comando foi incluido para aumentar a letra
+\setlength{\headheight}{15.2pt}
+
+\makeindex
+
+\newcommand{\B}{{\tt\symbol{92}}}
+\newcommand{\til}{{\tt\symbol{126}}}
+\newcommand{\chap}{{\tt\symbol{94}}}
+\newcommand{\agud}{{\tt\symbol{13}}}
+\newcommand{\crav}{{\tt\symbol{18}}}
+\newcommand{\cat}[3]{#1 \stackrel{#2}{\mathbf{\sqcap}}#3}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\beas}{\begin{eqnarray*}}
+\newcommand{\eeas}{\end{eqnarray*}}
+
+\rhead[]{\fancyplain{}{\rm \thepage}}
+\lhead[\fancyplain{}]{\fancyplain{}{\scriptsize \rightmark}}
+\cfoot{}
+
+\setlength{\textwidth}{17.5cm}      %
+\setlength{\textheight}{25cm}     %
+\setlength{\topmargin}{0cm}         %
+\setlength{\oddsidemargin}{.3cm}  %
+\setlength{\evensidemargin}{.3cm} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use os comandos abaixo em seu texto para os teoremas, lemas, definições, exemplos,
+% propriedades, corolários, demonstrações e marcação de fim das demonstrações
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\newtheorem{lema}{Lema}[chapter]
+\newtheorem{teore}{Teorema}[chapter]
+\newtheorem{defi}{Definição}[chapter]
+\newtheorem{corol}{Corolário}[chapter]
+\newtheorem{ex}{Exemplo}[chapter]
+\newtheorem{propri}{Propriedade}[chapter]
+\newtheorem{prop}{Proposi\c{c}\~ao}[chapter]
+\newtheorem{obs}{Observa\c{c}\~ao}[chapter]
+\newcommand{\dem}{\noindent \underline{Demonstração}: $\,$}
+\newcommand{\fim}{\hfill $\rule{2.0mm}{2.0mm}$ \\}    % marcação de fim das demonstrações
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\pagestyle{myheadings}
+
+\input{primeiras-paginas-e-book}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Quinta Folha - Sumário
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Verso da Última Folha do Sumário - Continuação do Sumário ou em branco
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage  \thispagestyle{empty}  $\frac{}{}$ % retirar caso o sumário continue no verso da folha
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Sexta Folha - Prefácio dos autores - Obrigatória
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\input{prefacio-e-book}  %           prefácio dos autores
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Verso da Última Folha do Prefácio- Continuação do Prefácio dos autores ou em branco
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage  \thispagestyle{empty}   $\frac{}{}$ % retirar caso o prefácio continue no verso da  folha
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%\pagestyle{fancyplain}  %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OBS: OS TEXTOS DEVEM TER NO MÍNIMO 80 PÁGINAS E NO MÁXIMO 150.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O texto pode ser feito em um só arquivo ou pode ser separado por capítulos.
+% Recomenda-se que seja separado por capítulos.
+% Para cada capítulo  colocar o comando \input{nome do arquivo}. Exemplo:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{cap1-e-book}
+%\input{cap2_aux-e-book}
+\input{cap2-e-book}
+\input{cap3-e-book}
+\input{cap3_aux-e-book}
+\input{cap4-e-book}
+\input{cap5-e-book}
+\input{cap6-e-book}
+\input{cap7-e-book}
+\input{cap8-e-book}
+\input{cap9-e-book}
+\input{cap10-e-book}
+\input{cap11-e-book}
+\bibliographystyle{abnt-alf}
+\bibliography{references-e-book}
+
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Para fazer o índice remissivo, o preâmbulo deve conter os comandos \usepackage{makeidx}
+% e \makeindex (como indicado neste exemplo). Além disso, após as referências, incluir
+% o comando  \printindex.
+% Para que as expressões (à escolha dos autores) apareçam no índice remissivo, colocar o
+% comando \index( expressão desejada) próximo ao local onde o assunto é tratado.
+% O latex fará, automaticamente, a indexação da expressão com a página correta.
+% Veja os exemplos:
+
+%\index{Convergentes de frações contínuas simples} %
+%\index{Frações contínuas simples!convergentes}%
+
+%\index{Wallis!teorema de} %
+% Veja exemplo no arquivo cap1.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,305 @@
+\chapter{Representação de matrizes de posto fixo} \label{cap7}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+O problema de minimização que se considera para realizar a redução de dimensionalidade, busca a melhor aproximação da matriz de interação binária dentre as matrizes de posto inferior, segundo a distância definida pela energia. A questão de como utilizar a matriz de posto inferior mais próxima para reduzir a dimensionalidade do problema de equilíbrio de fases é tratada em capítulo posteriores.
+
+Para se construir um algoritmo iterativo de otimização para resolver o problema de minimização, tem que se construir uma sequência de matrizes $\mathbf{C}_k$, de posto menor ou igual a $r$, onde $r$ é menor do que o posto de $\mathbf{C}$, de tal forma que $\mathbf{C}_k$ se aproxime da solução quando o índice $k$ cresce. Isto é, é um problema de minimização com restrições. 
+
+No entanto, garantir que $\mathbf{C}_k$ é de posto menor ou igual a $r$ não é uma tarefa simples, quando se pode variar livremente no conjunto das matrizes $N \times N$, como é usual em algoritmos matriciais.
+
+Assim, ao invés da busca da solução se dar no conjunto das matrizes, satisfazendo a restrição de posto dado, a estratégia é parametrizar o conjunto das matrizes de posto menor ou igual a $r$, e fazer-se o algoritmo de busca no espaço de parâmetros. Assim, troca-se um problema de otimização com restrição por um problema de otimização sem restrições. 
+
+Segue-se, então, uma discussão apropriada da parametrização do conjunto de matrizes de posto fixo e algumas considerações sobre o impacto no problema que se quer resolver. 
+
+\section{Considerações iniciais} 
+
+Por simplicidade de notação, aqui se modifica a notação do conjunto de matrizes. Seja  $ \mathcal{M}(N,N)$ o conjunto das matrizes simétricas $N \times N$. Seja ainda  $\mathcal{M}_r (N,N) = \left\{ \Theta \ \epsilon \ \mathcal{M}(N,N) \mid \Theta = \Theta^t \ \text{e}  \ \text{posto}(\Theta) \leq r \right\}$ o conjunto das matrizes simétricas de posto menor ou igual a $r$.
+
+Dada $\mathbf{C} \in \mathcal{M}(N,N)$, procura-se $\mathbf{C}^{\star}$, de posto menor ou igual a $r$, que aproxima $\mathbf{C}$. Para tal, destaca-se possivelmente a função
+%
+\begin{eqnarray}\label{rkr}
+\epsilon
+&:& \mathcal{M}_r (N,N)  \longrightarrow  \mathbb{R} \nonumber \\
+&& \mathbf{R}  \mapsto  \epsilon(\mathbf{R}) = \Vert \mathbf{C}-\mathbf{R}\Vert_E^2,
+\end{eqnarray}
+%
+onde $\Vert  \, \Vert_E$ é definida na Equação \ref{xe}. 
+
+
+A matriz $\mathbf{C}^{\star}$ que melhor aproxima a matriz $\mathbf{C}$, na norma da energia corresponde ao ponto de mínimo de $\epsilon$.
+
+Deseja-se, então, encontrar o mínimo e o ponto de mínimo de $\epsilon$, que portanto seria a matriz simétrica de posto $r$ mais próxima de $\mathbf{C}$.
+
+Uma dificuldade com a presente formulação envolvendo a função $\epsilon$ é especificar o conjunto $\mathcal{M}_r (N,N)$, ou seja, como criar um algoritmo de otimização que selecione os elementos de $\mathcal{M}_r (N,N)$. Sendo assim, para especificar um elemento (matriz) de $\mathcal{M}_r(N,N)$, pode-se introduzir a seguinte representação.
+
+Seja
+%
+\begin{eqnarray*} 
+L
+&:& \mathbb{R}^r \times (\mathbb{R}^N)^r   \longrightarrow    \mathcal{M}^r(N,N) \nonumber\\
+&& (\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r) \mapsto L(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r),
+\end{eqnarray*}
+%
+onde $L$ é uma soma de matrizes da forma $\mu_i \mathbf{w}_i \mathbf{w}_i^t$.
+%
+\begin{eqnarray*} \label{eq85} 
+L(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r) =  \sum_{i=1}^{r} \mu_i \mathbf{w}_i \mathbf{w}_i^t \in \mathcal{M}_N^r(N,N).
+\end{eqnarray*}
+
+É fundamental ressaltar que a representação de um elemento de $\mathcal{M}_r(N,N)$ através do mapeamento $L$ não é única. Usando a linguagem de funções, ainda que $L$ seja sobrejetora, ela não é injetora. De fato, seja a matriz
+%
+\begin{eqnarray*} \label{eq86} 
+\Theta = \sum_{j=1}^{r} \mu_j \mathbf{w}_j \mathbf{w}_j^t \in \mathcal{M}^r(N,N),
+\end{eqnarray*}
+%
+que é representada pela $2r$-upla ordenada $(\mu_1, \mu_2,...,\mu_r, \mathbf{
+w}_1, \mathbf{w}_2,..., \mathbf{w}_r)$. Sejam ainda $\alpha_1,\alpha_2,...,\alpha_r$ tais que $\alpha_j \neq 0, \ j=1,...,r$. Então, pode-se afirmar que 
+%
+\begin{eqnarray*}
+\left(\frac{\mu_1}{\alpha_1^2}, ..., \frac{\mu_r}{\alpha_r^2}, \alpha_1 \mathbf{w}_1,...,\alpha_r \mathbf{w}_r \right)
+\end{eqnarray*}
+%
+também representa a mesma matriz $\Theta$, uma vez que
+%
+\begin{eqnarray*} \label{eq87} 
+\sum_{j=1}^{r} \mu_j \mathbf{w}_j \mathbf{w}_j^t = \Theta = \sum_{j=1}^{r} \frac{\mu_i}{\alpha_j^2} \alpha_j \mathbf{w}_j (\alpha_j \mathbf{w}_j)^t.
+\end{eqnarray*}
+
+Pode-se ainda considerar mais casos de não unicidade da representação da matriz $\Theta$, por elementos de $\mathbb{R}^r \times (\mathbb{R}^N)^r$. De fato, obtém-se nova representação, permutando-se os escalares, $\mu_j$, e os vetores correspondentes, $\mathbf{w}_j$, ou mesmo quando há escalares repetidos, quando se pode fazer combinação linear dos vetores correspondentes. 
+
+A caracterização completa da não unicidade é considerada nas seções \ref{S1} e \ref{S2}.
+
+
+\section{Soma de matrizes de posto um}\label{S1}
+
+Sejam 
+${\cal B}= \left\lbrace \mathbf{u}_1,\mathbf{u}_2,
+\ldots\mathbf{u}_r\right\rbrace \subset\mathbb{R}^N$  e
+${\cal C}= \left\lbrace \mathbf{w}_1,\mathbf{w}_2,
+\ldots\mathbf{w}_r\right\rbrace \subset \mathbb{R}^M$ 
+dois conjuntos de vetores linearmente independentes,
+$\mu_j\neq 0$, $j=1,2,\ldots r$, 
+ e defina a matriz $M\times N$
+ %
+\begin{equation} \label{sm}
+\mathbf{A}= \sum_{j=1}^r \mu_j \mathbf{w}_j (\mathbf{u}_j)^t.
+\end{equation}
+%
+É claro que $r\leq M,N$, caso contrário os 
+conjuntos de vetores não poderiam ser linearmente 
+independentes.
+
+Sejam $\mathbf{U}$ a matriz $N\times r$ e $\mathbf{V}$ a matriz
+ $M\times r$ cujas colunas são, respectivamente, os vetores $\mathbf{u}_j$ e  $\mathbf{w}_j$, e $\mathbf{\Lambda}$ uma matriz diagonal, $r\times r$, com os $\mu_j$'s na diagonal. Assim, é possível escrever $\mathbf{A}$ de forma alternativa como 
+%
+\begin{eqnarray*} 
+\mathbf{A}& = & \mathbf{V}\mathbf{\Lambda} \mathbf{U}^t. \label{avu}
+\end{eqnarray*}
+
+O próximo teorema garante que $\mathbf{A}$ tem posto $r$.
+%
+\begin{teore}\label{Teo1} A matriz $\mathbf{A}$ 
+tem posto $r$, sendo que a imagem de $\mathbf{A}$ é o subespaço gerado pelos vetores de $\mathbf{C}$ e o núcleo é o complementar ortogonal ao espaço gerado por ${\cal B}$.
+\end{teore}
+
+\dem \ Para mostrar que $\mathbf{A}$ tem posto $r$ basta exibir
+ uma base para a imagem de $\mathbf{A}$ com $r$ vetores linearmente independentes. Essa base será $\mathbf{C}$.  Seja $\mathbf{x}\in \mathbb{R}^N$. Então,
+%
+\begin{eqnarray*}
+\mathbf{A}\mathbf{x} & = & \sum_{j=1}^r 
+ (\mu_j (\mathbf{u}_j)^t\mathbf{x}) \mathbf{w}^j, \label{ax}
+\end{eqnarray*}
+% 
+assim, $\mathbf{A}\mathbf{x}\in \mbox{Im}(\mathbf{A})$ é dado como combinação linear
+dos vetores $\mathbf{w}_j $, com coeficientes 
+$\mu_j ( \mathbf{u}_j)^t \mathbf{x}\in\mathbb{R}$, $j=1,2,\ldots r$, estando então no espaço gerado pelos vetores 
+$\mathbf{w}_j$, $j = 1,2,\ldots r$.
+
+Por outro lado, cada um dos vetores de $\mathbf{C}$ está na imagem de $\mathbf{A}$, o que garante que $\mbox{Im}(\mathbf{A})$ não só está contida, mas contém o espaço gerado por ${\cal C}$, e portanto a ele se iguala. Logo, a base da imagem de $\mathbf{A}$ é $\mathbf{C}$ e portanto o posto de $\mathbf{A}$ é $r$.
+
+Para mostrar que cada $\mathbf{w}_j$ está na imagem de $\mathbf{A}$, note o seguinte. 
+As colunas de $\mathbf{U}$ são linearmente independentes e o espaço gerado por elas tem dimensão $r$. Mas a dimensão do espaço
+gerado pelas linhas é a mesma do espaço gerado pelas colunas. Assim, o espaço gerado pelas colunas de $\mathbf{U}^t$, que está contido em $\mathbb{R}^r$ tem dimensão $r$, logo é o próprio 
+$\mathbb{R}^r$. Então existe $\mathbf{d}\in\mathbb{R}^N$ tal que
+% 
+\begin{eqnarray*}
+\mathbf{U}^t \mathbf{d} & = & \mathbf{\Lambda}^{-1} \mathbf{e}_j \in \mathbb{R}^r \ ,
+\end{eqnarray*}
+%
+o que implica 
+%
+\begin{eqnarray*}
+\mathbf{A}\mathbf{d}
+= \mathbf{V}\mathbf{\Lambda} \mathbf{U}^t \mathbf{d} & = & \mathbf{V} \mathbf{e}_j = \mathbf{w}_j
+\in \mathbb{R}^M \ .
+\end{eqnarray*}
+
+Como $\mathbf{w}_j \in \mbox{Im}(A)$, para todo $j=1,2,\ldots, r$, conclue-se que
+ $\mbox{Im}(\mathbf{A})$ é  o espaço gerado por $\mathbf{C}$.
+
+Falta mostrar que $\mathrm{ker}(\mathbf{A})$ é o espaço ortogonal ao espaço gerado por ${\cal B}$. Da Equação \ref{sm}, e como $\mathbf{w}_j$'s são linearmente independentes, $\mathbf{x}\in \mathrm{ker}(\mathbf{A})$ se e só se $(\mathbf{u}_j)^t\mathbf{x}=0$ para todo $i$, uma vez que $\mu_j\neq 0$, e não interfere na conclusão. Logo, $\mathbf{x}\in \text{ker}(\mathbf{A})$ se e só se pertencer ao espaço
+ortogonal ao espaço gerado por ${\cal B}$.
+\fim
+
+Alguns casos particulares são interessantes. 
+Quando $M=N$ e a mesma base é usada, a matriz 
+%
+\begin{eqnarray}\label{72a}
+\mathbf{A} = \sum_{j=1}^r \mu_j \mathbf{w}_j (\mathbf{w}_j)^t= \mathbf{V}\mathbf{\Lambda} \mathbf{V}^t
+\label{forma3}
+\end{eqnarray}
+%
+é simétrica, a imagem de $\mathbf{A}$ continua sendo gerada pelos vetores de ${\cal C}$, e o núcleo de $\mathbf{A}$ é ortogonal à imagem de $\mathbf{A}$, isto é, é ortogonal aos vetores $\mathbf{w}_j$.
+
+Dada uma matriz simétrica, $N\times N$,  de posto $r$, sabe-se pelo teorema espectral que ela é diagonalizável por uma matriz ortogonal. A representação dada pela Equação \ref{72a} se
+ assemelha à fatoração prevista pelo teorema espectral, no entanto não é igual, a não ser que $r=N$, uma vez que $\mathbf{V}$ e $\mathbf{\Lambda}$  não são  matrizes $N\times N$, mas, respectivamente, $N\times r$, e $r\times r$. Isto é, $\mathbf{V}$ e $\mathbf{\Lambda}$ são matrizes de dimensão menor do que deveriam ser para atender ao teorema espectral.
+
+É no entanto simples obter-se a fatoração prevista no teorema espectral para uma matriz $\mathbf{A}$ definida pelo lado direito da Equação \ref{72a} bastanto para tanto aumentar o tamanho de \  $\mathbf{V}$ e $\mathbf{\Lambda}$ com entradas nulas. Seja ${\cal D}= \{ \mathbf{w}_{r+1}, \mathbf{w}_{r+2},\ldots \mathbf{w}_{N}\}$ um conjunto de vetores ortonormais, base de $\mathrm{ker}(\mathbf{A})$. Então ${\cal C}\cup{\cal D}$ é uma base ortonormal de $\mathbb{R}^N$. Seja $\bar{\mathbf{V}}$ a matriz $N\times N$ cujas colunas são os elementos de ${\cal C}\cup{\cal D}$, ordenados. Seja também $\bar{\mathbf {\Lambda}}$ a matriz diagonal, $N\times N$, com $\mu_j$'s, $i=1,2, \ldots, r$, na
+diagonal, e $N-r$ zeros depois. Então,
+%
+\begin{eqnarray} \label{forma4}
+\mathbf{A} & = &
+\sum_{j=1}^r \mu_j \mathbf{
+w}_j (\mathbf{w}_j)^t= {\bar{\mathbf{V}}}
+ {\bar{\mathrm{\Lambda}}}{\bar{\mathbf{V}}}^t\ . 
+\end{eqnarray}
+
+Note que a soma continua sendo até $r$ apenas, uma vez que os vetores adicionais em ${\bar{\mathbf{V}}}$ são anulados pelas entradas 
+ nulas da diagonal de ${\bar{\mathbf{\Lambda}}}$. Dada uma matriz $\mathbf{A}$, $N\times N$, 
+ simétrica, real, de posto $r$, a fatoração
+ dada na Equação \ref{forma4} está na forma
+ garantida pelo teorema 
+ espectral.
+  
+\section{Não unicidade da representação}\label{S2}
+
+Como visto no teorema anterior, 
+matrizes definidas por uma soma de matrizes de posto um, como na Equação \ref{72a} tem posto $r$. 
+Mas apesar da matriz $\mathbf{A}$ ser única (bem definida), a representação através do mapeamento
+%
+\begin{eqnarray}\label{bbc}
+L:\mathbb{R}^r\times (\mathbb{R}^{N})^r & \longrightarrow & {\cal M}_r(N,N) \nonumber
+\\
+(\mu_1,\ldots,\mu_r, \mathbf{w}_1, \ldots, \mathbf{w}_r)& \mapsto & 
+\sum_{j=1}^{r} \mu_i \mathbf{w}_j (\mathbf{w}_j)^t
+\end{eqnarray}
+%
+não é única. Em outras palavras, se $\mathbf{A}$ é definida pela expressão dada na Equação \ref{72a}, existem outros valores de ${\bar{\mu}}_j$ e $\bar{\mathbf{w}}_j$ de tal forma que $\sum_{j=1}^r \bar{\mu}_j \bar{\mathbf{w}}_j (\bar{\mathbf{w}}_i)^t$ se iguale a $\mathbf{A}$. O teorema a seguir esclarece esta questão.
+%
+\begin{teore}\label{Teo2} Seja $\mathbf{A}$ definida pela  
+Equação \ref{72a}, com $\mu_j\geq 0$.\\
+%
+a) Seja $\mathbf{Q}$ matriz ortogonal, $r\times r$, e considere a matriz 
+$\mathbf{U}=\mathbf{V}\mathbf{\Lambda}^{\frac{1}{2}}\mathbf{Q}$. Denote por $\mathbf{u}_j$, para $j=1,2,\ldots r$ as colunas 
+de $\mathbf{U}$. Então
+%
+\begin{eqnarray} \label{rot}
+\mathbf{A}& = & \sum_{j=1}^r \mathbf{u}_j (\mathbf{u}_j)^t \ = \ \mathbf{U}\mathbf{U}^t\ .
+\end{eqnarray}
+%
+b) Sejam $d_1,d_2, \ldots, d_r$ números não nulos e $\mathbf{D}$ a matriz diagonal, $r\times r$, com os $d_j$'s na diagonal. Seja ainda $\mathbf{U}=\mathbf{V}\mathbf{D}^{-1}$. Denote por $\mathbf{u}_j$, para $j=1,2,\ldots r$ as colunas de $\mathbf{U}$. Então, $\mathbf{u}_j=\frac{1}{d_j}\mathbf{w}_j$ e
+%
+\begin{eqnarray}\label{mul}
+\mathbf{A}& = & \sum_{j=1}^r d_j^2 \mu_j \mathbf{u}_j (\mathbf{u}_j)^t \ = \ \mathbf{U}\mathbf{D}\mathbf{\Lambda} \mathbf{D} \mathbf{U}^t\ .
+\end{eqnarray}
+\end{teore}
+%
+\dem \\
+%
+(a) Por hipótese,  
+$\mathbf{V}=\mathbf{U}\mathbf{Q}^t\mathbf{\Lambda}^{-\frac{1}{2}}$, que substituída em (\ref{72a}) dá
+%
+\begin{equation}
+\mathbf{A}= \mathbf{U}\mathbf{Q}^t \mathbf{\Lambda}^{-\frac{1}{2}} \mathbf{\Lambda} \mathbf{\Lambda}^{-\frac{1}{2}} \mathbf{Q} \mathbf{U}^t = \mathbf{U}\mathbf{U}^t \nonumber .
+\end{equation}
+%
+(b) Analogamente, $\mathbf{V}=\mathbf{U}\mathbf{D}$, e substituindo em (\ref{forma3}) obtém-se
+\begin{equation}
+\mathbf{A} = \mathbf{U}\mathbf{D}\mathbf{\Lambda} \mathbf{D}\mathbf{U}^t \nonumber .
+\end{equation}
+\fim
+
+O teorema indica então a extensão da não unicidade que a representação de uma matriz $\mathbf{A}$, simétrica, de posto $r$, na forma dada pela Equação (\ref{72a}) carrega, pela arbitrariedade na escolha da matriz $\mathbf{Q}$ e da matriz $\mathbf{D}$.
+
+\begin{teore}\label{Teo3} A representação de uma matriz de posto $r$ dada pela Equação \ref{72a} tem $r(r+1)/2$ graus de liberdade.
+\end{teore}
+
+\dem \ Nota-se que, dada uma representação, como na Equação \ref{72a}, pelo primeiro item do teorema anterior, há a possibilidade de se escolher qualquer matriz ortogonal, $r\times r$, e construir uma outra representação com os vetores $\mathbf{u}_j$, e o número 1. Como o conjunto das matrizes ortogonais tem dimensão $r(r-1)/2$, isso implica em $r(r-1)/2$ graus de liberdade na representação da matriz $\mathbf{A}$. Adiciona-se a estes $r$ graus de liberdade referentes à arbitrariedade da matriz $\mathbf{D}$ no segundo item,
+que permite também a construção de mais representações, perfazendo $r(r+1)/2$ graus de liberdade.
+\fim
+
+\section{Comparação entre os problemas de minimização}\label{S3}
+
+Ao introduzir a função $G$, o problema de minimização da função $\epsilon$ é agora substituído pelo problema de minimização da função $G = \epsilon \circ L$, que é a composta da função $L$ seguida da função $\epsilon$, dada por
+%
+\begin{eqnarray*}
+G
+&:&  \mathbb{R}^r \times (\mathbb{R}^N)^r  \longrightarrow  \mathbb{R} \\
+&& (\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r)  \mapsto  G(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r),
+\end{eqnarray*}
+%
+tal que 
+%
+\begin{eqnarray}\label{87a}
+ G(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r) = \epsilon(L(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r)).
+\end{eqnarray}
+
+É importante notar-se que o mínimo de $\epsilon$ e o mínimo de $G$ coincidem, mas é certo que o mesmo não acontece com os pontos de mínimo (que pertencem aos respectivos domínios das funções, que são distintos). No caso de $\epsilon$, o ponto de mínimo será uma matriz e no caso de $G$ será uma $2r$-upla ordenada, onde as $r$ primeiras entradas são números reais e as $r$ seguintes será vetores em $\mathbb{R}^N$.
+
+Devido à não unicidade da representação das matrizes de posto menor ou igual a $r$ por meio da função $L$, como visto anteriormente, a função $G$ passa a ter inúmeros pontos de mínimo, na verdade um contínuo de pontos de mínimo. 
+
+Seja $\mathbf{C}^{\star}$ o ponto de mínimo de $\epsilon$, 
+%
+\begin{eqnarray}\label{mrc}
+m = \epsilon(\mathbf{C}^{\star}) = \displaystyle\min_{\mathbf{R} \vert \text{posto} (\mathbf{R}) \leq r} \epsilon(\mathbf{R}).
+\end{eqnarray}
+
+Então, para todo $\mathbf{\chi}^* = (\mu_1, ..., \mu_r, \mathbf{w}_1,...,\mathbf{w}_r)$ tal que $L(\mathbf{\chi}) = \mathbf{C}^{\star}$, {\em i.e.}, 
+%
+\begin{eqnarray}\label{cxx}
+ \sum_{j=1}^{r} \mu_j \mathbf{w}_j \mathbf{w}_j^t = \mathbf{C}^{\star},
+\end{eqnarray}
+%
+compondo-se com $\epsilon$, $\epsilon \circ L = G$, tem-se que
+%
+\begin{eqnarray}\label{eme}
+G(\mathbf{\chi})= \epsilon(\mathbf{C}^{\star}) = m, 
+\end{eqnarray}
+%
+e $\mathbf{\chi}$ é um ponto de mínimo de $G$. Assim, para todo $\mathbf{\chi} = (\mu_1,...,\mu_r, \mathbf{w}_1,...,\mathbf{w}_r)$ satisfazendo a Equação \ref{cxx}, é ponto de mínimo de $G$.
+
+Naturalmente surge a pergunta se haverá algum $\mathbf{\chi}$. Como será visto em capítulo posterior, $\epsilon$ tem ponto de mínimo, isto é, existe $\mathbf{C}^{\star}$ satisfazendo a Equação \ref{mrc}. Como $\mathbf{C}^{\star}$ é simétrica e de posto $r$, o teorema espectral garante a existência de autovalores não nulos $\lambda_1,...,\lambda_r$, e autovalores, $\mathbf{v}_1,...,\mathbf{v}_r$, ortonormais, tais que:
+%
+\begin{eqnarray*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j \mathbf{v}_j \mathbf{v}_j^t.
+\end{eqnarray*}
+
+O teorema \ref{Teo3} garante então a existência de um conjunto com $r(r+1)/2$ graus de liberdade de vetores, $(\mu_1,...,\mu_r, \mathbf{w}_1,...,\mathbf{w}_r)$ que representam $\mathbf{C}^{\star}$ como na Equação \ref{cxx}, logo, pela Equação \ref{eme}, a função $G$ conta com inúmeros pontos de mínimo.
+
+Finalmente observa-se, então, que ao minimizar a função $G$, tem-se o mínimo de $\epsilon$. Assim, é possível obter-se um ponto de mínimo de $G$, digamos $\mathbf{\chi}^{\star} = (\mu_1^{\star},...,\mu_r^{\star},\mathbf{w}_1^{\star},...,\mathbf{w}_r^{\star})$, tal que  $\sum_{j=1}^{r} \mu_j^{\star} \mathbf{w}_j^{\star} (\mathbf{w}_j^{\star})^t$ minimiza $\epsilon$ e fornece uma aproximação para a matriz $\mathbf{C}$, de dimensão reduzida, solucionando o problema de otimização. 
+
+
+%=====================================================================
+\section{Comparação entre aproximações de posto baixo} \label{Cap7aux}\label{777}
+%=====================================================================
+
+Dada uma matriz de dimensão $N \times N$, os métodos de redução de dimensionalidade buscam encontrar uma matriz de posto $r$ reduzida, com $r < N$, que seja próxima da matriz original e que permita redução no número de cálculos necessários para determinar o equilíbrio de fases da mistura, com  diminuição no tempo computacional, e mantendo a acurácia dos resultados. 
+
+Na abordagem proposta em \cite{hendriks1988reduction} aplicou-se o método de redução utilizando o teorema espectral. Neste caso, a redução é efetivamente obtida por decomposição espectral da matriz de interação binária, $\mathbf{C}$. Assim, após reduzir a dimensionalidade da representação de $\mathbf{C}$, utilizando apenas autovetores associados aos autovalores de maior valor, pode-se calcular o parâmetro de energia $a_m$ e o parâmetro $\psi_i$ descritos no Capítulo \ref{cap6}, na forma reduzida. Como $\mathbf{C}$ é uma matriz simétrica, a fatoração de $\mathbf{C}$ obtida pelo teorema espectral é equivalente à fatoração obtida pela decomposição em valores singulares (SVD), donde pode-se escolher a que usar, dando os mesmos resultados.  
+
+Uma forma de se aplicar este método de redução de dimensionalidade é através da minimização da norma de Frobenius do erro de aproximação da matriz, problema caracterizado teoricamente pelo teorema de Eckart-Young-Mirsky \cite{markovsky2007left}. Nesta formulação deseja-se obter uma aproximação de posto baixo (em inglês,``\textit{low-rank approximation}") da matriz $\mathbf{C}$, conforme o teorema citado, e uma discussão deste assunto é dada a seguir.
+
+Contudo, \cite{gaganis2013improved} argumentam que é preferível mensurar a diferença entre a matriz $\mathbf{C}$ e sua aproximação por uma matriz de posto inferior, utilizando-se o parâmetro de energia. De fato, isto corresponde a calcular a distância entre essas duas matrizes com auxílio de uma norma proveniente de um produto interno, definido a partir do parâmetro de energia conforme visto no Capítulo \ref{cap6}. 
+
+Isto dá origem a um problema conhecido como problema de aproximação de posto baixo ponderado, com o produto interno ponderado com `interação' entre os elementos da matriz (em inglês, $\textit{weighted low-rank approximation problem}$). Neste caso, pode-se aprimorar a acurácia dos resultados no cálculo do equilíbrio líquido-vapor de misturas multicomponentes no contexto de redução de dimensionalidade, uma vez que a norma utilizada é definida a partir de quantidades físicas relevantes. 

@@ -1,0 +1,353 @@
+\chapter{Distância entre matrizes}\label{cap3}
+
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Como dito na capítulo \ref{introducao}, para se reduzir a  dimensionalidade no cálculo do equilíbrio de fases se considera aproximações da matriz de interação binária por matrizes de posto menor. Isso então requer que se especifique a noção de aproximação. Para clareza de exposição, são relembradas neste capítulo as definições relevantes. 
+
+%--------------------------------------------------------
+\section{Norma, produto interno e distância}
+%--------------------------------------------------------
+
+Considera-se um espaço vetorial $V$ com escalares reais, sendo $V$ o espaço euclidiano $\mathbb{R}^N$ ou o conjunto de matrizes $M \times N$, denotado por $ \mathcal{M}(M,N)$.
+
+Uma norma $\Vert \cdot \Vert$ é uma função definida para elementos de $V$ com valores em $\mathbb{R}$
+%
+\begin{eqnarray*}
+\Vert  \  \Vert
+&:& \mathbf{V} \longrightarrow \mathbb{R} \\
+&& \mathbf{x} \longmapsto \Vert \mathbf{x} \Vert,
+\end{eqnarray*}
+%
+satisfazendo as seguintes propriedades:
+\begin{enumerate}
+\item (positividade) $\Vert \mathbf{x} \Vert \geq 0, \  \text{para todo} \ \mathbf{x} \in V$, e $\Vert \mathbf{x} \Vert = 0$ se e só se $\mathbf{x}=0$,
+
+\item (homogeneidade) $\Vert \lambda \mathbf{x}\Vert = \vert \lambda \vert \Vert \mathbf{x} \Vert, \ \text{para todo} \ \mathbf{x} \in V, \text{e para todo} \ \lambda \in \mathbb{R}$,
+
+\item (desigualdade triangular) $ \Vert \mathbf{x} + \mathbf{y} \Vert \leq \Vert \mathbf{x} \Vert + \Vert\mathbf{y} \Vert, \ \text{para todos} \ \mathbf{x}, \mathbf{y} \in V$.
+\end{enumerate}
+
+Um produto interno em $V$, $\langle \, , \, \rangle$, é uma função
+%
+\begin{eqnarray*}
+\langle \, , \, \rangle
+&:& V \times V \longrightarrow \mathbb{R} \\
+&& (\mathbf{x}, \mathbf{y}) \longmapsto \langle \mathbf{x}, \mathbf{y} \rangle,
+\end{eqnarray*}
+%
+satisfazendo as seguintes propriedades
+\begin{enumerate}
+\item (positividade) $ \langle \mathbf{x}, \mathbf{x} \rangle \geq 0, \ \text{para todo} \ \mathbf{x} \in V$, e $\langle \mathbf{x}, \mathbf{x} \rangle = 0$
+ se e só se $\mathbf{x} = 0$,
+ 
+\item (simetria) $\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle, \ \text{para todos} \ \mathbf{x}, \mathbf{y} \in V$,
+
+\item (linearidade) $ \langle a\mathbf{x} + b\mathbf{y}, \mathbf{z} \rangle = a \langle \mathbf{x}, \mathbf{z} \rangle + b \langle \mathbf{y}, \mathbf{z} \rangle, \  \text{para todos} \ \mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathbf{V}$ e para todos $a, b \in  \mathbb{R}$. 
+\end{enumerate}
+
+Uma distância em $V$, $d$, é uma função
+%
+\begin{eqnarray*}
+d
+&:& V \times V \longrightarrow \mathbb{R} \\
+&& (\mathbf{x}, \mathbf{y}) \longmapsto d(\mathbf{x}, \mathbf{y}),
+\end{eqnarray*}
+%
+satisfazendo as seguintes propriedades:
+\begin{enumerate}
+\item (positividade) $ d(\mathbf{x}, \mathbf{y}) \geq 0, \  \text{para todo} \ \mathbf{x} \in V$, e $d(\mathbf{x}, \mathbf{y}) = 0$, se e só se $\mathbf{x} = \mathbf{y}$,
+ 
+\item (simetria) $d(\mathbf{x}, \mathbf{y}) = d(\mathbf{y}, \mathbf{x}) \ \text{para todo} \ \mathbf{x}, \mathbf{y} \in V$,
+
+\item (desigualdade triangular) $d(\mathbf{x}, \mathbf{y}) \leq d(\mathbf{x}, \mathbf{z}) + d(\mathbf{z}, \mathbf{y}), \text{para todo} \ \mathbf{x}, \mathbf{y}, \mathbf{z} \in V$  
+\end{enumerate}
+
+Recorda-se que dado um produto interno, é possível definir-se uma norma, 
+%
+\begin{eqnarray*}
+\Vert \mathbf{x} \Vert = \langle \mathbf{x}, \mathbf{x} \rangle^{1/2},
+\end{eqnarray*}
+%
+e que dada uma norma é possível se definir uma distância,
+%
+\begin{eqnarray*}
+d(\mathbf{x}, \mathbf{y}) = \Vert \mathbf{x} - \mathbf{y} \Vert,
+\end{eqnarray*}
+%
+assim, dando um produto interno, define-se uma distância $d(\mathbf{x}, \mathbf{y}) = \langle \mathbf{x}-\mathbf{y}, \mathbf{x}-\mathbf{y}\rangle^{1/2}$.
+
+\begin{ex} \label{e1x} O exemplo mais simples em $\mathbb{R} ^N$, é o do produto escalar, e da norma e distância euclidianas. Sejam  $x = (x_1, \cdots , x_N)^t$ e $y = (y_1, \cdots, y_N)^t$, então,
+%
+\begin{eqnarray*}
+\langle \mathbf{x}, \mathbf{y}\rangle = x_1y_1 + \cdots + x_N y_N, \ \ 
+\Vert \mathbf{x} \Vert =  \langle \mathbf{x}, \mathbf{x}\rangle^{1/2}= (x_1^2 + \cdots + x_N^2)^{1/2}, \ \ \text{e} 
+\end{eqnarray*}
+%
+\begin{eqnarray*}
+d(\mathbf{x}, \mathbf{y}) = \Vert \mathbf{x} - \mathbf{y} \Vert = \sqrt{(x_1 - y_1)^2 + \cdots + (x_N - y_N)^2}.
+\end{eqnarray*}
+\end{ex}
+\fim
+
+\begin{ex} \label{pp2} No conjunto de matrizes  $ \mathcal{M}(M,N)$, o exemplo mais simples de norma é a norma de Frobenius, $\Vert \cdot \Vert_F$, dada por 
+%
+\begin{eqnarray*}
+\Vert \mathbf{A} \Vert_F = \sqrt{\sum_{j=1}^{N} \sum_{i=1}^{M} (\mathbf{A})_{ij}^2}.
+\end{eqnarray*}
+
+Com esta norma é possível definir-se uma distância entre matrizes,
+%
+\begin{eqnarray*}
+d(\mathbf{A}, \mathbf{B}) = \Vert \mathbf{A} - \mathbf{B} \Vert_F, \ \mathbf{A}, \mathbf{B} \in  \mathcal{M}(M,N)\ .
+\end{eqnarray*}
+
+Em verdade, essa norma é proveniente de um produto interno de matrizes,
+%
+\begin{eqnarray*}
+\langle \mathbf{A}, \mathbf{B} \rangle_F = \sum_{j=1}^{N} \sum_{i=1}^{M} (\mathbf{A})_{ij} (\mathbf{B})_{ij}.
+\end{eqnarray*}
+
+A norma de Frobenius é, de fato, a extensão da norma euclidiana ao caso de matrizes, como é visto mais adiante.
+\end{ex}
+\fim
+
+\begin{ex} \label{3x3}
+Um outro exemplo, em $\mathbb{R}^N$, é obtido a partir de uma matriz positiva definida. Seja $\mathbf{W}$ uma matriz positiva definida, {\em i.e.},
+$\mathbf{x}^t \mathbf{W}\mathbf{x} > 0, \text{para todo} \  \mathbf{x} \neq 0, \ \mathbf{x} \in \mathbb{R} ^N$. Então, define-se o produto interno
+%
+\begin{eqnarray*}
+\langle \mathbf{x}, \mathbf{y} \rangle_{_{\text{W}}} = \mathbf{x}^t \mathbf{W} \mathbf{y},
+\end{eqnarray*}
+%
+e, naturalmente, também uma norma
+%
+\begin{eqnarray*}
+\Vert \mathbf{x}\Vert_{_{\text{W}}} = \langle \mathbf{x}, \mathbf{x}\rangle_{_{\text{W}}}^{1/2},
+\end{eqnarray*}
+%
+e uma distância associadas
+%
+\begin{eqnarray*}
+d_\mathbf{W}(\mathbf{x}, \mathbf{y}) = \Vert \mathbf{x} - \mathbf{y} \Vert_{_{\text{W}}} = \langle \mathbf{x}-\mathbf{y}, \mathbf{x}-\mathbf{y} \rangle_{_{\text{W}}}^{1/2}.
+\end{eqnarray*}
+\end{ex}
+\fim
+
+Diz-se que o produto interno $\langle \, , \,  \rangle_{_{\text{W}}}$ é um produto interno ponderado, onde $\mathbf{W}$ é uma matriz de ponderação. Claramente quando $\mathbf{W} = \mathbf{I}$, o produto interno é o mesmo dado no exemplo \ref{e1x}, e portanto, a ponderação é trivial. Há dois casos interessantes, quando $\mathbf{W}$ é diagonal, diferente da matriz identidade, e quando $\mathbf{W}$ não é diagonal. No primeiro caso, há de fato ponderação porque os valores que multiplicam as entradas do vetor não são todas iguais, mas não há ``interação'' entre as entradas do vetor, enquanto no segundo caso há ``interação''. 
+
+%--------------------------------------------------------
+\section{O operador vec}
+%--------------------------------------------------------
+
+Para construir exemplos de normas, distâncias e produtos internos com ponderação no conjunto das matrizes, pode-se utilizar de um subterfúgio, transformando as matrizes $M \times N$ em vetores de $\mathbb{R}^{M \times N}$, e então utilizar o Exemplo \ref{3x3}. Para isso é conveniente a introdução do conceito do operador vec, que é utilizado também em outros momentos desta tese, pelo que se faz necessário apresentar algumas de suas propriedades.
+
+O operador linear $\text{vec}$ transforma uma matriz $M \times N$ em um vetor em $\mathbb{R}^{M \times N}$, concatenando-se as colunas da matriz. Assim, por exemplo,
+%
+\begin{small}
+\begin{equation*}\label{110}
+\mathbf{a} = \text{vec} (\mathbf{A}) = [(\mathbf{A})_{11} \  (\mathbf{A})_{21}  \ \ldots \ (\mathbf{A})_{M1} \   (\mathbf{A})_{12} \  (\mathbf{A})_{22}  \ \ldots \  (\mathbf{A})_{M2}  \ldots  (\mathbf{A})_{M1} \  (\mathbf{A})_{M2} \  \ldots  \ (\mathbf{A})_{MN}]^t.
+\end{equation*}
+\end{small}
+
+\subsection{Produtos internos no conjunto das matrizes}
+
+Nesta seção utiliza-se o operador vec para definir produtos internos em  $\mathcal{M}(M,N)$. 
+
+\begin{ex}\label{exem4} \ A norma de Frobenius é a norma euclidiana para matrizes. De fato, usando o operador vec tem-se 
+%
+\begin{equation*}
+ \mathbf{A}\Vert_F = \Vert \mathrm{vec} (\mathbf{A})\Vert, \ \ \langle \mathbf{A}, \mathbf{B}\rangle_F = \langle \mathrm{vec}(\mathbf{A}), \mathrm{vec}(\mathbf{B})\rangle \ \ \text{e} \ \ d_F(\mathbf{A}, \mathbf{B}) = d(\mathrm{vec}(\mathbf{A}), \mathrm{vec}(\mathbf{B})),
+ \end{equation*}
+%
+onde os lados direitos são os euclidianos em $\mathbb{R}^{M \times N}$ definidos no Exemplo \ref{e1x}.
+\end{ex}
+\fim
+
+\begin{ex} \ Seja $\mathbf{W}$ uma matriz $(M \times N)\times (M \times N)$, positiva definida. Em $\mathcal{M}(M,N)$ define-se o produto interno
+%
+\begin{eqnarray}
+\langle\mathbf{A}, \mathbf{B}\rangle_{W} = \langle\mathrm{vec}(\mathbf{A}), \mathrm{vec}(\mathbf{B})\rangle_{W}, \ \mathbf{A}, \ \mathbf{B} \ \in \ \mathcal{M}(M,N),
+\end{eqnarray}
+%
+onde o lado direito é definido como no Exemplo \ref{3x3}.
+\end{ex}
+\fim
+
+%--------------------------------------------------------
+\subsection{Propriedades do operador vec}
+%--------------------------------------------------------
+
+Nesta seção apresenta-se algumas propriedades do operador vec. Uma questão relevante é como relacionar os índices de $\mathbf{a}=\text{vec}(\mathbf{A})$ e de $\mathbf{A}$. Dado o elemento $(\mathbf{A})_{ij}$, ele corresponderá à entrada 
+%
+\begin{eqnarray}\label{alg}
+k = i+(j-1)M, \ i=1...M, \ j=1...N,
+\end{eqnarray}
+%
+do vetor $\mathbf{a}$. Assim, por exemplo, o elemento $(\mathbf{A})_{11}$ corresponde a $k =1$, o elemento $(\mathbf{A})_{M1}$ corresponde à entrada $k=M$, e o elemento $(\mathbf{A})_{MN}$ corresponde à $k=M+(N-1)M = NM$.
+
+Inversamente, dado um elemento $a_k$, para se determinar os índices $i$ e $j$ de $\mathbf{A}$, de tal forma que $a_k = (\mathbf{A})_{ij}$, basta analisar a Equação \ref{alg}. À primeira vista se poderia supor que $j-1$ fosse o quociente da divisão de $k$ por $M$, e $i$ o resto correspondente. Não é pois $i$ varia de $1$ a $M$ e não de $0$ a $M-1$. De qualquer forma, tanto $i$ quanto $j$ são funções de $k$, que pode-se escrever $i=i(k)$ e $j=j(k)$. Neste caso, $j(k)$ representa de qual coluna de $\mathbf{A}$ o elemento corresponde e $i(k)$ de qual linha de $\mathbf{A}$ o elemento  corresponde. 
+
+Da Equação \ref{alg} pode-se escrever que
+%
+\begin{eqnarray}\label{alg1}
+k-1 = i-1 +(j-1)M, 
+\end{eqnarray}
+%
+e, neste caso, como $(i-1)$ está entre $0$ e $M-1$, tem-se de fato que $j-1$ é o quociente de $k-1$ por $M$, denotado por $q(k-1,M)$ e $i-1$ é o resto da divisão de $k-1$ por $M$, denotado por $r(k-1,M)$. Assim, a Equação \ref{alg1} se escreve 
+%
+\begin{eqnarray*}
+k-1 = r(k-1,M)+q(k-1,M)M,
+\end{eqnarray*}
+%
+e então, dado $k$, tem-se que
+%
+\begin{eqnarray}\label{index}
+i(k) = 1+r(k-1,M), \ j(k)=1+q(k-1,M), \ k=i(k)+(j(k)-1)M.
+\end{eqnarray}
+
+A Tabela \ref{tab:Tabela3} apresenta esquematicamente estas funções.
+%
+\begin{table}[!h]{16cm}
+\centering       
+	\caption{Posição das entradas $i$ do vetor $\bar{\mathbf{z}}$.}\label{tab:Tabela3} 
+	\begin{footnotesize}	 
+	 \begin{tabular}{c|c|c|c|c|c}\hline	
+\multicolumn{1}{c|}{\multirow{2}{*}{\boldmath{ $k$}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\boldmath{$k-1$}}}  & \multicolumn{1}{|c|}{\multirow{2}{*}{\boldmath{ $q(k-1,M)$}}} & \multicolumn{1}{|c|}{\multirow{2}{*}{\boldmath{ $r(k-1,M)$}}} &  \multicolumn{1}{|p{3cm}|}{\textbf{linha}$i(k)=$ } & \multicolumn{1}{|p{2cm}|}{\textbf{coluna}$j(k)=$} \\ & & & & \multicolumn{1}{|c|}{\boldmath{ $r(i-1,M)+1$}} & \multicolumn{1}{|p{2.5cm}}{\boldmath{$q(k-1,M)+1$}}   \\ \hline
+1 & 0 & 0 & 0 & 1 & 1 \\ \hline
+2 & 1 & 0 & 1 & 2 & 1 \\\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\hline
+$M$ & $M-1$ & 0 & $N-1$ & $M$ & 1 \\ \hline
+$M+1$ & $M$ & 1 & 0 & 1 & 2 \\ \hline
+$M+2$ & $M+1$ & 1 & 1 & 2 & 2 \\ \hline
+ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\hline
+$2M$ & $2M-1$ & 1 & $N-1$ & $M$ & 2\\ \hline
+$2M+1$ & $2M$ & 2 & 0 & 1 & 3\\ \hline
+$2M+2$ & $2M+1$ & 2 & 1 & 2 & 3\\ \hline
+ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\hline
+$3M$ & $3M-1$ & 2 & $N-1$ & $M$ & 3\\ \hline 
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\hline
+$(N-1)M+1$ & $(N-1)M$ & $N-1$ & 0 & 1 & $N$ \\ \hline 
+$(N-1)M+2$ & $(N-1)M+1$ & $N-1$ & 1 & 2 & $N$ \\ \hline 
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\\hline
+$MN$ & $MN -1$ & $N-1$ & $N-1$ & $M$ & $N$\\ \hline 
+\end{tabular}
+\end{footnotesize}	
+\end{table} 
+
+Dada a matriz $\mathbf{A}$, $M \times N$, denota-se
+%
+\begin{eqnarray*}\label{e}
+\text{sum} (\mathbf{A}) = \sum_{j=1}^{N}\sum_{i=1}^{N} (\mathbf{A})_{ij},
+\end{eqnarray*}
+%
+a soma de todas as entradas da matriz $\mathbf{A}$, e seja $\openone \in \mathbb{R}^N$ o vetor de entradas todas iguais a 1. Tem-se então o seguinte resultado. 
+
+\begin{propri}\label{proposta} \ Sejam $\mathbf{A}$ e $\mathbf{B}$ matrizes $M \times N$, $\mathbf{C}$ uma matriz $N \times N$, $\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{z} \in \mathbb{R}^{M \times N}$. Então:
+\end{propri}
+%
+\begin{enumerate}
+\item  $\text{vec}(\mathbf{A} \bullet \mathbf{B}) \in \mathbb{R}^{M \times N}$ e 
+%
+\begin{equation}\label{abvec}
+\text{vec}(\mathbf{A} \bullet \mathbf{B}) = \text{vec}(\mathbf{A} ) \bullet \text{vec}(\mathbf{B} )
+\end{equation}
+
+\item $\mathrm{sum}(\mathbf{A}) =  \openone^t \mathrm{vec}(\mathbf{A})$
+
+\item $\langle \mathbf{A}, \mathbf{B} \rangle_F = \mathrm{sum} (\mathbf{A} \bullet \mathbf{B}) = \openone^t \text{vec}(\mathbf{A}\bullet \mathbf{B})$
+
+\item $\mathbf{z}^t\mathbf{C}\mathbf{z} =  \openone^t \mathrm{vec}((\mathbf{z} \mathbf{z}^t)\bullet \mathbf{C})$
+
+\item $\langle \mathbf{a}, \mathbf{b}\rangle = \langle \openone, \mathbf{a} \bullet \mathbf{b}\rangle$
+
+\item $(\mathbf{a}\mathbf{a}^t)\bullet (\mathbf{b}\mathbf{b}^t) = (\mathbf{a} \bullet \mathbf{b})(\mathbf{a} \bullet \mathbf{b})^t$
+ 
+\item $((\mathbf{a} \bullet \mathbf{b})^t\mathbf{c})^2 = \mathbf{c}^t (\mathbf{a} \mathbf{a}^t)\bullet(\mathbf{b} \mathbf{b}^t)\mathbf{c}$
+\end{enumerate}
+
+\dem \ \textbf{de 1} Seja $k$ um inteiro entre $M$ e $N$. Então existe um único $i=i(k)$ e um único $j=j(k)$, com $i = 1 \ ... \ M$ e $j = 1 \ ... \ N$, tais que $k=i(k)+(j(k)-1)M$, conforme a Tabela \ref{tab:Tabela3}. Assim, $ \text{vec}(\mathbf{A})_{k = i -1} = (\mathbf{A})_{i(k)j(k)}$. Então  
+%
+\begin{eqnarray*}
+(\text{vec}(\mathbf{A} \bullet \mathbf{B}))_{k} = (\mathbf{A} \bullet \mathbf{B})_{i(k)j(k)} = (\mathbf{A})_{i(k)j(k)}(\mathbf{B})_{i(k)j(k)} =  (\text{vec}(\mathbf{A}))_k (\text{vec}(\mathbf{B}))_k ,   
+\end{eqnarray*}
+%
+ donde $\mathrm{vec}(\mathbf{A} \bullet \mathbf{B}) = \mathrm{vec}(\mathbf{A})\bullet \mathrm{vec}(\mathbf{B})$.
+\fim \\
+
+\dem \ \textbf{de 2} De fato,
+%
+\begin{eqnarray*}
+\mathrm{sum} (\mathbf{A}) = \sum_{i=1}^{M}\sum_{j=1}^{N} (\mathbf{A})_{ij} = \sum_{k=1}^{M\times N} (\text{vec}\mathbf{A})_{k = i + M(j - 1)} = \openone^t \text{vec}(\mathbf{A}),
+\end{eqnarray*}
+%
+donde, $\mathrm{sum}(\mathbf{A}) = \openone^t \mathrm{vec}(\mathbf{A})$. 
+\fim \\
+
+\dem \ \textbf{de 3} O resultado segue de
+%
+\begin{eqnarray*}\label{e}
+\langle \mathbf{A}, \mathbf{B} \rangle_F = \sum_{i=1}^{M}\sum_{j=1}^{N} (\mathbf{A})_{ij} (\mathbf{B})_{ij} = \sum_{i=1}^{M}\sum_{j=1}^{N} (\mathbf{A} \bullet \mathbf{B})_{ij} = \mathrm{sum} (\mathbf{A}\bullet \mathbf{B}),
+\end{eqnarray*}
+%
+e, de (2), $\text{sum}(\mathbf{A}\bullet\mathbf{B}) = \openone^t\text{vec}(\mathbf{A}\bullet\mathbf{B})$.
+\fim \\
+
+
+\dem \ \textbf{de 4} Tem-se também que
+%
+\begin{eqnarray*}
+\mathbf{z}^t \mathbf{C}\mathbf{z} 
+&=&  \sum_{i=1}^{N}\sum_{j=1}^{N} z_i (\mathbf{C})_{ij} z_j = \sum_{i=1}^{N}\sum_{j=1}^{N} z_i z_j (\mathbf{C})_{ij} \\
+&=& \sum_{i=1}^{N}\sum_{j=1}^{N} (\mathbf{z}\mathbf{z}^t)_{ij} (\mathbf{C})_{ij} =\sum_{i=1}^{N}\sum_{j=1}^{N} \left[(\mathbf{z}\mathbf{z}^t)\bullet \mathbf{C}\right]_{ij} \\
+&=& \text{sum} ((\mathbf{z}\mathbf{z}^t)\bullet \mathbf{C}) = \openone^t\text{vec}((\mathbf{z}\mathbf{z}^t)\bullet \mathbf{C}),
+\end{eqnarray*}  
+%
+donde $\mathbf{z}^t \mathbf{C}\mathbf{z} = \openone^t \mathrm{vec}((\mathbf{z}\mathbf{z}^t) \bullet \mathbf{C})$.
+\fim \\
+
+\dem \ \textbf{de 5} Tem-se que 
+%
+\begin{eqnarray*}
+\langle \mathbf{a}, \mathbf{b} \rangle  = \mathbf{a}^t \mathbf{b} = \sum_{i=1}^{N} a_i b_{c_i} = \sum_{i=1}^{N} (\mathbf{a} \bullet\mathbf{b})_i = \openone^t \mathbf{a} \bullet \mathbf{b} =  \langle \openone, \mathbf{a} \bullet \mathbf{b} \rangle .
+\end{eqnarray*}
+
+\fim \\
+
+\dem \ \textbf{de 6} Note que 
+%
+\begin{eqnarray*}
+((\mathbf{a}\mathbf{a}^t)
+ \bullet (\mathbf{b}\mathbf{b}^t))_{ij} = (\mathbf{a}
+ \mathbf{a}^t)_{ij} (\mathbf{b}\mathbf{b}^t)_{ij} = 
+ a_i a_j b_{c_i} b_{c_j} = a_i b_{c_i} a_j b_{c_j} =  (\mathbf{a}
+  \bullet\bullet \mathbf{b})_i (\mathbf{a} \bullet \mathbf{b})_j 
+  = ((\mathbf{a} \bullet \mathbf{b}) (\mathbf{a} \bullet
+   \mathbf{b})^t)_{ij},
+\end{eqnarray*}
+%
+donde $(\mathbf{a}
+    \mathbf{a}^t) \bullet (\mathbf{b}\mathbf{b}^t) =
+     (\mathbf{a} \bullet \mathbf{b})(\mathbf{a} \bullet
+      \mathbf{b})^t$.
+\fim \\
+
+\dem \ \textbf{de 7} Uma vez que $(\mathbf{a} \bullet \mathbf{b})^t \mathbf{c}$ é um escalar, é igual ao seu transposto $(\mathbf{a} \bullet \mathbf{b})^t \mathbf{c} = \mathbf{c}^t(\mathbf{a} \bullet \mathbf{b})$, e então, usando (6) tem-se
+
+%
+\begin{eqnarray*}
+((\mathbf{a} \bullet \mathbf{b})^t\mathbf{c})^2 = \mathbf{c}^t(\mathbf{a} \bullet \mathbf{b})(\mathbf{a}\bullet\mathbf{b})^t \mathbf{c} = \mathbf{c}^t(\mathbf{a}\mathbf{a}^t)\bullet(\mathbf{b}\mathbf{b}^t)\mathbf{c}.
+\end{eqnarray*}
+\fim
+
+

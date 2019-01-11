@@ -1,0 +1,379 @@
+\chapter{Otimização do problema} \label{cap8}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo discute-se a solução do problema de aproximação formulado como um problema de otimização, apresentam-se alguns resultados de otimização pertinentes ao problema de aproximação de uma matriz por matrizes de posto baixo, e o algoritmo estocástico de evolução diferencial que será utilizado.
+
+%--------------------------------------------------------
+\section{Conceitos básicos de otimização de função}
+%-------
+
+Inicialmente relembra-se alguns conceitos de otimização. Sejam dados um conjunto $D \subset \mathbb{R}^N$ e uma função $F: \Omega \longrightarrow  \mathbb{R}$, com $D \subset\Omega$. O problema de minimizar $F$ no conjunto $D$ é escrito por 
+%
+\begin{eqnarray}\label{155}
+\text{min} \ F(\mathbf{x}) \ \ \text{sujeito a}\ \ \mathbf{x} \in D, \ \  \text{ou ainda,} \ \  \displaystyle\min_{\mathbf{x} \in D} \ F(\mathbf{x}).
+\end{eqnarray}
+
+O conjunto $D$ é chamado de conjunto viável do problema, os pontos de $D$ são pontos viáveis, e $F$ é a função custo ou objetivo.
+
+Diz-se que $\mathbf{x}^{\star} \in D$ é um minimizador global, ou ponto de mínimo global de $F|_D$ ($F$ restrito ao conjunto $D$), e $F(\mathbf{x}^{\star})$ é chamado de mínimo global de $F|_D$ se
+%
+\begin{eqnarray*}
+F(\mathbf{x}^{\star}) \leq F(\mathbf{x}), \ \text{para  todo} \  \mathbf{x} \in D.
+\end{eqnarray*} 
+
+Diz-se que $\mathbf{x}^{\star} \in D$ é um minimizador local, ou ponto de mínimo local de $F|_D$, e $F(\mathbf{x}^{\star})$ é chamado de mínimo local de $F|_D$, se existe uma vizinhança $U$ de $\mathbf{x}^{\star}$ tal que 
+%
+\begin{eqnarray*}
+F(\mathbf{x}^{\star}) \leq F(\mathbf{x}), \ \text{para todo} \  \mathbf{x} \in D \cap U.
+\end{eqnarray*} 
+
+
+Diz-se ainda que $m \in \left[- \infty , + \infty \right]$, definido por 
+%
+\begin{eqnarray*}
+m = \text{inf} \ \left\{F(\mathbf{x}) | \  \mathbf{x} \in D  \right\} = \text{inf} \ \left\{\text{Im}\ (F|_D) \right\},
+\end{eqnarray*} 
+%
+é o valor ótimo do problema (\ref{155}), onde entende-se que $m = +\infty$ se $D = \emptyset$. No caso de $F$ ter um minimizador global, $\mathbf{x}^{\star}$, então $m = F(\mathbf{x}^{\star})$, e diz-se que o problema (\ref{155}) tem uma solução global.
+
+Para exemplificar, seja 
+%
+\begin{eqnarray*}
+F
+&:& \mathbb{R} \longrightarrow  \mathbb{R} \\
+&& x  \longmapsto   F(x) = x,
+\end{eqnarray*} 
+%
+e $D = \left]  1, 2 \ \right[$. Pode-se observar que $F|_D$ não tem minimizador. De fato, $\text{Im} \ (F|_D) =  \left]  1, 2 \ \right[ $ e $\text{inf} \  \left]   1 , 2 \ \right[ = 1$, mas não existe $\mathbf{x}^{\star}$ tal que $F(\mathbf{x}^{\star})=1$.
+%
+%\begin{figure}[h!]{12cm}
+%  \caption{Gráfico de função periódica} \label{rotulo9}
+%  \fbox{\includegraphics[scale=0.6]{Figuras/Fig9.png}}
+%  \legend{F(x)}
+%  \source{O autor, 2016.}
+%\end{figure}
+
+
+Uma função pode admitir vários minimizadores globais, mas, neste caso, o valor ótimo do problema ---o mínimo global---, naturalmente, sempre é o mesmo.
+
+Para exemplificar, seja a função 
+%
+\begin{eqnarray*}
+F
+&:& \mathbb{R}  \longrightarrow  \mathbb{R} \\
+&& t \longmapsto F(x) = \frac{5}{4} + \cos \left( x + \frac{\pi}{6}\right) ,
+\end{eqnarray*} 
+%
+tem-se que $\frac{5}{6}\pi +2k\pi$ com $k \in \mathbb{Z}$, são os minimizadores globais e o valor ótimo é $1/4$.  Veja Figura \ref{rotulo9}. O problema de minimizar $F$ em $\mathbb{R}$ tem vários minimizadores globais.
+
+Um teorema clássico que garante a existência de minimizador global é o seguinte
+%
+\begin{teore}\label{TeoWei} \textbf{Teorema de Weierstrass} Sejam $D \subset \mathbb{R}^N$, um conjunto compacto (fechado e limitado) não vazio e $F:  D \longrightarrow  \mathbb{R}$ uma função contínua. Então, o problema de minimizar $F$ em $D$ tem uma solução global, isto é, existe um minimizador global de $F$. Em outras palavras, existe $\mathbf{x}^{\star} \in D$ tal que $\displaystyle\min_{\mathbf{x} \in D} F(\mathbf{x}) = F(\mathbf{x}^{\star})$.
+\end{teore}
+
+\section{Existência de matrizes de posto menor aproximando a matriz de interação binária}
+
+Aplica-se o teorema de Weierstrass ao problema de obtenção de uma matriz de posto $r$ (ou menor) aproximando a matriz de coeficientes de interação binária.
+
+A função objetivo é definida fazendo-se uso do produto interno obtido no Capítulo \ref{cap6}. 
+
+Sejam $\langle \, , \, \rangle_E$ o referido produto interno, $\mathbf{C}$ a matriz de interação binária e $ \mathcal{M}_r(N,N)$ o conjunto das matrizes simétricas de posto menor ou igual a $r$. Então a função objetivo é
+%
+\begin{eqnarray*}
+\epsilon
+&:& \mathcal{M}_r(N,N) \longrightarrow  \mathbb{R} \\
+&& \mathbf{R}  \longmapsto   \epsilon(\mathbf{R}) = \langle \mathbf{C} - \mathbf{R}, \mathbf{C} - \mathbf{R} \rangle_E.
+\end{eqnarray*} 
+
+A redução de dimensionalidade referida corresponde a determinar $\mathbf{C}^{\star}$ de posto menor ou igual a $r$ que minimize $\epsilon$ entre todas as matrizes em $ \mathcal{M}_r(N,N)$, {\em i.e.},
+%
+\begin{eqnarray}\label{min}
+\displaystyle\min_{\mathbf{R}\in \mathcal{M}_r(N,N)}  \epsilon(\mathbf{R})= \epsilon(\mathbf{C}^{\star}).
+\end{eqnarray} 
+
+\begin{teore}\label{TEO4}
+O problema de otimização dado na Equação \ref{min} tem solução.
+\end{teore}
+
+A estratégia de demonstração deste resultado é aplicar o teorema de Weierstrass. Inicialmente necessita-se mostrar que o conjunto $ \mathcal{M}_r(N,N)$ é fechado. 
+
+\begin{propri}
+O conjunto $ \mathcal{M}_r(N,N)$ é fechado.
+\end{propri}
+
+\dem \ De fato, $\mathbf{A} \in \mathcal{M}_r(N,N)$ se e somente se os determinantes de todas as suas $(r+1)\times(r+1)$ submatrizes forem nulas. Para escolher uma submatriz $(r+1)\times (r+1)$, há que selecionar $(r+1)$ linhas entre as $N$ disponíveis (e as mesmas colunas). O número total de submatrizes é um problema de combinatória. Assim, há $\alpha= C^{r+1}_N$, submatrizes $(r+1)\times (r+1)$. Considera-se a função
+%
+\begin{eqnarray*}
+\gamma
+&:& \mathcal{M}(N,N)  \longrightarrow  \mathbb{R}^\alpha,
+\end{eqnarray*} 
+%
+que leva cada matriz $N \times N$ no vetor dos determinantes das submatrizes. Tem-se que $\mathbf{R} \in \mathcal{M}_r(N,N)$, se e somente se $\gamma (\mathbf{R}) = \mathbf{0}$, {\em i.e.}, $\mathcal{M}_r(N,N)$  é a imagem inversa do vetor nulo, $\mathbf{0}$, 
+%
+\begin{eqnarray*}
+\mathcal{M}_r(N,N) = \gamma^{-1}(\mathbf{0}).
+\end{eqnarray*} 
+
+Como $\gamma$ é contínua, pois é baseada no cálculo de determinantes, que é uma função contínua, $\left\lbrace \mathbf{0}\right\rbrace $ é um conjunto fechado, e a imagem inversa de conjuntos fechados por funções contínuas são fechados, conclui-se que  $\mathcal{M}_r(N,N)$ é um conjunto fechado.
+\fim \\ 
+
+\dem \  {\bf do teorema \ref{TEO4}}
+Seja agora ${\mathbf{0}}$ a matriz nula. Claramente $\mathbf{0} \in \mathcal{M}_r(N,N)$, e então, seja $d_0 > 0$ tal que
+%
+\begin{eqnarray*}
+d_0^2 = \epsilon(\mathbf{0}) = \langle \mathbf{C}- \mathbf{0},  \mathbf{C}- \mathbf{0}\rangle_E = \Vert \mathbf{C}\Vert_E^2.
+\end{eqnarray*} 
+
+Como se busca minimizar $\epsilon$ entre as matrizes de $\mathcal{M}_r(N,N)$, então basta procurar o minimizador entre as matrizes de $\mathcal{M}_r(N,N)$ tais que a distância a $\mathbf{C}$ seja menor ou igual a $d_0$, já que se não houver nenhuma matriz cuja distância a $\mathbf{C}$ seja menor do que $d_0$, então o minimizador será a matriz nula. Seja $B$ o conjunto das matrizes que distam no máximo $d_0$ de $\mathbf{C}$,  
+%
+\begin{eqnarray*}
+B = \left\lbrace  \mathbf{R} \in \mathcal{M}(N,N) \mid \Vert \mathbf{C} - \mathbf{R}\Vert_E \leq d_0 \right\rbrace,
+\end{eqnarray*}
+%
+e seja $\mathcal{D}$ as matrizes em $B$ que tenham posto menor ou igual a $r$, isto é, 
+%
+\begin{eqnarray*}
+\mathcal{D} = B \bigcap \mathcal{M}_r(N,N).
+\end{eqnarray*}
+
+Ora, $B$ é um conjunto compacto e $ \mathcal{M}_r(N,N)$ é um conjunto fechado. Como $\mathcal{D}$ é a interseção de um conjunto fechado com um conjunto compacto, $\mathcal{D}$ é compacto e é não vazio, pois a matriz nula pertence a $\mathcal{D}$. Assim, aplica-se o teorema de Weierstrass e conclui-se que existe $\mathbf{C}^{\star} \in \mathcal{M}_r(N,N)$ tal que
+% 
+\begin{eqnarray*}
+\displaystyle\min_{\mathbf{R}\in \mathcal{D}}  \epsilon(\mathbf{R})= \epsilon(\mathbf{C}^{\star}).
+\end{eqnarray*}  
+
+Como $\mathcal{D} \in \mathcal{M}_r(N,N)$, 
+% 
+\begin{eqnarray*}
+\displaystyle\min_{\mathbb{R} \in \mathcal{D}} \epsilon(\mathbf{R}) \geq \displaystyle\min_{\mathbb{R} \in \mathcal{M}_r(N,N)} \epsilon(\mathbf{R}).
+\end{eqnarray*}  
+
+Falta então mostrar que a equação anterior é uma igualdade. Assuma, por contradição, que existe 
+% 
+\begin{eqnarray*}
+ \tilde{\mathbf{C}} \in \mathcal{M}_r(N,N), \  \text{tal que} \  \epsilon(\tilde{\mathbf{C}}) < \epsilon(\mathbf{C}^{\star}).
+\end{eqnarray*}  
+%
+Então, 
+% 
+\begin{eqnarray*}
+\Vert\mathbf{C} - \tilde{\mathbf{C}}\Vert_E^2 =    \epsilon(\tilde{\mathbf{C}}) < \epsilon(\mathbf{C}^{\star}) \leq \epsilon(\mathbf{0}) = d_0^2,
+\end{eqnarray*} 
+%
+donde $\tilde{\mathbf{C}} \in B$, logo $\tilde{\mathbf{C}} \in \mathcal{D}$, o que é uma contradição pois $\mathbf{C}^{\star}$ é o ponto de mínimo de $\epsilon$ em $\mathcal{D}$ e não pode então $\epsilon(\tilde{\mathbf{C}})$ ser o mesmo que $\epsilon(\mathbf{C}^{\star})$.
+
+\fim
+
+%--------------------------------------------------------
+\section{Condições de otimalidade}
+%---------------------------------------------------
+
+Quando $D = \mathbb{R}^N$, diz-se que o problema (\ref{155}) é irrestrito, e quando $D \neq \mathbb{R}^N$ o problema é dito de otimização com restrições. Usando esta nomenclatura, o problema de minimizar $\epsilon$ entre as matrizes de posto menor ou igual a $r$ é um problema de otimização com restrições, e o problema de minimizar $G$ é uma minimização irrestrita. 
+
+Apresenta-se, a seguir, as condições de otimalidade para o problema de minimização irrestrita, isto é, 
+%
+\begin{eqnarray}\label{156}
+\text{min} \ F(\mathbf{x}), \ \ \mathbf{x} \in \mathbb{R}^N.
+\end{eqnarray}
+
+Seja $F$ uma função diferenciável. Diz-se que $\mathbf{x}^{\star}$ é ponto crítico, ou ponto estacionário, de $F$ se e só se $\bigtriangledown F(\mathbf{x}^{\star}) = 0$.
+
+\begin{teore} \label{TEOO}  Condições de otimalidade no caso irrestrito   
+%
+\begin{itemize}
+\item Seja $F: \mathbb{R}^N \longrightarrow \mathbb{R}$  uma função diferenciável no ponto $\mathbf{x}^{\star} \in \mathbb{R}^N$ e $\mathbf{x}^{\star}$ um minimizador local do problema (\ref{155}). Então, $\mathbf{x}^{\star}$ é ponto crítico de $F$, isto é,
+%
+\begin{eqnarray}\label{157}
+\bigtriangledown F(\mathbf{x}^{\star}) = 0.
+\end{eqnarray}
+%
+Se $F$ é duas vezes diferenciável em $\mathbf{x}^{\star}$, então além de (\ref{157}), tem-se que a matriz hessiana de $F$ avaliada no ponto $\mathbf{x}^{\star}$, que será denotada por $H_F(\mathbf{x}^{\star})$, é positiva semidefinida, isto é 
+%
+\begin{eqnarray*}\label{158}
+\langle H_F(\mathbf{x}^{\star}) \mathbf{v}, \mathbf{v} \rangle \geq 0, \ \text{para todo} \  \mathbf{v} \in \mathbb{R}^N. 
+\end{eqnarray*}
+
+\item Suponha-se que a função $F: \mathbb{R}^N \longrightarrow \mathbb{R}$ seja duas vezes diferenciável no ponto $\mathbf{x}^{\star} \in \mathbb{R}^N$. Se $\mathbf{x}^{\star}$ é ponto crítico de $F$, e se a matriz hessiana de $F$ em $\mathbf{x}^{\star}$ é positiva definida, isto é
+%
+\begin{eqnarray}\label{159}
+\langle H_F(\mathbf{x}^{\star}) \mathbf{v}, \mathbf{v} \rangle  > 0, \ \text{para todo} \ \mathbf{v} \neq 0, \ v \in \mathbb{R}^N, 
+\end{eqnarray} 
+%
+então $\mathbf{x}^{\star}$ é minimizador local estrito do problema (\ref{155}). 
+ 
+A condição (\ref{157}) chama-se condição necessária de primeira ordem para o problema (\ref{155}). A combinação de (\ref{157}) com (\ref{158}) é a condição suficiente de segunda ordem para o problema (\ref{155}). 
+\end{itemize}
+\end{teore}
+
+\section{Método de Newton --- dificuldades}
+
+Uma possibilidade para se determinar o ponto de mínimo ou minimizador de $\epsilon$, é obter-se um ponto de mínimo de $G$, $\mathbf{\chi}^{\star} = (\mu_1,...,\mu_r, \mathbf{w}_1,...,\mathbf{w}_r)$ , e construir-se o minimizador de $\epsilon$
+%
+\begin{eqnarray*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \mu_j \mathbf{w}_j \mathbf{w}_j^t. 
+\end{eqnarray*}
+
+Assim, coloca-se a questão de minimizar $G$. Como agora este é um problema de minimização sem restrições, pode-se apelar ao teorema \ref{TEOO}, e o minimizador é então um ponto crítico de $G$, {\em i.e.}, satisfaz
+%
+\begin{eqnarray*}
+\bigtriangledown G(\mathbf{\chi}^{\star}) =0.
+\end{eqnarray*}
+
+Pode-se, em princípio, aplicar o método de Newton para obter $\mathbf{\chi}^{\star}$. Neste caso, haverá que se utilizar a jacobiana de $\bigtriangledown G$, isto é, a hessiana de $G$. que então tem que se inverter. 
+
+Como é visto  seguir, a hessiana não é inversível, o que essencialmente impede a utilização do método de Newton para obter a matriz $\mathbf{C}^{\star}$ de posto dado que melhor se aproxima da matriz de interação binária, $\mathbf{C}$, na norma proveniente da energia. 
+
+
+\subsection{Singularidade da hessiana}\label{S4}
+
+
+\begin{teore} \ Seja $F: D \longrightarrow \mathbb{R}$ uma função diferenciável. Assume-se que o conjunto dos pontos críticos de $F$,
+%
+\begin{eqnarray*}\label{eq92a}
+C = \left\{\mathbf{x} \in D | \nabla F(\mathbf{x}) = 0\right\},
+\end{eqnarray*}
+%
+contenha uma curva $\boldsymbol{\gamma}: \left] a, b \right[ \longrightarrow D, \  \boldsymbol{\gamma} = (\gamma_1, ..., \gamma_N)^t$, com $\frac{\text{d}\boldsymbol{\gamma}}{\text{d}t}(t) \neq 0, \ \text{para todo} \ t \in \left] a, b \right[$. Então a hessiana de $F$, sobre a imagem de $\boldsymbol{\gamma}$, $ \boldsymbol{\gamma}(\left] a, b\right[) = \left\lbrace \boldsymbol{\gamma}(t) \in D, \text{para todo} \ t \in \left] a, b\right[\right\rbrace $, não é positiva definida.
+\end{teore}
+
+\dem \ Como $\boldsymbol{\gamma}(\left] a, b\right[) \subset C$, então, $\nabla F|_{\boldsymbol{\gamma}(t)} = 0$. Isto é, 
+%
+\begin{eqnarray*}\label{eq92c}
+\left(\frac{\partial F}{\partial x_1} |_{\boldsymbol{\gamma}(t)}, \frac{\partial F}{\partial x_2} |_{\boldsymbol{\gamma}(t)}, ..., \frac{\partial F}{\partial x_N} |_{\boldsymbol{\gamma}(t)} \right) = 0, \ \ \text{para todo} \ t \in \left] a, b\right[. 
+\end{eqnarray*}
+%
+Derivando ambos os lados da equação anterior em relação a $t$, obtém-se
+%
+\begin{eqnarray*}\label{eq92d}
+\sum_{i=1}^{N} \frac{\partial^2 F}{\partial x_i \partial x_j} |_{\boldsymbol{\gamma}(t)} \frac{\text{d}\gamma_i}{\text{d}t} = 0, \ \text{para todo} \ j, t.
+\end{eqnarray*}
+%
+Multiplicando-se ambos os lados por $\frac{\text{d}\boldsymbol{\gamma}_j}{\text{d}t}$ e somando em $j$, obtém-se  
+%
+\begin{eqnarray*}\label{eq92e}
+0 = \sum_{i=1}^{N} \sum_{j=1}^{N} \frac{\text{d}\gamma_i}{\text{d}t} \left( \frac{\partial^2 F}{\partial x_i \partial x_j} |_{\boldsymbol{\gamma}(t)} \right) \frac{\text{d}\gamma_j}{\text{d}t} = \left( \frac{\text{d}\boldsymbol{\gamma}}{\text{d}t} \right) ^t \mathbf{H}_F |_{\boldsymbol{\gamma}(t)}\left( \frac{\text{d}\boldsymbol{\gamma}}{\text{d} t}\right),
+\end{eqnarray*}
+%
+onde $\mathbf{H}_F$ é a hessiana de $F$. Como $\frac{d\boldsymbol{\gamma}}{\text{d}t} \neq 0$, da equação anterior conclui-se que a hessiana não é positiva definida.
+\fim 
+%
+\begin{corol} \ Seja $F: D \longrightarrow \mathbb{R}$ uma função diferenciável e assume-se que a imagem da curva $\boldsymbol{\gamma}: \left] a, b \right[ \longrightarrow D$ seja formada por pontos de mínimo local de $F$ no interior de $D$, e $\frac{\text{d}\boldsymbol{\gamma}}{\text{d}t} \neq 0$. Então a hessiana de $F$ nesses mínimos locais não é positiva definida. 
+\end{corol}
+
+\dem \ Basta lembrar que pontos de mínimo local em pontos interiores são pontos críticos, e o resultado segue do teorema anterior.
+\fim
+%
+\begin{corol}\label{Coro} Seja $\epsilon \mathcal{M}(N,N) \longrightarrow \mathbb{R}$. Assume-se que $\mathbf{C}^{\star}$ é uma matriz de posto $r$ e é ponto de mínimo  de $\epsilon$. Seja ainda $G = \epsilon \circ L$, onde $L$ é definida na Equação \ref{bbc}.
+
+
+Defina-se $\Gamma = \left\{ \left( \mu_1, ..., \mu_r, \mathbf{w}_1, ..., \mathbf{w}_r \right) | \ \mathbf{C}^{\star} = \sum_{i=1}^{r} \mu_i \mathbf{w}_i \mathbf{w}_i^t \right\}$. Então, todo $\mathbf{\alpha} \in \Gamma$ é ponto de mínimo de $G$, e a hessiana de $G$ em $\mathbf{\alpha}$ não é positiva definida.
+\end{corol}
+
+\dem \  Em capítulo anterior foi mostrado que o conjunto $\Gamma$ tem $r(r+1)/2$ graus de liberdade, logo dado $\mathbf{\alpha} \in \Gamma$, há curvas por $\mathbf{\alpha}$ com velocidade não nula. O resultado segue do corolário anterior. 
+\fim
+
+Suponha-se que se queira utilizar o método de Newton para obter o ponto de mínimo da função $\epsilon$ dada na Equação \ref{rkr}. Assim, se teria que procurar o mínimo da função $G = \epsilon \circ L$. O método de Newton exigiria inverter a hessiana de $G$. Pelo corolário \ref{Coro} conclui-se que ela não é inversível em diversos pontos, dificultando o uso do método de Newton e indicando que se deve procurar utilizar outro método. É isso que é feito. Propõe-se utilizar um método estocástico chamado Evolução Diferencial. 
+
+\section{Método da evolução diferencial}
+
+Um dos algoritmos baseados em comportamento
+natural para estimação dos parâ-metros de processos
+físicos é o algoritmo da evolução diferencial (ED). O algoritmo ED é robusto e tem rápida convergência na
+busca das soluções que minimizam a função custo. A estratégia de otimização
+desse algoritmo se baseia na evolução da população
+de candidatos a soluções que representam os parâmetros
+possíveis da função a ser otimizada. A
+evolução desses parâmetros acontece por meio de mecanismos conhecidos como \textit{mutação}, \textit{recombinação} e \textit{seleção}. A ED é um algoritmo populacional, onde uma população de indivíduos (de tamanho $NP$) evolui ao longo de gerações, representadas por $G$. Dois parâmetros fundamentais (além de $NP$ e de $G$) são o fator $F$ --- que controla o tamanho da mutação --- e a taxa de recombinação (ou cruzamento) ($CR$).
+
+A maioria dos trabalhos relacionados ao algoritmo
+ED utiliza valores fixos para $F$ e $CR$. Em muitos casos, esses valores não garantem que o algoritmo terá um desempenho satisfatório em todo o seu
+processo de evolução. A utilização inadequada dos
+valores das taxas de cruzamento e mutação fixos
+pode causar convergência prematura do processo de estimação do
+ponto ótimo de um problema, assim não obtendo
+resultados satisfatórios. O algoritmo ED pode tornar-se
+mais rápido quando seus parâmetros referentes às
+taxas de cruzamento e mutação são ajustados de
+acordo com o comportamento de evolução da população, obtendo-se
+com isto um tempo computacional
+menor. Ademais, com o progresso do algoritmo, é comum que a população perca diversidade. Nestes casos, grandes populações podem implicar em altos tempos de computação de forma desnecessária.
+
+O algoritmo ED inicializa com uma população
+escolhida aleatoriamente composta por $NP$ vetores chamados indivíduos. Para um problema com $M$
+variáveis de projeto, cada vetor (indivíduo da população)
+possui $M$ componentes. A evolução da população
+é inicializada com a operação de mutação,
+onde novos indivíduos (vetores modificados ou \textit{vetores mutantes}, representados por $V(i)$, onde $i$ é o índice do elemento na população) são
+gerados pela adição da diferença vetorial ponderada
+entre dois indivíduos da população a um terceiro
+indivíduo.
+A nova solução gerada pela mutação tem suas
+componentes ``misturadas'' (\textit{crossover}) com as componentes de um
+indivíduo da população
+(definido como vetor alvo), para resultar no vetor
+chamado \textit{vetor-tentativa}, representado por $U(i)$. Este processo de ``misturar'' as componentes é referido como cruzamento, recombinação ou \textit{crossover}.
+Se o valor da função objetivo do vetor experimental
+for menor que o custo do vetor corrente ($P(i)$), então o
+vetor tentativa assume o lugar de $P(i)$ na população. Esta operação é chamada de seleção.
+Este processo é repetido a cada geração até que um
+critério de parada seja satisfeito \cite{Storn1997}. No caso em questão, o critério de parada é que o número de gerações $G$ seja igual ao máximo número de gerações ($totG$).
+
+A estrutura da ED está apresentado no Algoritmo \ref{alg:ED}. Os valores dos parâmetros de controle empregados foram: $F = 0,5$, $CR=0,9$, $NP = 100$ e $totG = 1\times 10^5$.
+
+AQUI ENTRA O ALGORÍTMO DA EVOLUÇÃO DIFERENCIAL QUE ESTÁ COMENTADO
+%%\begin{algorithm}
+%\caption{Evolução diferencial.} \label{alg:ED}
+%\begin{pseudocode}
+%\Algoritmo{Evolução diferencial}
+%\Ins{Inicie aleatoriamente uma população de $NP$ indivíduos, com dimensão $M$, faça $G=1$.}
+%\Enquanto[$G\leq totG$]{o critério de parada não for satisfeito}
+%	\ParaDeAtePasso[cada elemento da população]{$i$}{1}{$NP$}{}
+%    	\Comentario{Mutação} \Ins{Selecione aleatoriamente os elementos $P(r1)$, $P(r2)$ e $P(r3)$ na população}
+%    	\Comentario{$r1$, $r2$ e $r3$ devem ser distintos entre si e distintos de $i$}
+%    	\Ins{Calcule o vetor mutante $V(i)_{G+1} = P(r1)_G + F \times (P(r2)_G - P(r3)_G)$}
+%    	\Comentario{Recombinação}
+%    	\Ins{Gere um índice aleatório $\textrm{rnbr(i)}$ entre as dimensões do problema}
+%		\ParaDeAtePasso[cada dimensão do problema]{$j$}{1}{$M$}{}    	
+%    		\Ins{Gere um número aleatório $\textrm{randb(j)}$ com distribuição uniforme 0-1}
+%    		\Ins{Calcule:$U(i)_{G+1} = \left[ U(i)_{1,G+1}, U(i)_{2,G+1}, \ldots, U(i)_{M,G+1} \right]$}
+%    		\SeEntao{$\textrm{randb(j)} \leq CR|j = \textrm{rnbr(i)}$}
+%    		\Ins{$U(i)_{j,G+1} = V(i)_{j,G+1}$}
+%    		\SenaoSeEntao{$(\textrm{randb(j)} > CR) \& (j \neq \textrm{rnbr(i))}$}
+%    		\Ins{$U(i)_{j,G+1} = P(i)_{j,G}$}
+%    		\FimSe
+%    	\FimPara
+%    	\Comentario{Seleção}
+%    		\SeEntao{$f(U(i)_{G+1})<f(P(i)_G$}
+%    		\Ins{$P(i)_{G+1} \leftarrow U(i)_{G+1}$} 
+%    		\Senao
+%    		\Ins{$P(i)_{G+1} \leftarrow P(i)_{G}$}
+%    		\FimSe
+%    \FimPara
+%    \Ins{$G \leftarrow G+1$}
+%\FimEnquanto
+%\FimAlgoritmo
+%\end{pseudocode}
+%%\end{algorithm}
+
+Neste trabalho foi utilizada uma estratégia semelhante à proposta por \cite{ali2013unconventional} sobre como colocar ``bons pontos" na população inicial. Dentre os $NP$ indíviduos gerados aleatoriamente, um dos elementos da população inicial foi escolhido como sendo o resultado obtido pelo método SVD, ao qual deseja-se superar, obtendo-se um resultado melhor após a otimização. 
+
+É importante lembrar que o método da evolução (ED) é bastante demorado até que se encontre o vetor que minimiza a função-objetivo. Porém, esse passo é realizado apenas uma vez e, obtido o vetor ótimo, calcula-se a matriz $\mathbf{C}^{\star}$ (como será comentado no próximo capítulo) que será armazenada na base de dados do método de equilíbrio de fases. A partir daí, pode-se calcular e recalcular o equilíbrio de fases quantas vezes se queira e alterando as estimativas inicias dadas, de maneira que o tempo computacional será bem menor quando comparado ao SVD. A Figura \ref{Diagrama} apresenta, de forma esquemática, os passos realizados até que se calcule o equilíbrio líquido-vapor e encontre-se a pressão de equilíbrio para cada temperatura no intervalo previamente escolhido. No próximo capítulo é apresentado o algoritmo para o equilíbrio de fases.
+%
+%\begin{figure}[!ht]{10cm}
+%  \caption{Passos realizados para o cálculo do equilíbrio de fases.} \label{Diagrama}
+%  \fbox{\includegraphics[scale=0.5]{Figuras/Diagrama.png}}
+%  \legend{Equilíbrio líquido-vapor calculado através da matriz $\mathbf{C}^{\star}$ gerada a partir do vetor de menor custo}
+%  \source{O autor, 2017.}
+%\end{figure}
+

@@ -1,0 +1,579 @@
+\chapter{Teorema de redução}\label{Cap4}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Em sistemas multicomponentes é conveniente formulá-lo utilizando a energia livre de Gibbs. Como visto, o potencial químico está relacionado à fugacidade. Da mesma forma, o mesmo se relaciona com a energia livre de Gibbs, $\mathcal{G}$, (que portanto está relacionada a fugacidade), pela relação
+%
+\begin{equation}\label{mui}
+\mu_i \equiv  \left(\frac{\partial \mathcal{G}}{\partial n_i}\right)_{P,T,n_{j\neq i}}.
+\end{equation}
+
+Assim, a igualdade dos potencias químicos das duas fases é equivalente à igualdade das derivadas energia livre de Gibbs nas mesmas duas fases para as componentes da mistura. Passa-se então para a análise baseada na energia livre de Gibbs, a fim de explanar o método de redução de dimensionalidade.  
+
+A energia livre de Gibbs para as fases líquida e vapor são, respectivamente
+%
+\begin{equation}\label{Gibbstotal2}
+\mathcal{G}^L = nRT \left(\sum_{i=1}^{N} x_i  \text{ln}x_i + g(\mathbf{x},P,T)\right),  \ \  \mathcal{G}^V = nRT\left(\sum_{i=1}^{N} y_i  \text{ln}y_i + g(\mathbf{y},P,T)\right).
+\end{equation}
+
+Com o objetivo de obter um sistema de equações para o equilíbrio termodinâmico com um número menor de incógnitas (variáveis), se considera novas variáveis ($\mathbf{q}$) para representar a composição das fases, relacionadas linearmente com a composição. A redução se dá quando não sejam necessárias todas as novas variáveis para descrever com boa aproximação a composição da fase.
+
+Seja $\mathbf{u}^1, \ldots, \mathbf{u}^N$ uma base de $\mathbb{R}^N$, e define-se a matriz $U$, $N \times N$, cujas colunas são $\mathbf{u}^i$'s,
+%
+\begin{equation}
+U = (\mathbf{u}^1 \ \ldots \  \mathbf{u}^N).
+\end{equation} 
+%
+Escrevendo-se a composição (na fase líquida ou vapor) $\mathbf{z}$ na nova base, obtém-se 
+%
+\begin{equation}
+\mathbf{z} = U\mathbf{q}, \ \ \text{ou} \ \ z_j =  \sum_{k=1}^{N} (U)_{jk} q_k,
+\end{equation} 
+%
+onde escolha apropriada da matriz mudança de base $U$, é discutida mais à frente. As entradas do vetor $\mathbf{q}$ são chamados \textit{parâmetros de redução} (da fase em questão, ou global, se $\mathbf{z}$ for a composição global).
+
+Quando apenas $q_1, \ldots, q_r$ forem diferentes de zero, pode-se aplicar o teorema de redução \cite{hendriks1988reduction}, que será apresentado neste capítulo, para obter-se um sistema reduzido de equilíbrio termodinâmico. Mesmo quando os restantes termos de $\mathbf{q}$, $q_{r+1},\ldots, q_N$, não forem zero, mas forem suficientemente pequenos, pode-se considerá-los nulos e utilizar ainda essa redução.
+
+Assim, a energia livre de Gibbs $\mathcal{G}$ (em um sistema com $N$ componentes) pode ser escrita na forma geral
+%
+\begin{equation}
+\label{eq17}
+\mathcal{G} = \mathcal{G}(n, \mathbf{z}, P, T) = nRT\left[\sum_{j=1}^{N} z_j  \text{ln}z_j + h(\mathbf{q},P,T)\right],
+\end{equation} 
+%
+sendo $\mathbf{q} = \mathbf{q}(\mathbf{z},P,T)$ um vetor $N\times 1$. 
+
+Neste caso, define-se a função $h$ como a composição da transformação de coordenadas com a função $g$ presente na energia livre de Gibbs,
+%
+\begin{equation}
+h(\mathbf{q}, P, T) = g(U\mathbf{q}, P, T).
+\end{equation} 
+
+Escolhe-se as entradas do vetor $\mathbf{q}$ como funções lineares da composição, na forma
+%
+\begin{equation}
+\label{eq18}
+q_k = (\sqrt{\mathbf{a}}\bullet \mathbf{v}_k)^t \mathbf{z} = \sum_{i=1}^{N}\sqrt{a_i} v_{ik}z_i = \sum_{i=1}^{N}m_{ik}z_i, \ k=1,...,N,
+\end{equation} 
+%
+onde $v_{ik} = v_k (i)$ com $k=1,\cdots,N$, denota a $i$-ésima entrada do vetor $\mathbf{v}_k$, que forma uma base de $ \mathbb{R}^N $, e $\sqrt{a_i} v_{ik} = m_{ik}$. Observa-se que $\mathbf{v}_k$ não depende da composição. Uma escolha possível é que $\mathbf{v}_k$'s formem uma base de autovetores da matriz de coeficientes de interação binária da mistura.
+
+Seja $V$ a matriz $N \times N$ com $N$ vetores linearmente independentes com $N$ entradas, $V = (\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_N)$, onde $V_{ij} = v_j(i)$ é a $i$-ésima entrada do vetor $\mathbf{v}_j$. Seja ainda $M=(\sqrt{\mathbf{a}}\openone^t)\bullet V $, onde $\openone$ é um vetor $N \times 1$. Então, a Equação \ref{eq18}, em forma matricial é dada por
+%
+\begin{equation}
+\label{eqextra} 
+\mathbf{q} =  M^t\mathbf{z},
+\end{equation} 
+%
+onde $\mathbf{z}$ é um vetor $N \times 1$. Neste caso, $U=(M^t)^{-1}$.
+ 
+
+\section{Potencial químico e a energia livre de Gibbs}
+
+%Assumindo-se que $\mathbf{q} = \mathbf{q}(\mathbf{z})$ seja inversível, isto é, que $\mathbf{z} = \mathbf{z}(\mathbf{q})$ e uma função $g$ tal que \\
+%%
+%$g(\mathbf{z}(\mathbf{q}),P,T) = h(\mathbf{q},P,T)$, pode-se escrever a função de Gibbs na forma
+%%
+%\begin{equation}\label{Gibbstotal}
+%\mathcal{G} = nRT \left(\sum_{i=1}^{N} z_i  \text{ln}(z_i) + g(\mathbf{z}(\mathbf{q}),P,T)\right) .
+%\end{equation}
+
+%\begin{eqnarray*}
+%\mathcal{G} 
+%&=& \mathcal{G}^L + \mathcal{G}^V \nonumber \\
+%&=& nRT \left(\sum_{i=1}^{N} x_i  \text{ln}(x_i) + g(\mathbf{x},P,T)\right) + nRT\left(\sum_{i=1}^{N} y_i  \text{ln}(y_i) + g(\mathbf{y},P,T)\right) \nonumber \\
+%&=& RT\left(\sum_{i=1}^{N} nx_i  \text{ln}(x_i) + ng(\mathbf{x},P,T)\right) + RT\left(\sum_{i=1}^{N} ny_i  \text{ln}(y_i) + ng(\mathbf{y},P,T)\right) .
+%\end{eqnarray*}
+%
+%Pela Equação \ref{nil}, têm-se
+%%
+%\begin{eqnarray}
+%\mathcal{G} 
+%&=& RT\left(\sum_{i=1}^{N} nx_i  \text{ln}(x_i) + ng(\frac{n^L}{n},P,T)\right) + RT\left(\sum_{i=1}^{N} ny_i  \text{ln}(y_i) + ng(\frac{n^V}{n},P,T)\right) \nonumber \\
+%&=& RT\left(\sum_{i=1}^{N} n_i^L \text{ln}(x_i) + \bar{g}(n\frac{n^L}{n},P,T)\right) + RT\left(\sum_{i=1}^{N} n_i^V \text{ln}(y_i) + \bar{g}(n\frac{n^V}{n},P,T)\right) \nonumber \\
+%&=& RT\left(\sum_{i=1}^{N} n_i^L  \text{ln}(x_i) + \bar{g}(n^L,P,T)\right) + RT\left(\sum_{i=1}^{N} n_i^V  \text{ln}(y_i) + \bar{g}(n^V,P,T)\right).
+%\end{eqnarray}
+%
+%Considerando ainda que, na fase líquida, por exemplo, 
+%%
+%\begin{eqnarray*}
+%\sum_{i=1}^{N} nx_i  \text{ln}(x_i) 
+%&=& \sum_{i=1}^{N} (n_i^{L}  \text{ln}(n_i^{L}) - n_i^{L}  \text{ln}(n)) = \sum_{i=1}^{N} n_i^{L}  \text{ln}(n_i^{L}) - \sum_{i=1}^{N} n_i^{L} \text{ln}(n),
+%\end{eqnarray*}
+%%
+%e então $\mathcal{G}$ pode ainda ser escrita por
+%%
+%\begin{small}
+%\begin{eqnarray}\label{Gibbsfinal} 
+%\mathcal{G} &=& RT\left(\sum_{i=1}^{N} n_i^L \text{ln}(n_i^L ) - \sum_{i=1}^{N} n_i^L   \text{ln}(n) + \bar{g}(n^L,P,T) + \sum_{i=1}^{N} n_i^V  \text{ln}(n_i^V) - \sum_{i=1}^{N} n_i^V \text{ln}(n) + \bar{g}(n^V,P,T)\right) \nonumber \\
+%&=& RT\left(\sum_{i=1}^{N} n_i^L  \text{ln}(n_i^L ) + \bar{g}(n^L,P,T) \right) +  RT\left(\sum_{i=1}^{N} n_i^V \text{ln}(n_i^V) + \bar{g}(n^V,P,T)\right) - 2n \text{ln}(n).
+%\end{eqnarray}
+%\end{small}
+
+%Da eq. \ref{Gibbstotal2}, pelo equilíbrio de fases, dado pelo Sistema \ref{sistema1}, e pela definição do potencial químico $\mu_i \equiv \frac{\partial \mathcal{G}}{\partial n_i}$, tem-se
+%%
+%\begin{equation}\label{Gibbspartial}
+%\frac{\partial \mathcal{G}^L}{\partial n_i^L} - \frac{\partial \mathcal{G}^V}{\partial n_i^V} = 0.
+%\end{equation}
+
+Como obtido pela proposição \ref{prop11}, a representação mássica da mistura multicomponente tanto pode ser dada pelo número de mols de cada componente, $n_i$'s, como pela composição, $z_i$'s, e o total de mols da fase. 
+
+Por um lado, pela eq. \ref{mui}, o potencial químico é obtido da energia livre de Gibbs a partir da derivada de $\mathcal{G}$ com relação ao número de mols da componente, isto é, aplicando-se o operador diferencial $\partial / \partial n_i$. Por outro lado, na expressão de $\mathcal{G}$, dada na eq. \ref{eq17}, há uma parcela, $nRT\sum_{j=1}^{N}z_i\ln z_j$, que depende da composição e do número total de mols da fase. 
+
+Assim, um primeiro passo para obter uma expressão para os potenciais químicos, através de sua relação com a energia livre de Gibbs, é obter o operador diferencial que é dado na proposição a seguir.
+
+$\mathcal{H}=\mathcal{H}(n, \mathbf{z})$ está em função da parcela da função de Gibbs que depende de $n$ e $\mathbf{z}$, correspondente ao primeiro termo no lado direito da eq. \ref{eq17}.
+ 
+\begin{prop}\label{propl_1} \begin{em}
+Sejam $H(\mathbf{n})$, uma função de $\mathbf{n}=(n_1,\cdots, n_N)^t$, $\mathcal{H}: \mathbb{R} \times \mathbb{R}^N \longrightarrow \mathbb{R}$, e 
+%
+\begin{eqnarray}\label{rkr}
+L
+&:& \mathbb{R} \times \mathbb{R}^N \longrightarrow    \mathbb{R}^N \nonumber\\
+&& (n,\mathbf{z} ) \mapsto L(\mathbf{n},\mathbf{z}) = n\mathbf{z} ,
+\end{eqnarray}
+%  
+tais que  \ $\mathcal{H}(n, \mathbf{z}) = (H \circ L) (n, \mathbf{z})= H(n\mathbf{z})$. Então
+%
+\begin{eqnarray*} 
+\frac{\partial H}{\partial n_i} = \frac{\partial \mathcal{H} }{\partial n}  +  \frac{1}{n}\frac{\partial \mathcal{H}}{\partial z_i} -  \frac{1}{n}\sum_{l=1}^{N} z_l \frac{\partial \mathcal{H}}{\partial z_l},
+\end{eqnarray*}
+%
+ou, simplesmente, o operador diferencial linear é escrito como
+%
+\begin{eqnarray}\label{simples}
+\frac{\partial}{\partial n_i} = \frac{\partial}{\partial n}  +  \frac{1}{n}\frac{\partial}{\partial z_i} -  \frac{1}{n}\sum_{l=1}^{N} z_l \frac{\partial}{\partial z_l}.
+\end{eqnarray}
+
+\dem \ Seja
+%
+\begin{equation} \label{operador}
+\frac{\partial H}{\partial n_i}  
+= \frac{\partial \mathcal{H}}{\partial n}\frac{\partial n}{\partial n_i} + \frac{\partial \mathcal{H}}{\partial z_1}\frac{\partial z_1}{\partial n_i} + \cdots + \frac{\partial \mathcal{H}}{\partial z_N}\frac{\partial z_N}{\partial n_i} 
+= \frac{\partial \mathcal{H}}{\partial n}\frac{\partial n}{\partial n_i} + \sum_{j=1}^{N} \frac{\partial \mathcal{H}}{\partial z_j}\frac{\partial z_j}{\partial n_i}.
+\end{equation}
+
+Aqui, recorda-se que $n=\sum_{i=1}^{N} n_i$ e, portanto, $\frac{\partial n}{\partial n_i} = 1$. Para a composição, recorda-se que $z_j = \frac{n_j}{n}$ e, portanto,
+%
+\begin{equation*}
+\label{parcialdez}
+\frac{\partial z_j}{\partial n_i} = \frac{\partial }{\partial n_i}\left(\frac{n_j}{n}\right). 
+\end{equation*} 
+
+Mas como,
+%
+\begin{equation*}
+\label{parcialdez}
+\frac{\partial n_j}{\partial n_i} = \delta_{ij} 
+= \left\{\begin{array}{rll}
+1, & \hbox{se} & j = i \\
+0, & \hbox{se} & j \neq i \\
+\end{array} \right .\
+\end{equation*} 
+%
+o cálculo resulta em
+%
+\begin{equation*}
+\label{parcialdez2}
+\frac{\partial z_j}{\partial n_i} = \frac{\delta_{ij}}{n} + n_j \frac{(-1)}{n^2}\frac{\partial n}{\partial n_i} = \frac{\delta_{ij}}{n} - \frac{n_j}{n^2}. 
+\end{equation*} 
+
+Voltando à eq. \ref{operador}, tem-se 
+%
+\begin{eqnarray} \label{operador2}
+\frac{\partial H}{\partial n_i} 
+&=& \frac{\partial \mathcal{H}}{\partial n}  + \sum_{j=1}^{N} \frac{\partial \mathcal{H}}{\partial z_j}\left( \frac{\delta_{ij}}{n} - \frac{n_j}{n^2}\right) = \frac{\partial \mathcal{H}}{\partial n}  + \frac{1}{n} \frac{\partial \mathcal{H}}{\partial z_i} - \sum_{j=1}^{N} \frac{n_j}{n^2} \frac{\partial \mathcal{H}}{\partial z_j},
+\end{eqnarray}
+%
+que eliminando $H$ e $\mathcal{H}$, gera a igualdade entre os operadores 
+%
+\begin{eqnarray} \label{operador22}
+\frac{\partial}{\partial n_i} = \frac{\partial }{\partial n}  +  \frac{1}{n}\frac{\partial }{\partial z_i} -  \frac{1}{n}\sum_{j=1}^{N} z_j \frac{\partial }{\partial z_j}.
+\end{eqnarray}
+
+\fim 
+\end{em}
+\end{prop} 
+
+O objetivo neste momento é obter-se uma expressão para o potencial químico a partir da sua relação com a energia livre de Gibbs, eq. \ref{eq17}, aplicando à eq. \ref{eq17} o operador diferencial da eq. \ref{operador22}. Devido aos cálculos extensos necessários nessa aplicação, os mesmos são apresentados na forma de dois lemas preliminares e um teorema.
+
+\begin{lema}\label{propl2} \begin{em}
+
+Seja $\eta(n, \mathbf{z}) = nRT \sum_{j=1}^{N} z_j  \text{ln}z_j$. Então, 
+%
+\begin{eqnarray} \label{derivadanova}
+\frac{\partial \eta}{\partial n_i} = RT\ln z_i.
+\end{eqnarray}
+
+\dem  \ Utiliza-se a expressão do operador diferencial $\partial / \partial n_i$, na eq. \ref{simples}, para o cálculo da derivada de $\eta(n, \mathbf{z}) = nRT \sum_{j=1}^{N} z_j  \text{ln}z_j$. Assim, o primeiro termo do operador é: 
+%
+\begin{subequations}\label{astres}
+\begin{eqnarray}\label{derivadanova1}
+\frac{\partial \eta}{\partial n} = RT\sum_{j=1}^{N} z_j  \text{ln}z_j  = \frac{1}{n}\eta. 
+\end{eqnarray}
+
+O segundo termo do operador diferencial dá:
+%
+\begin{eqnarray}\label{derivadanova2}
+\frac{1}{n}\frac{\partial \eta}{\partial z_i} 
+&=& RT \sum_{j=1}^{N} \frac{\partial \left(z_j  \text{ln}z_j\right)}{\partial z_i} = RT \sum_{j=1}^{N}\left( \frac{\partial  z_j}{\partial z_i} \text{ln}z_j + z_j \frac{\partial  (\text{ln}z_j)}{\partial z_i}\right) \nonumber \\
+&=& RT \sum_{j=1}^{N}\left(\delta_{ij} \ln z_j + \delta_{ij}\right) = RT (\ln z_i + 1),
+\end{eqnarray} 
+%
+uma vez que
+%
+\begin{eqnarray*}
+\frac{\partial  z_j}{\partial z_i} = \delta_{ij} = 
+\left\{ \begin{array}{rll}
+1, & \hbox{se} & j = i \\
+0, & \hbox{se} & j \neq i \  
+\end{array} \right.
+\end{eqnarray*} 
+
+Para o terceiro termo, tem-se 
+%
+\begin{eqnarray}\label{derivadanova3}
+- \frac{1}{n}\sum_{l=1}^{N}z_l \frac{\partial \eta}{\partial z_l} 
+&=& - RT \sum_{l=1}^{N}\sum_{j=1}^{N} z_l \frac{\partial \left(z_j  \text{ln}z_j\right)}{\partial z_l} = - RT \sum_{l=1}^{N} \sum_{j=1}^{N} z_l \left(\delta_{lj} \ln z_j + \delta_{lj}\right) \nonumber \\
+&=& - RT \sum_{l=1}^{N} z_l (\ln z_l + 1) = - \frac{1}{n}\eta - RT.
+\end{eqnarray} 
+\end{subequations}
+
+Finalmente, da eq. \ref{astres},
+%
+\begin{eqnarray}\label{derivadanovafinal1}
+\frac{\partial \eta}{\partial n_i} = \frac{1}{n} \eta + RT \ln z_i + RT - \frac{1}{n}\eta - RT = RT \ln z_i.
+\end{eqnarray}
+
+\fim 
+\end{em}
+\end{lema} 
+
+Agora, resta utilizar o operador diferencial $\partial/ \partial n_i$ para obter a derivação de $nRTh(\mathbf{q}, P, T)$, o segundo termo da eq. \ref{eq17}, da energia livre de Gibbs.
+
+\begin{lema}\label{propl22} \begin{em}
+
+Seja $h=h(\mathbf{q}, P, T)$ como na eq. \ref{eq17} e $\bar{\eta}(n, \mathbf{q})= nRTh(\mathbf{q}, P, T)$.  Então, 
+%
+\begin{eqnarray}\label{derivadafinal2}
+\frac{\partial \bar{\eta}}{\partial n_i} = RT\sum_{k=0}^{N}h_{k} m_{ik},
+\end{eqnarray}
+%
+onde $h_{k} = \partial h / \partial q_k$, e $h_0 = h - \sum_{k=1}^{N}h_{k} q_k$. \\
+
+\dem \ O primeiro termo do operador é:
+%
+\begin{eqnarray} \label{derivadanova1_2}
+\frac{\partial \bar{\eta}}{\partial n} = RT \frac{\partial }{\partial n} \left( n h(\mathbf{q}, P, T)\right) = RT h(\mathbf{q}, P, T).
+\end{eqnarray}
+
+O segundo termo é dado por 
+%
+\begin{eqnarray}\label{derivadanova2_2}
+\frac{1}{n}\frac{\partial \bar{\eta}}{\partial z_i} 
+&=& \frac{1}{n} nRT\frac{\partial }{\partial z_i} \left(h(\mathbf{q},P,T)\right) = RT \sum_{k=1}^{N}\frac{\partial h}{\partial q_k} \frac{\partial q_k}{\partial z_i},
+\end{eqnarray} 
+%
+onde denota-se $h_{k} = \partial h / \partial q_k$, e 
+%
+\begin{eqnarray*}
+\frac{\partial q_k}{\partial z_i} 
+&=& \frac{\partial \left(\sum_{j=1}^{N}m_{jk}z_j\right)}{\partial z_i} = \sum_{j=1}^{N}m_{jk} \frac{\partial z_j}{\partial z_i} = \sum_{j=1}^{N}m_{jk} \delta_{ij} = m_{ik},
+\end{eqnarray*} 
+%
+donde, a eq. \ref{derivadanova2_2} é reescrita como
+%
+\begin{eqnarray}\label{derivadanova2_2nova}
+\frac{1}{n}\frac{\partial \bar{\eta}}{\partial z_i} 
+&=& RT \sum_{k=1}^{N}h_k m_{ik}.
+\end{eqnarray} 
+
+Para o terceiro termo, tem-se
+%
+\begin{eqnarray}\label{derivadanova3_2}
+-\frac{1}{n}\sum_{l=1}^{N}z_l \frac{\partial \bar{\eta}}{\partial z_l}  
+&=& - RT \sum_{l=1}^{N} z_l \frac{\partial h}{\partial z_l} = - RT \sum_{l=1}^{N} z_l \sum_{k=1}^{N}\frac{\partial h}{\partial q_k} \frac{\partial q_k}{\partial z_l} \nonumber \\
+&=& - RT \sum_{l=1}^{N} z_l \sum_{k=1}^{N} h_k m_{lk}.
+\end{eqnarray}
+
+Assim, das equações \ref{derivadanova1_2},  \ref{derivadanova2_2nova} e \ref{derivadanova3_2}, obtém-se 
+%
+\begin{eqnarray*}\label{derivadanovafinal2}
+\frac{\partial \bar{\eta}}{\partial n_i} 
+&=& RT h(\mathbf{q}, P, T) + RT \sum_{k=1}^{N}h_k m_{ik} - RT \sum_{l=1}^{N} z_l \sum_{k=1}^{N} h_k m_{lk} \nonumber \\
+&=& RT\left( h(\mathbf{q}, P, T) + \sum_{k=1}^{N}h_k m_{ik} -  \sum_{l=1}^{N} z_l \sum_{k=1}^{N} h_k m_{lk}\right) \nonumber \\
+&=& RT\left( h(\mathbf{q}, P, T) + \sum_{k=1}^{N}h_k m_{ik} -  \sum_{l=1}^{N} h_k \sum_{k=1}^{N} m_{lk} z_l \right).
+\end{eqnarray*} 
+
+Da eq. \ref{eq18}, obtém-se então 
+%
+\begin{eqnarray}\label{derivadanovafinal2}
+\frac{\partial \bar{\eta}}{\partial n_i} 
+&=& RT\left( h(\mathbf{q}, P, T) + \sum_{k=1}^{N}h_k m_{ik} -  \sum_{l=1}^{N} h_k \sum_{k=1}^{N} m_{lk} z_l \right) \nonumber \\
+&=& RT\sum_{k=0}^{N}h_k m_{ik}, 
+\end{eqnarray} 
+%
+com $h_{k} = \partial h / \partial q_k$, $h_0 = h - \sum_{k=1}^{N}h_{k} q_k$ e $m_{i0}=1$.  
+\fim
+\end{em}
+\end{lema}
+
+Colecionando-se os resultados dos lemas \ref{propl2} e \ref{propl22}, obtém-se a expressão do potencial químico em função da energia livre de Gibbs, conforme o teorema a seguir.
+
+\begin{teore}\label{potencialfinal} \begin{em} 
+Pela relação entre o potencial químico, $\mu$, e a energia livre de Gibbs, $\mathcal{G}$, dada por
+%
+\begin{eqnarray*}
+\mu_i \equiv  \left(\frac{\partial \mathcal{G}}{\partial n_i}\right)_{P,T,n_{j\neq i}},
+\end{eqnarray*}
+%
+tem-se que o potencial químico da componente $i$ é 
+%
+\begin{eqnarray} \label{potquimico}
+\mu_i = RT\left(  \ln z_i + \sum_{k=0}^{N}h_{k} m_{ik}\right) ,
+\end{eqnarray}
+%
+onde, denota-se, $h_0 = h - \sum_{k=1}^{N}h_{k} q_k$, e $m_{i0} = 1$. \\
+
+\dem \ O resultado segue-se imediatamente dos lemas \ref{propl2} e \ref{propl22}.
+
+\fim 
+\end{em} 
+\end{teore} 
+
+\section{Aplicação do teorema de redução ao problema físico original}
+
+Utilizando os coeficientes de distribuição vapor/ líquido, $\beta_i = y_i/x_i$, definidos na seção \ref{secalternativa}, pode-se obter uma expressão para $\beta_i$ utilizando o potencial químico, dado na eq. \ref{potquimico}.
+
+\begin{prop}\label{prop_quimic} \begin{em}
+As composições $\mathbf{y}$, na fase vapor, e $\mathbf{x}$, na fase líquida, estão relacionadas pelo fator $\beta_i$, pela expressão
+%
+\begin{eqnarray} \label{beta0}
+y_i = \beta_i x_i,
+\end{eqnarray}
+%
+onde $\beta_i$ pode ser escrito como
+%
+\begin{eqnarray} \label{beta}
+\beta_i = \text{exp}\left(-\sum_{k=0}^{N} m_{ik} \bigtriangleup h_k\right) , 
+\end{eqnarray}
+%
+onde $\bigtriangleup h_k = h_{k}^V - h_{k}^L$. \\
+
+\dem \ Da eq. \ref{potquimico} tem-se que
+%
+\begin{eqnarray}\label{lnzi}
+\ln z_i = \frac{\mu_i}{RT} - \sum_{k=0}^{N}h_{k} m_{ik},
+\end{eqnarray}
+%
+logo,
+%
+\begin{eqnarray*} 
+z_i =  \text{exp}\left(\frac{\mu_i}{RT} - \sum_{k=0}^{N}h_{k} m_{ik} \right).
+\end{eqnarray*}
+
+Para as composições das fases líquida e vapor, $x_i$ e $y_i$, respectivamente, 
+%
+\begin{eqnarray*} 
+x_i =  \text{exp}\left(\frac{\mu_i ^L}{RT} - \sum_{k=0}^{N}h_{k}^L m_{ik} \right), \ \ \ y_i =  \text{exp}\left(\frac{\mu_i^V}{RT} - \sum_{k=0}^{N}h_{k}^V m_{ik} \right).
+\end{eqnarray*}
+
+No equilíbrio termodinâmico, $ \mu_i^L = \mu_i^V$, então
+%
+\begin{eqnarray} \label{k_i2}
+\frac{y_i}{x_i} 
+&=& \frac{\text{exp}\left(\frac{\mu_i^V}{RT} - \sum_{k=0}^{N}h_{k}^V m_{ik} \right)}{\text{exp}\left(\frac{\mu_i^L}{RT} - \sum_{k=0}^{N}h_{k}^L m_{ik} \right)} = \text{exp}\left(-\sum_{k=0}^{N}h_{k}^V m_{ik} + \sum_{k=0}^{N}h_{k}^L m_{ik}\right) \nonumber \\
+&=& \text{exp}\left(-\sum_{k=0}^{N} m_{ik}(h_{k}^V - h_{k}^L)\right) =\text{exp}\left(-\sum_{k=0}^{N} m_{ik}\bigtriangleup h_k\right), 
+\end{eqnarray}
+%
+onde $\bigtriangleup h_k = h_{k}^V - h_{k}^L$.
+
+Denotando essa exponencial por $\beta_i$, tem-se a importante relação
+%
+\begin{eqnarray*}
+y_i = \beta_i x_i,
+\end{eqnarray*}
+%
+com
+%
+\begin{eqnarray*} 
+\beta_i = \text{exp}\left(-\sum_{k=0}^{N} m_{ik} \bigtriangleup h_k\right) , 
+\end{eqnarray*} 
+\fim 
+\end{em}
+\end{prop} 
+
+Para uso posterior, define-se analogamente aos coeficientes de distribuição, os coeficientes generalizados de distribuição, 
+%
+\begin{eqnarray} \label{kaka}
+\kappa_k = \frac{q_k^V}{q_k^L}, \ \ k=1,\ldots,N,
+\end{eqnarray}
+%
+adotando-se, por conveniência, $\kappa_0=1$. Ainda se definem $m_{i0} = 1$, com $i=1,\ldots, N$.
+
+Segue-se, então:
+
+\begin{prop}\begin{em}
+Os coeficientes generalizados de distribuição podem ser escritos diretamente em função da composição global, $\mathbf{z}$, dos coeficientes de distribuição, $\boldsymbol{\beta}$, e da fração molar total da fase líquida, $\phi^L$,
+%
+\begin{eqnarray}\label{kakakaka} 
+\kappa_k 
+&=& \frac{\sum_{i=1}^{N} \frac{\beta_i m_{ik}z_i}{\phi^L +(1-\phi^L)\beta_i}}{\sum_{i=1}^{N}\frac{m_{ik} z_i}{\phi^L+(1-\phi^L)\beta_i}}. 
+\end{eqnarray}
+
+\dem \ Das duas equações em \ref{patati}, multiplicando-as por $m_{ik}$ e somando-se em $i$, usando a definição dos parâmetros de redução, eq. \ref{eq18}, obtém-se 
+%
+\begin{subequations}\label{QKM}
+\begin{eqnarray}\label{qkm} 
+q_k^L = \sum_{i=1}^{N}m_{ik} x_i = \sum_{i=1}^{N} \frac{m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i}, 
+\end{eqnarray}
+%
+e
+%
+\begin{eqnarray}\label{qkm2} 
+q_k^V = \sum_{i=1}^{N}m_{ik} y_i = \sum_{i=1}^{N} \frac{\beta_i m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i}. 
+\end{eqnarray}
+\end{subequations}
+
+Finalmente, pela definição de $\kappa_k$, da eq. \ref{kaka}, obtém-se
+%
+\begin{eqnarray*} 
+\kappa_k 
+&=& \frac{\sum_{i=1}^{N} \frac{\beta_i m_{ik}z_i}{\phi^L +(1-\phi^L)\beta_i}}{\sum_{i=1}^{N}\frac{m_{ik} z_i}{\phi^L+(1-\phi^L)\beta_i}}. 
+\end{eqnarray*}
+\fim 
+\end{em}
+\end{prop} 
+
+Com o objetivo de encontrar uma expressão para a função objetivo para o teorema de redução, da mesma forma que foi encontrada uma expressão para o problema físico original (eq. \ref{sistema2_1}), e utilizando a relação encontrada na proposição acima, passa-se ao seguinte teorema:
+%
+\begin{teore}\label{teore_4} \begin{em} 
+O sistema do equilíbrio termodinâmico quando a função de Gibbs aceita redução, como na eq. \ref{eq17}, é  
+%
+\begin{equation} \label{Ffinal0}
+\mathbf{F}(\phi^L, \kappa_k, P, T) = 0,
+\end{equation}
+%
+com
+%
+\begin{equation} \label{Ffinal}
+F_k (\phi^L, \kappa_k, P, T) = \sum_{i=1}^{N} m_{ik} (\kappa_k - \beta_i ) \frac{z_i}{ \phi^L + (1 - \phi^L) \beta_i}
+\end{equation}
+
+\dem \ A demonstração é facilmente obtida pela eq. \ref{QKM}, obtendo-se 
+%
+\begin{eqnarray}\label{kappa2}
+ \kappa_k = \frac{q_k^V}{q_k^L} = \frac{\sum_{i=1}^{N} \frac{\beta_i m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i}}{\sum_{i=1}^{N} \frac{m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i}}.
+\end{eqnarray}
+
+Logo, 
+\begin{eqnarray*}
+\kappa_k q_k^L - q_k^V = 0
+\end{eqnarray*}
+\begin{eqnarray*}
+\kappa_k \sum_{i=1}^{N} \frac{m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i} - \sum_{i=1}^{N} \frac{\beta_i m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i} = 0
+\end{eqnarray*}
+\begin{eqnarray*}
+\sum_{i=1}^{N}\left(  \frac{m_{ik} \kappa_k  z_i}{\phi^L +(1-\phi^L)\beta_i} -  \frac{\beta_i m_{ik} z_i}{\phi^L +(1-\phi^L)\beta_i}\right) = 0
+\end{eqnarray*}
+
+Finalmente, 
+%
+\begin{eqnarray*}
+\sum_{i=1}^{N} m_{ik}(\kappa_k - \beta_i)\frac{z_i}{\phi^L + (1-\phi^L)\beta_i} = 0, \  \text{com} \ k=1,\ldots,N.
+\end{eqnarray*}
+
+Seja a função, $\mathbf{F} = \mathbf{F}(\phi^L, \kappa_k, P, T)$, com componentes $F_k = \kappa_k q_k^L - q_k^V$, tem-se a formulação completa do problema a ser resolvido. Ou seja, a função $F_k$ que deseja-se achar os zeros para que o teorema da redução seja aplicado na expressão da energia livre de Gibbs, considerando  a mesma para as duas fases no cálculo do equilíbrio é
+%
+\begin{equation} \label{Ffinal}
+F_k (\phi^L, \mathbf{\kappa}, P, T) = \sum_{i=1}^{N} m_{ik} (\kappa_k - \beta_i ) \frac{z_i^F}{ \phi^L + (1 - \phi^L) \beta_i},
+\end{equation}
+%
+com $k=1,\cdots,r$.
+\fim 
+\end{em}
+\end{teore} 
+
+De forma semelhante ao que foi feito na eq. \ref{patati}, pode-se escrever uma expressão para o parâmetro de redução nas fases líquida e vapor, em função do parâmetro de redução global, $q_k$, de $\phi^L$ e $\kappa_k$.
+
+\begin{prop}\begin{em}
+Tem-se que 
+%
+\begin{subequations}
+\begin{eqnarray}\label{Qliquido} 
+q_k^L = \frac{q_k}{\phi^L +(1-\phi^L)\kappa_k},
+\end{eqnarray}
+%
+e
+%
+\begin{eqnarray}\label{Qvapor} 
+q_k^V = \frac{\kappa_k q_k}{\phi^L +(1-\phi^L)\kappa_k}.
+\end{eqnarray}
+\end{subequations}
+
+\dem \ Observa-se que,pela definição de parâmetro de redução, \ref{eq18}, e pelas relações de balanço de massa, eq. \ref{relacao}, o parâmetro de redução global é dado por
+%
+\begin{eqnarray*} 
+q_k 
+&=& \sum_{i=1}^{N}m_{ik}z_i =  \sum_{i=1}^{N}m_{ik}\frac{n_i}{n} =  \sum_{i=1}^{N}m_{ik}\frac{n_i^L+n_i^V}{n} =  \sum_{i=1}^{N}m_{ik} \frac{n_i^L}{n} + \sum_{i=1}^{N}m_{ik} \frac{n_i^V}{n} \nonumber \\
+&=& \sum_{i=1}^{N}m_{ik} \frac{x_i n^L}{n} + \sum_{i=1}^{N}m_{ik} \frac{y_i n^V}{n} = \frac{n^L}{n}\sum_{i=1}^{N}m_{ik}x_i + \frac{n^V}{n}\sum_{i=1}^{N}m_{ik}y_i \nonumber \\
+&=& \phi^L q_k^L + \phi^V q_k^V.
+\end{eqnarray*}
+
+Assim,
+%
+\begin{eqnarray*}\label{Qtotal} 
+q_k = \phi^L q_k^L + (1-\phi^L) q_k^V.
+\end{eqnarray*}
+
+Da eq. \ref{kaka}, tem-se que
+%
+\begin{eqnarray*}\label{Qtotal} 
+q_k = \phi^L q_k^L + (1-\phi^L)\kappa_k q_k^L.
+\end{eqnarray*}
+
+Resolvendo-se então para $q_k^L$, obtém-se
+%
+\begin{eqnarray*} 
+q_k^L = \frac{q_k}{\phi^L +(1-\phi^L)\kappa_k},
+\end{eqnarray*}
+%
+e novamente usando a eq. \ref{kaka}, obtém-se
+%
+\begin{eqnarray*}
+q_k^V = \frac{\kappa_k q_k}{\phi^L +(1-\phi^L)\kappa_k}.
+\end{eqnarray*}
+
+\fim
+\end{em}
+\end{prop} 
+
+Para o sistema encontrado na eq. \ref{Ffinal} comenta-se as principais características. Pode-se observar que este sistema tem $r$ equações e $r+3$ variáveis, relacionadas a $\kappa_k$, com $k=1,\cdots,r$, $\phi^L$, pressão $P$ e temperatura $T$. Observa-se que $F_k$ depende de $\phi^L$, $\kappa_k$, $P$, $T$, pois $m_{ik}$ depende de $P$ e $T$ e considerando a composição da fase vapor, $y_i$, conhecida, $z_i^F$ dependerá somente da composição da fase líquida, $x_i$, que por sua vez depende de $\beta_k$ e
+$\beta_k$ depende $\kappa_k$, de $P$ e $T$.
+
+A composição, como será demonstrado na próxima seção, é dada por 
+%
+\begin{equation}\label{condicao1}
+x_i =\frac{\varphi_i^V(\mathbf{q}^V) y_i}{\varphi_i^L(\mathbf{q}^L)}.
+\end{equation}
+
+Se de fato for possível encontrar um valor para o parâmetro de redução da fase líquida $\mathbf{q}^L$ que satisfaça \ref{condicao1} de modo que a composição nessa fase tenha $\sum_{i=1}^{N}x_i = 1$, a função $F_k$ estará resolvida. Sendo assim, em vez de resolver $F_k$ resolve-se apenas o erro de $k$ parâmetros de redução na fase líquida, com $k=1,\cdots,r$.
+
+Neste caso, como o covolume $b_m = \sum_{i=1}^{N}b_{c_i}x_i$, da fase líquida, depende da composição (desconhecida), uma estimativa inicial para este parâmetro se faz necessária. Outra condição que precisa ser satisfeita, se diz respeito a soma total da composição do líquido, posteriormente obtida no método de Newton, satisfazer $\sum_{i=1}^{N}x_i = 1$.
+
+Assim, considerando o chute inicial para $\mathbf{q}^L = (\mathbf{q}_1,\cdots,\mathbf{q}_r)$, um chute inicial para o covolume $\xi_{r+1} = b_m$ e um chte incial para a pressão $\xi_{r+2} = P_0$, tem-se o vetor estimativa inicial concatenado $\boldsymbol{\xi} = (\mathbf{q}^L, b_m, P)=(q_1,\cdots,q_{r},b_m,P)^t$. Pelo método de Newton-Raphson multivariável procura-se resolver as equações de erro dadas pelo sistema
+%
+\begin{equation}
+\label{sistema9}
+\left\{\begin{array}{ll}
+\mathcal{E}_k = \mathbf{q}^L -\sum_{i=1}^{N} m_{ik}x_i = 0 , \ \text{com} \ k=1,\cdots,r \\ \\
+\mathcal{E}_{r+1} = b_m - \sum_{i=1}^{N}b_{c_i}x_i = 0 \ , \\ \\
+\mathcal{E}_{r+2} = ( \sum_{i=1}^{N}x_i)  - 1 = 0.
+\end{array}\right.
+\end{equation}
+
+O sistema é resolvido de maneira que o erro seja o mais próximo possível de zero. Assim, tem-se a solução da função objetivo $F$. 
+
+No próximo capítulo, é apresentada uma ilustração algorítmica do método de redução.

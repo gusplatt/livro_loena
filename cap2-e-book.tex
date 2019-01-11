@@ -1,0 +1,436 @@
+% Modifique de acordo com as suas necessidades
+
+\chapter{Equações de estado} \label{cap2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+ \label{qua}
+% Equações de 1 a 16
+
+Neste capítulo são apresentados os conceitos relativos ao estado termodinâmico de uma substância, generalidades acerca de equações de estado, as equações de estado cúbicas e suas raízes, as regras de mistura e combinação e, por fim, as propriedades do equilíbrio de fases.  Tal fundamentação justifica-se por permitir uma leitura mais contínua sem excessivas consultas à literatura. Uma apresentação alternativa é fisicamente motivada pode ser encontrada em  \cite{smith2000introducao}.
+
+%--------------------------------------------------------
+\section{Modelagem termodinâmica de uma substância}
+%--------------------------------------------------------
+
+A criação de modelos é uma tarefa relevante na engenharia química e em ciências correlatas. Especificamente, a modelagem matemática de sistemas fluidos tem por objetivo correlacionar as propriedades  termodinâmicas do sistema, desenvolvendo modelos matemáticos capazes de predizer, com alguma exatidão, as mesmas. 
+
+Os modelos termodinâmicos podem ser utilizados na avaliação de desempenho, além de serem cruciais para que trabalhos de simulação alcancem resultados satisfatórios. Estes modelos são conhecidos como equações de estado (EDE) e constituem-se em um conjunto de equações que correlacionam as variáveis de estado dos fluidos, permitindo a modelagem termodinâmica de processos químicos.
+
+No decorrer dos anos, várias equações de estado vêm sendo propostas e se diferenciam por características específicas em relação à teoria em que se baseiam, ao grau de complexidade matemática, ao grau de precisão e à aplicabilidade. 
+
+Com o uso da EDE é possível o cálculo de várias propriedades termodinâmicas, tais como propriedades térmicas (entalpias, entropias, capacidades caloríficas etc.), propriedades volumétricas (volumes molares e densidades), propriedades de equilíbrio de substâncias puras e de misturas (pressão de vapor, entalpia de vaporização ou calor latente, do equilíbrio líquido-vapor de misturas), entre outras \cite{terron2009termodinamica}. 
+
+Este livro utiliza equações cúbicas de estado (EDEC). Além de despertarem grande interesse por serem ferramentas de cálculo para a determinação de várias outras propriedades, as EDECs são incorporadas a {\emph{softwares}} que realizam cálculos com o auxílio de computadores em simuladores de processo para aplicações industriais ou científicas \cite{terron2009termodinamica}.
+Existem várias EDECs, mas apenas algumas, que são objeto de uso neste livro, são comentadas a seguir. 
+
+As EDECs são utilizadas em diversos projetos de engenharia química, em especial na área de simulação de reservatórios de petróleo. Estas equações apresentam, em sua maioria, um pequeno número de termos e parâmetros, facilitando a manipulação matemática necessária para o cálculo de outras propriedades, bem como a obtenção da solução do problema de equilíbrio líquido-vapor.
+
+As principais EDECs são as equações propostas em van der Waals \cite{van1873over}, Redlich Kwong \cite{redlich1949thermodynamics}, Soave \cite{soave1972equilibrium} e Peng Robinson \cite{peng1976new}. Estas equações, além de generalidade e grande aplicabilidade, o que é característica de grande parte das EDECs, também são capazes de representar o comportamento tanto de líquidos quanto de gases, veja \cite{smith2000introducao}. Tal característica permite a utilização de uma única equação para ambas as fases. 
+
+%--------------------------------------------------------
+\section{Formulação geral de equações de estado cúbicas para uma substância}
+\label{subsecEDECumasubstancia}
+%--------------------------------------------------------
+ 
+A celebrada equação de van der Waals, $P = \frac{RT}{\bar{V}-b} - \frac{a}{\bar{V}^2}$, pode ser escrita como uma equação cúbica no volume $\bar{V}$,
+%
+\begin{equation}
+\bar{V}^3 - \left( b + \frac{RT}{P} \right)\bar{V}^2 + \frac{a}{P}\bar{V} - \frac{ab}{P}  = 0, \nonumber
+\end{equation}
+%
+na qual $\bar{V}$ é o volume molar, $P$ é a pressão, $T$ é a temperatura e $R$ é a constante ideal dos gases.
+
+Semelhante ao que foi apresentado para a equação de van der Waals, uma EDEC pode ser escrita em termos de volumes molares. No entanto, sem perda de generalidade, é preferível escrevê-la usando o fator de compressibilidade, que é a relação entre o volume molar medido de um gás real dividido pelo volume molar de um gás ideal. Sendo $Z=\frac{P\bar{V}}{RT}$ o fator de compressibilidade, então uma EDEC na forma cúbica pode ser escrita em termos deste fator como   
+%
+\begin{subequations}
+\begin{eqnarray}\label{qq1}
+Z^3 + C Z^2 + DZ + E = 0,
+\end{eqnarray}
+%
+com 
+%
+\begin{small}
+\begin{equation}\label{qq2}
+C = -(1+B-uB), \ D=(A+hB-uB-uB^2), \ E=-(AB+hB^2+hB^3),
+\end{equation}
+\end{small}
+%
+\begin{small}
+\begin{equation}\label{qq3}
+A=\frac{aP}{(RT)^2}, \ \  B=\frac{bP}{RT},
+\end{equation}
+\end{small}
+\end{subequations}
+%
+onde, recorda-se, $a$ é o parâmetro de energia e $b$ é o covolume. Os parâmetros $u$ e $h$, obtidos experimentalmente, dependem de qual EDEC se representa e são dados na Tabela \ref{tab:Tabela1}, apresentada na próxima seção. Para a equação de van der Waals, $h = u =0$, donde a Equação \ref{qq1} se reduz a
+%
+\begin{equation}\label{w}
+Z^3 - \left( 1 + \frac{bP}{RT} \right)Z^2 + \frac{aP}{(RT)^2}Z - \frac{abP^2}{(RT)^3}  = 0. 
+\end{equation}
+
+Calculando-se  o fator de compressibilidade $Z$, {\em i.e.}, as raízes da Equação \ref{qq1}, pode-se obter o volume molar $\bar{V}=\frac{ZRT}{P}$, desde que a pressão e a temperatura sejam conhecidas. Para cada EDEC tem-se coeficientes diferentes para a Equação \ref{qq1}. 
+
+Reescrevendo a equação de estado cúbica para uma substância pura $i$, tem-se, 
+%
+\begin{subequations}
+\begin{equation}
+\label{eq7}
+Z_i^{3}+C_i Z_i^{2} +D_i Z_i +E_i = 0,
+\end{equation}  
+%
+sendo,
+%
+\begin{small}
+\begin{equation}
+\label{eq8}
+Z_i = \frac{P\bar{V}_i}{RT}, \ \ C_i = -(1+B_i -u B_i),\ \  D_i = (A_i +h_i B_i -u B_i -u B_i^2), \ \  E_i = -(A_i B_i +h B_i^2 +hB_i^3),
+\end{equation}  
+\end{small}
+%
+onde
+%
+\begin{equation}
+\label{eq9}
+A_i = \frac{a_i P}{{(RT)}^2}, \ B_i = \frac{b_{i} P}{RT},
+\end{equation}
+\end{subequations}  
+%
+com $a_i$ e $b_{i}$, respectivamente, os parâmetros de energia e covolume da substância $i$. Mais adiante é apresentada uma formulação mais detalhada destes parâmetros.  
+
+\section{A equação de Peng-Robinson}
+
+Nesta seção, apresenta-se um estudo mais detalhado da equação de estado escolhida para a solução dos problemas propostos em capítulos posteriores. Segue então, um estudo da equação de estado de Peng-Robinson.
+
+Sejam $P$, $\bar{V}$ e $T$ a pressão, o volume molar (volume de um mol na substância) e a temperatura. O equilíbrio termodinâmico da equação de estado de Peng-Robinson é
+%
+ \begin{subequations}
+ \label{PReq}
+ \begin{equation}
+ P = \frac{RT}{\bar{V}-b}- \frac{a(T)}{\bar{V}^2+2b\bar{V}-b^2}\ ,
+  \end{equation}
+ com $R$ a constante universal dos gases, $a$  o parâmetro de energia, e $b$ o covolume. Aqui
+ \begin{equation}
+ a(T)= \frac{\Omega_a(RT_c)^2}{P_c}\alpha(T)\ ,
+ \end{equation}
+ com
+ \begin{equation}
+ \alpha(T)=[ 1+ S(\omega)
+ (1-({T}/{T_c})^\frac{1}{2})]^2\ ,
+ \\
+ S(\omega)=S_0+S_1 \omega+ S_2 \omega^2 \ ,
+ \end{equation}
+ e
+ \begin{equation}
+ b=\Omega_b \frac{RT_c}{P_c}\ .
+ \end{equation}
+ \end{subequations}
+%
+$T_c$, $P_c$ são temperatura e pressão críticas, respectivamente e $\omega$ é o fator acêntrico da substância. Note que
+   $S$ é uma constante que depende da substãncia. 
+  Outras constantes são $\Omega_a$, $\Omega_b$ and $S_i$, $i=0,1,2$.
+  A Tabela \ref{const} apresenta algumas dessas constantes.
+  \begin{table}
+  \caption{Algumas constantes termodinâmicas\label{const}}
+  \begin{center}
+  \begin{tabular}{c|c|c|c|c}
+  $S_0$ & $S_1$ & $S_2$ & $\Omega_a$ &  $\Omega_b$
+  \\
+  \hline
+  & & & &
+  \end{tabular}
+   \end{center}
+  \end{table}
+
+Por uma simples manipulação algébrica, a equação de PR pode ser reescrita como uma equação cúbica para o volume  $\bar{V}$, 
+com coeficientes dependentes em $T$ e $\bar{V}$,
+\begin{equation}
+P\bar{V}^3+(Pb-RT)\bar{V}^2-(3b^2P+2bRT-a(T))\bar{V}-Pb^3+b^2RT-a(T)b=0.
+\label{PRcubic}
+\end{equation}
+
+Apresenta-se a seguir uma série de observações sobre esta equação: 
+%
+\begin{enumerate}
+\item Este modelo termodinâmico do estado de equilíbrio
+de uma substância admite que a substância esteja no estado de vapor, líquido e também em um
+estado bifásico líquido + vapor.
+\item Em princípio, pode-se verificar a Equação \ref{PReq} ou
+\ref{PRcubic} define uma superfície em $ \mathbb{R}^ 3 $. Isto é
+equivalente a escrever, localmente perto de cada ponto que
+satisfaz a equação, uma das variáveis, $ P $, $ \bar{V} $ ou $ T $,
+como uma função das outras duas.
+\item Denota-se por $ F (P, \bar{V}, T) $ o lado esquerdo da Equação \ref {PRcubic}, e calculando-se seu gradiente, obtém-se
+%
+\begin{subequations}
+\begin{equation}
+\frac{\partial F}{\partial P}= \bar{V}^3+b\bar{V}^2-3b^2\bar{V}-b^3\ ,
+\end{equation}
+\begin{equation}
+\frac{\partial F}{\partial \bar{V}}= 3\bar{V}^2P+2(Pb-RT)\bar{V}-(3b^2P+2bRT-a(T))\ ,
+\end{equation}
+\begin{equation}
+\frac{\partial F}{\partial T}= -R\bar{V}^2-(2bR-a'(T))\bar{V}+b^2R-a'(T)b\ .
+\end{equation}
+\end{subequations}
+Pelo teorema da função implícita em qualquer ponto satisfazendo e
+Equação \ref{PRcubic}, tal que o gradiente de $ F $ é não nulo,
+digamos, por exemplo, que $ \partial F / \partial \bar{V} $ difere de zero,
+então, localmente, $ \bar{V} $ pode ser escrita como uma função de $ P $ e $ T $.
+\item Devido à interpretação física das variáveis, restringe-se aa variáveis $ P \geq 0 $, $ \bar{V} \geq 0 $ e $ T \geq 0 $.
+\item Observe que a Equação \ref{PReq} define $ P $ em função de $ \bar{V} $
+e $ T $ globalmente, sempre que o lado direito da eq. \ref{PReq}
+pode ser calculado.
+Para isso, no entanto, $ \bar{V} $ e $ T $ têm que satisfazer algumas restrições.
+De fato, devido: 
+\begin{itemize}
+\item à definição de $ \alpha (T) $, obtém-se que $ T \geq 0 $;
+\item aos quocientes na expressão, obtém-se
+\begin{equation}
+\bar{V}\neq b\ ,\ 
+\bar{V}\neq (\sqrt{2}-1)b \text{, e } \bar{V}\neq -(1+\sqrt{2})b\ .
+\end{equation}
+\end{itemize}
+
+Essas restrições podem ser descartadas se considerarmos que
+$ \bar{V}> b^*> b $, onde $ b^* $ é definido a seguir.
+Isto é justificado considerando o limite de 
+pressão infinita, quando o volume atingiria seu valor assintótico mínimo. Ao dividir Equação \ref{PRcubic} por $ P $ e deixar
+$ P \rightarrow \infty $, com temperatura fixa, obtem-se
+\begin{equation}
+\bar{V}^3+b\bar{V}^2-3b^2\bar{V}-b^3=0\ . \label{pol}
+\end{equation}
+Reescrevendo, fica-se com
+\begin{equation}
+(\bar{V}^2-b^2)(\bar{V}+b)=2b^2\bar{V}\ .
+\end{equation}
+À esquerda, tem-se um polinômio que é
+positivo para $ \bar{V}> b $ e igual a $ (\sqrt{2} +1) b ^ 3 $
+em $ \bar{V} = \sqrt{2} $ e $ 9b^3 $ em $ \bar{V} = 2b $,
+e à direita uma função linear, igual a $ 4 \sqrt{2} b^3 $ em
+$ \bar{V} = \sqrt {2} b $ e $ 8b^3 $ a $ \bar{V} = 2b $.
+ Portanto, existe um valor, $ b^*$, entre $ \sqrt{2} b $ e $ 2b $,
+$ \sqrt{2} b <b^*<2b $, raiz do polinômio Equação \ref{pol}.
+\item
+ Pode-se verificar que $ \bar{V} $ não é globalmente,
+uma função de $ P $ e $ T $, uma vez que na Equação \ref{PRcubic}, $ \bar{V} $ pode ter
+(e em alguns casos tem) três soluções reais.
+\item Em princípio, quando se escolhe $ P = P_c $ e $ T = T_c $,
+Equação \ref{PRcubic} deve ter apenas uma solução, denotada
+por $ \bar{V}_c $, o
+volume crítico.
+\item Da Equação \ref{PReq}, definindo $ P $ como uma função de $ \bar{V} $
+e $ T $, pode-se considerar o sistema de equações não lineares para
+$ \bar{V} $ e $ T $,
+\begin{equation}
+\frac{\partial P}{\partial \bar{V}}=0\ , \ 
+\frac{\partial^2 P}{\partial \bar{V}^2}=0 \ ,
+\end{equation}
+que, em princípio, tem solução $ \bar{V}_c $, $ T_c $.
+\item Em princípio, se $ P <P_c $ e $ T <T_c $, Equação \ref{PReq} tem
+três raízes reais, denotadas ordenadamente por
+\begin{equation}
+\bar{V}^l < \bar{V}^b < \bar{V}^v \ .
+\end{equation}
+Os sobrescritos $ l $, $ b $ e $ \bar{V} $ significam líquido, bifásico e
+vapor.
+ É relevante apontar que cada uma dessas raízes depende da
+ substância para a qual a equação PR é escrita e dependem da temperatura e da pressão, assim, em particular,
+ \begin{equation}
+ \bar{V}^l=\bar{V}^l(T,P)\ , \  \bar{V}^v=\bar{V}^v(T,P) .
+ \end{equation}
+ \item Dada uma substância, e especificada uma temperatura $ T $,
+  uma pressão $ P $ e
+  um volume $ \tilde{V} $, satisfazendo
+  \begin{equation}
+  \tilde{V}> \bar{V}^v(T,P)\ ,
+  \end{equation}
+  a substância está no estado de vapor. Se a temperatura e
+  a pressão é mantida e o volume é diminuído até
+  \begin{equation}
+  \tilde{V}=\bar{V}^v(T,P)\ ,
+  \end{equation}
+encontra-se o ponto de orvalho 
+  (transição do estado de vapor para o estado bifásico). Diminuindo
+    mais ainda o volume,
+     a substância entra em um estado bifásico,
+    líquido + vapor, até atingir
+    o volume
+    \begin{equation}
+    \tilde{V}> \bar{V}^l(T,P)\ ,
+    \end{equation}
+  quando se obtém o fenómeno do ponto de bolha (transição do estado líquido para o estado bifásico), e todo o vapor
+  muda de fase para estado líquido.
+  
+Tabela \ref{states} resume a teoria termodinâmica de
+estado de uma substância com estado termodinâmico $ (P, \bar{V}, T) $
+  satisfazendo Equação \ref{PReq}.
+
+  \begin{table}
+  \begin{center}
+  \caption{Estado termodinâmico} \label{states}
+  \begin{tabular}{c|l}
+  $\bar{V}<\bar{V}^l(T,P) $ & estado líquido
+  \\
+  \hline
+  $\bar{V}=\bar{V}^l(T,P) $ &  ponto de bolha
+  \\
+  \hline
+$\bar{V}^l(T,P)<\bar{V}<\bar{V}^v(T,P) $ & estado bifásico
+\\
+\hline
+$\bar{V}=\bar{V}^v(T,P) $ &  ponto de orvalho
+  \\
+  \hline
+  $\bar{V}>\bar{V}^v(T,P) $ & estado vapor
+  \end{tabular}
+  \end{center}
+  \end{table}
+\end{enumerate}
+
+%--------------------------------------------------------
+\section{Termodinâmica de misturas}
+%--------------------------------------------------------
+
+Nesta seção são discutidos conceitos relativos a misturas e à formulação de equações de estado cúbicas para misturas. As EDECs são adaptadas para serem utilizadas em misturas por um conjunto de regras chamadas regras de mistura e regras de combinação, conforme mencionado na Equação \ref{pp}. O objetivo central do livro (o emprego de técnicas de redução de dimensionalidade) explora a forma das regras de mistura, com o consequente impacto nas EDECs para misturas.
+
+%--------------------------------------------------------
+\subsection{Regras de mistura clássicas}
+\label{subsecRMC}
+%--------------------------------------------------------
+
+Existem alguns tipos de regras de mistura que são úteis em situações outras (por exemplo, quando do uso de equações de estado em misturas fortemente polares). Aborda-se a regra de mistura de van der Waals, tendo em conta sua aplicação nas técnicas de redução aqui investigadas. Estas regras são também conhecidas como regras clássicas e são  derivadas da teoria do fluido único. Não será abordada a teoria mencionada, mas somente se apresenta as equações resultantes.
+
+Ademais, se escolhe a regra de mistura conhecidas por van der Waals-1 (VDW). Neste caso, os parâmetros de energia  $a_m$ e covolume $b_m$ são dados (em uma mistura de $N$ componentes), respectivamente, por
+% 
+\begin{subequations}
+\begin{equation}
+\label{eq1}
+a_m = a_m(T,\mathbf{z}) = \sum_{i=1}^{N}\sum_{j=1}^{N} a_{ij} z_i  z_j \ \ , \ \  b_m = b_m(\mathbf{z}) = \sum_{i=1}^{N} b_{c_i} z_i \ ,
+\end{equation}
+%
+onde,
+\begin{equation}
+\label{eq2}
+a_{ij} = \sqrt{a_i a_j}(1-c_{ij}), \ i,j = 1,...,N \ ,                    
+\end{equation} 
+%
+\begin{equation}
+\label{eq3}
+ a_i =  \frac{\Omega_a(RT_{c_i})^2}{P_{c_i}}\alpha_i(T) , \ \ b_{c_i} =  \frac{\Omega_b RT_{c_i}}{P_{c_i}}, \ \ \text{e} \  \ \alpha_i(T) = [1+S(1-T_r^{0,5})]^2 \ ,
+\end{equation}
+\end{subequations}
+%
+com $T_r = \frac{T}{T_{c_i}}$ \ \text{e} \ $S = S_0 + S_1\omega_i + S_2\omega_i^2$.
+
+Aqui, $R$ é a constante universal dos gases, $T$ é a temperatura e $P$ é a pressão. O valor dos parâmetros $S_0, S_1, S_2, \Omega_a$ e $\Omega_b$, são obtidos experimentalmente e variam de acordo com a EDEC utilizada como pode ser observado na Tabela \ref{tab:Tabela1}. O valor da temperatura da componente $i$ no ponto crítico, $T_{c_i}$, da pressão da componente $i$ no ponto crítico, $P_{c_i}$, dos coeficientes de interação binária entre as componentes $i$ e $j$, $c_{ij}$, da fração molar da componente $i$ na composição global da mistura, $z_i$, e do fator acêntrico da componente $i$, $\omega_i$, são dados de acordo com a mistura utilizada e podem ser encontrados em \cite{terron2009termodinamica}, para alguns exemplos de misturas dadas pelo autor. O fator acêntrico é também chamado de fator acêntrico de Pitzer e representa um número associado a esfericidade das moléculas \cite{doi:10.1021/ja01618a002}.  A Equação \ref{eq1} representa as regras de mistura e a \ref{eq2}, as regras de combinação. 
+%
+\begin{table}[]{}
+\centering
+	\caption[Coeficientes de equações de estado cúbicas.]{Valores de $u$, $h$, $\Omega_a$, $\Omega_b$, e as equações para o cálculo dos termos $\alpha$, das equações de estado cúbicas de van der Waals (VDW), Redlich-Kwong (RK), Soave-Redlich-Kwong (RKS) e Peng-Robinson (PR).}\label{tab:Tabela1}
+	\begin{footnotesize} 
+		\hfill\begin{tabular}{  c | c | c | c | c | c | c | c | c | c  }
+			\hline
+			\textbf{EDE} & \textbf{$u$} & \textbf{$h$} & \textbf{$\Omega_a$} & \textbf{$\Omega_b$} & \multicolumn{5}{|c}{\boldmath{$\alpha$}} \\ \hline
+			VDW & 0                  & \multirow{3}{*}{0}                  & 27/64  & 1/8     & \multicolumn{5}{|l}{$\alpha = 1$} \\ \cline{1-2} \cline{4-10}
+			RK  & \multirow{2}{*}{1} &                    & \multirow{2}{*}{0,4278} & \multirow{2}{*}{0,0867}  & \multicolumn{5}{|l}{$\alpha = T_r^{-0,5}$} \\ \cline{1-1} \cline{6-10}
+			RKS &                    &                    &        &         & \multirow{4}{3.1cm}{$\alpha = [1 + S(1 - T_r^{0,5})]^2$ $S = \displaystyle\sum_{k=0}^2 S_k \times (\omega_i)^k$}  & \multirow{2}{*}{\textbf{EDE}} &\multicolumn{3}{|c}{\textbf{$S_k$}} \\ \cline{1-5} \cline{8-10} 			
+			\multirow{3}{*}{PR}  & \multirow{3}{*}{2}                  &\multirow{3}{*}{$-1$}                  & \multirow{3}{*}{0,45724} & \multirow{3}{*}{0,07780} &                                     &                   &  \textbf{$S_0$} & \textbf{$S_1$} & \textbf{$S_2$} \\ \cline{7-10}
+				&			         &                    &        &         &                  & RKS              & 0,480 & 1,574 & $-0,176$ \\ \cline{7-10}
+				&			         &                    &        &         &                  & PR               & 0,37464 & 1,54226 & $-0,26992$ \\ \hline
+		\end{tabular}\hfill
+	\end{footnotesize}
+	
+\end{table}
+
+
+%--------------------------------------------------------
+\subsection{Formulação matricial das regras de mistura e regras de combinação}
+\label{subsecFMRCeM}
+%---------------------------------------------------
+
+Expressa-se em seguida, a matriz de interação binária, os parâmetros de energia e covolume de uma mistura, utilizando notação vetorial e matricial. 
+
+Seja $\mathbf{a} = (a_1, \ldots, a_N)^t$ e denota-se $\sqrt{\mathbf{a}} = (\sqrt{a_1}, \ldots, \sqrt{a_N})^t$. Então, a matriz $\bar{\mathbf{A}}$, cujas entradas são dadas por $ \sqrt{a_i a_j}$, pode ser escrita como $\bar{\mathbf{A}} = \sqrt{\mathbf{a}}(\sqrt{\mathbf{a}})^t$.
+
+Seja ainda $\bullet$ a operação de multiplicação entrada a entrada de matrizes, $(\mathbf{A} \bullet \mathbf{B})_{ij} = (\mathbf{A})_{ij} (\mathbf{B})_{ij}$. O operador $\circ$ é comutativo\footnote[1]{{Nota-se que o operador $\circ$ é comutativo. De fato, $(\mathbf{A} \bullet \mathbf{B})_{ij} = (\mathbf{A})_{ij}(\mathbf{B})_{ij} = (\mathbf{B})_{ij}(\mathbf{A})_{ij} = (\mathbf{B} \bullet \mathbf{A})_{ij}$, donde  $\mathbf{A} \bullet \mathbf{B} = \mathbf{B} \bullet \mathbf{A}$. Além disso, se $\mathbf{A}$ e $\mathbf{B}$ são simétricas, $\mathbf{A} \bullet \mathbf{B}$ também será.}},
+%
+$\mathbf{A} \bullet\mathbf{B} = \mathbf{B} \bullet\mathbf{A}$. 
+
+Substituindo a Equação \ref{eq2} na Equação \ref{eq1}, obtém-se
+%
+\begin{subequations}
+%
+\begin{eqnarray}\label{eq4a}
+a_m 
+&=& \sum_{i=1}^{N}\sum_{j=1}^{N} \sqrt{a_i a_j}(1-c_{ij})z_i z_j = \sum_{i=1}^{N} \sum_{j=1}^{N} z_i \sqrt{a_i} \sqrt{a_j}(1-c_{ij}) z_j \nonumber \\
+&=& \mathbf{z}^t ((\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)\bullet\mathbf{C}) \mathbf{z} =  \mathbf{z}^t (\bar{\mathbf{A}} \bullet\mathbf{C}) \mathbf{z},
+\end{eqnarray}
+%
+\begin{eqnarray}\label{eq4}
+b_m = \sum_{i=1}^{N} b_{c_i} z_i =  \mathbf{b}^t \mathbf{z},
+\end{eqnarray}
+\end{subequations}
+%
+com $\mathbf{z}  = (z_1, z_2, ..., z_N)^t, \ \ \mathbf{a}  = (a_1, a_2, ..., a_N)^t, \ \ \mathbf{b} = (b_{c_1}, b_{c_2}, ..., b_{c_N})^t$ e --- atenção --- $(\mathbf{C})_{ij} = 1 - c_{ij}$. A matriz $\mathbf{C}$ é construída a partir dos coeficientes de interação binária, $c_{ij}$, tendo entradas $1-c_{ij}$ e será chamada aqui de \textit{matriz de interação binária}.
+
+ %--------------------------------------------------------
+\subsection{Equação de estado cúbica para uma mistura}
+\label{subsecEDECmisturas}
+%--------------------------------------------------------
+
+Uma EDEC para uma mistura é obtida da Equação \ref{qq1}, com escolhas apropriadas dos coeficientes. Para uma mistura de $N$ componentes, toma-se
+%
+\begin{eqnarray}\label{Lo}
+A_m = \frac{a_m P}{{RT}^2}, \ \ B_m = \frac{b_m P}{RT},
+\end{eqnarray}
+%
+onde $a_m$ e $b_m$ são obtidos usando as regras de mistura de VDW-1, dadas pela Equação \ref{eq1}.
+%%
+%\begin{equation}
+%\label{eq10a}
+%A_m = \frac{a_m P}{{RT}^2}; \ \ B_m = \frac{b_m P}{RT}.
+%\end{equation} 
+
+Tem-se, então, que a equação de estado cúbica para uma mistura é escrita por
+%
+\begin{equation}
+\label{eq7b}
+Z_m^{3}+C_m Z_m^{2} +D_m Z_m +E_m = 0,
+\end{equation}  
+%
+onde $Z_m = \frac{P\bar{V}_m}{RT}$, $ C_m = -(1+B_m -u B_m)$, $D_m = (A_m +w B_m -u B_m -u B_m^2)$, $E_m = -(A_m B_m +h B_m^2 +hB_m^3)$, e $u$ e $h$ são dados na Tabela \ref{tab:Tabela1}. 
+
+Pode-se, então, calcular os possíveis valores de $Z_m$ dados pelas raízes da equação cúbica. Essa equação apresenta três raízes, sendo três raízes reais ou uma raiz real e duas complexas conjugadas, pois em um polinômio com coeficientes reais, as raízes complexas só podem acontecer aos pares. Raízes complexas não apresentam significado físico em problemas de equilíbrio de fases e, portanto, devem ser descartadas. Estas correspondem à região do diagrama pressão-volume onde não há equilíbrio termodinâmico, {\em i.e.}, no diagrama pressão-volume, Figura \ref{diagrama}, a região acima da linha horizontal correspondente à pressão crítica. 
+
+Quando todas as raízes da equação forem reais, toma-se a de menor valor para calcular o fator de compressibilidade do líquido (associado ao volume molar do líquido) e a de maior valor para calcular o fator de compressibilidade do vapor. Quando há somente uma raiz real, toma-se essa raiz como aquela da fase em questão, tanto para a fase líquida como para a fase vapor. 
+
+A obtenção de raízes de equações cúbicas pode ser conduzida pela fórmula de Cardano ou por métodos numéricos como, por exemplo, o método de Newton-Raphson. Aqui, utiliza-se os  comandos \textit{poly} e \textit{roots}, do Scilab 5.5, para a geração do polinômio cúbico e  a obtenção de suas raízes, respectivamente.
+
+\section{Equação de estado de Peng-Robinson para misturas}
+A equação PR para misturas é obtida a partir da eq. \ref{PReq} ou
+a partir de sua forma cúbica Equação \ref{PRcubic}, substituindo
+$ a $ e $ b $ por $ a_m $ e $ b_m $, o parâmetro de energia e o
+covolume da mistura de substâncias.
+
+Portanto, a equação PR para misturas, em sua forma cúbica, é
+\begin{small}
+\begin{equation}
+P\bar{V}^3+(Pb_m-RT)\bar{V}^2-(3b_m^2P+2b_m
+RT-a_m)\bar{V}-Pb_m^3+b_m^2RT-a_mb_m=0 \ .
+\label{PRcubicm}
+\end{equation}
+\end{small}
+Como $ b_m = b_m (\mathbf{z}) $, $ a_m = a_m (T, \mathbf {z}) $, o
+coeficientes da equação cúbica dependem de $ P $, $ T $ e também de
+as frações molares $ \mathbf{z} $, suas raízes dependem
+bem sobre essas variáveis, e escrevemos para os menores e maiores
+raizes
+\begin{equation}
+\bar{V}^l=\bar{V}^l(P,T, \mathbf{z})< \bar{V}^v(P,T, \mathbf{z})=\bar{V}^v\ .
+\end{equation}

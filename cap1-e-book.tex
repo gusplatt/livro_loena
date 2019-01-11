@@ -1,0 +1,200 @@
+\chapter{Separação de fases na indústria de petróleo e gás} \label{introducao}
+\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+%\markboth
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo inicial  apresenta-se uma motivação para o trabalho e os seus principais objetivos, 
+bem como chega-se a duas quantidades extremamente importantes no 
+estudo em questão: o parâmetro de energia de uma fase multicomponente (presente nas equações de 
+estado) e a matriz de parâmetros de interação binária entre componentes de uma mistura. Em capítulos 
+subsequentes, tais ideias serão formalizadas, no entanto esta introdução serve para contextualizar o problema. 
+
+
+\section{Uma demanda crescente por energia}
+
+O planejamento energético vem se tornando um assunto extremamente importante para o desenvolvimento das sociedades nas últimas décadas. O mundo ainda é essencialmente dependente da indústria do petróleo, não obstante todas as questões ambientais a ela relacionadas.
+
+A Figura \ref{energia} apresenta uma projeção da Agência Ambiental dos EUA para o consumo mundial de energia, por fonte de energia. Os dados históricos estão disponíveis até o ano de 2012. A partir daí, são feitas previsões. Nota-se que embora haja aumento considerável no uso de fontes renováveis e de energia nuclear, o uso de combustíveis líquidos e gás natural --- essencialmente fósseis --- ainda será predominante até o ano de 2040.
+
+\begin{figure}[!h]{14cm}
+  \centering
+  \fbox{\includegraphics[scale=0.7]{Figuras/energia.eps}}
+  \caption{Expectativa do consumo de energia por fonte} \label{energia}
+  %\legend{}
+\end{figure}
+
+Neste cenário, o problema de calcular como se dá o equilíbrio de fases fluidas em uma mistura merece destaque, uma vez que toda a indústria de separação de óleo é baseada na previsão da coexistência de fases.
+
+Mais ainda, considerando a situação brasileira --- a existência de muitas reservas de óleo na camada pré-sal --- a demanda por estudos do equilíbrio de fases fluidas é evidente para o desenvolvimento do país e sua segurança energética.
+
+\section{Equações de estado e simuladores de processos de separação}
+
+A maneira mais usual de representar-se o comportamento de fases fluidas baseia-se no uso de \textit{equações de estado}. Uma equação de estado é uma relação do tipo $f(n,P,V,T)=0$, em que $f$ é uma função a quatro variáveis, $n$ é o número de mols da substância, $P$ é a pressão absoluta, $V$ é o volume e $T$ é a temperatura absoluta. A mais simples das equações de estado é a \textit{equação do gás ideal} ou equação de Clapeyron,  \cite{smith2000introduccao}. Um gás é dito ideal quando formado de um número muito grande de pequenas partículas, as moléculas, que tem um movimento rápido e aleatório, sofrendo colisões perfeitamente elásticas, de modo a não perder quantidade de movimento. Usualmente, a equação do gás ideal é representada como
+\begin{equation}
+PV = nRT, \nonumber
+\end{equation}
+onde $R$ é chamada de constante universal dos gases. Tal equação, embora muitas vezes empregada em cálculos de engenharia, não representa de maneira acurada o comportamento termodinâmico de fluidos sob altas pressões, mesmo que em fase gasosa, nem de líquidos.
+
+Uma outra forma de representar-se um gás ideal é empregando a ideia de volume molar, $\bar{V}$ --- volume ocupado por 1 mol de substância --- que é calculado por $\bar{V} = V/n$. Neste caso, a equação torna-se
+\begin{equation}
+P\bar{V} = RT. \nonumber
+\end{equation}
+
+Uma óbvia deficiência da equação do gás ideal decorre do seguinte fato:
+\begin{equation}
+\lim_{P \rightarrow \infty} \bar{V} =  \lim_{P \rightarrow \infty} \frac{RT}{P} = 0. \nonumber
+\end{equation}
+Ora, a equação do gás ideal não é capaz de representar, então, o volume de \textit{empacotamento} de moléculas ou átomos de uma substância, situação na qual estes estão extremamente próximos, o que certamente ocorre em líquidos. Em outras palavras, a equação do gás ideal não permite que moléculas ou átomos ocupem uma porção do espaço.
+
+A equação de Abel-Nobel 
+%
+\begin{equation}
+P(\bar{V}-b) = RT, \nonumber
+\end{equation}
+%
+onde o parâmetro $b$ é chamado \textit{covolume},  representa uma modificação útil em altas pressões como é verificado a seguir. Agora, o problema das moléculas ``não ocuparem espaço'' foi resolvido uma vez que
+%
+\begin{equation}
+\lim_{P \rightarrow \infty} \bar{V} =  \lim_{P \rightarrow \infty} \left( b + \frac{RT}{P} \right)  = b. \nonumber
+\end{equation}
+
+Assim, o covolume $b$ representa o mínimo volume ocupado pelas moléculas/átomos, quando a pressão tende a infinito. Diz-se, então, que o covolume é uma medida representando as \textit{forças repulsivas} existentes entre moléculas ou átomos. Por outro lado, tal equação ainda não é capaz de representar ao mesmo tempo o comportamento de fases líquida e vapor.
+
+A célebre equação de van der Waals, \cite{van1873over}, foi a primeira equação de estado capaz de representar simultaneamente a existência de mais de uma fase fluida. Tal equação escreve-se como
+%
+\begin{equation}
+P = \frac{RT}{\bar{V}-b} - \frac{a}{\bar{V}^2}. \nonumber
+\end{equation}
+
+Nesta equação aparece um outro parâmetro, representado por $a$, que se constitui numa  medida de \textit{forças atrativas} entre as moléculas, também chamado de \textit{parâmetro de energia}. Tendo como premissa que o parâmetro $a$ é positivo nota-se que a existência da parcela $a/ \bar{V}^2$ implica em uma diminuição da pressão em comparação com a equação de Nobel-Abel e também com a equação do gás ideal. Ora, entendendo-se a pressão (em um vaso, por exemplo) como efeito do choque de moléculas ou átomos com a parede de um recipiente, a existência do parâmetro $a$ aponta para algum tipo de interação entre moléculas/átomos que faz com que o número de colisões com as paredes seja menor. Desta forma, explica-se a relação entre forças atrativas e o parâmetro $a$.
+
+Modernamente, diversas equações de estado baseiam-se em diferentes propostas para avaliação dos parâmetros de energia $a$ e de covolume $b$. Tais parâmetros dependem da substância em questão e são normalmente expressos em termos das coordenadas do ponto crítico da substância (temperatura crítica e pressão crítica). O ponto crítico corresponde à situação a partir da qual o equilíbrio entre fases não mais existe.
+
+A Figura \ref{diagrama} \cite{libotte} apresenta o diagrama pressão-volume para uma substância pura, isto é, uma representação do domínio da temperatura como função da pressão e do volume, 
+%
+\begin{eqnarray*}
+T =  \frac{\bar{V}-b}{R} -\left( P + \frac{a}{\bar{V}^2}\right),
+\end{eqnarray*}
+%
+munida de outras informações, como especificado em seguida. As linhas em azul são chamadas \textit{isotermas}, e representam lugares geométricos de mesma temperatura. A porção do diagrama abaixo da linha contínua em preto corresponde à região bifásica. O máximo da curva em preto, com a pressão em função do volume, é a pressão crítica ($P_c$), e o ponto de máximo é o volume crítico ($V_c$). Para pressões acima da pressão crítica, a substância encontra-se em uma fase fluida fora do equilíbrio termodinâmico, conhecida como fase supercrítica.   O lado esquerdo à curva em preto, abaixo da linha horizontal de pressão crítica, corresponde à fase líquida e o lado direito constitui a fase vapor. 
+
+A Figura \ref{diagrama} serve ainda para entender-se porque uma equação do tipo van der Waals (reescrita como equação cúbica para o volume) é capaz de representar simultaneamente as fases líquida e vapor: dado um par temperatura-pressão, a solução da equação para o volume produzirá três raízes (três raízes reais ou uma raiz real e duas complexas conjugadas). Como a pressão constante corresponde a uma linha horizontal no diagrama, e temperatura constante correponde a uma curva em azul --- veja Figura \ref{diagrama} ---, pode-se ter por interseção, entre as curvas de pressão constante e temperatura constante, três valores para o volume, ou apenas um. 
+
+Analisemos inicialmente o caso de três raízes reais (baixos valores de pressão no diagrama): claramente a equação cúbica produzirá uma raiz que representa o volume do líquido (menor raiz) e outra que representa o volume do vapor (maior raiz), conforme os pontos em amarelo no diagrama. A raiz intermediária não possui significado físico e deve ser descartada. Conforme a pressão aumenta, as três raízes reais ficam cada vez mais próximas, até que colapsam em um único ponto, já mencionado, o chamado ponto crítico (representado em vermelho no diagrama). A partir daí, tem-se somente uma raiz real. Exatamente no ponto crítico, os máximos e mínimos exibidos pelas isoterma, escrita como $P$ em função de $V$, convertem-se em um ponto crítico e de inflexão de uma isoterma, daí, satisfaz as equações
+%
+\begin{eqnarray}
+\left( \frac{\partial P}{\partial \bar{V}} \right)_{T=T_c} = 0,\nonumber \\
+\left( \frac{\partial^2 P}{\partial \bar{V}^2} \right)_{T=T_c} = 0. \nonumber
+\end{eqnarray}
+
+A solução simultânea destas equações permite que os parâmetros
+ $a$ e $b$ sejam escritos em termos das coordenadas do
+  ponto crítico, a temperatura crítica, $T_c$, e a pressão crítica, $P_c$.
+
+\begin{figure}[!ht]{14cm}
+  \caption{Diagrama pressão-volume para uma substância pura.} \label{diagrama}
+  \fbox{\includegraphics[scale=0.6]{Figuras/isoterma.pdf}}
+  %\legend{}
+\end{figure}
+
+O cenário existente na indústria de petróleo ainda é, em essência, baseado neste tipo de abordagem. Equações de estado mais modernas, como as equações de Soave \cite{soave1972equilibrium} e de Peng-Robinson \cite{peng1976new} apresentam estrutura similar à de van der Waals, com a vantagem de serem mais acuradas pela introdução de um terceiro parâmetro (chamado fator acêntrico).
+
+Um outro problema a ser considerado vem do fato de que o petróleo não é uma substância pura, mas uma mistura extremamente complexa. Portanto, as ideias desenvolvidas para as equações de estado devem ser estendidas para misturas. Tal extensão é feita por um conjunto de regras, chamadas \textit{regras de mistura e regras de combinação}, das quais as mais usuais são expressas por
+%
+\begin{eqnarray}
+\label{pp}
+a_m = \sum_{i=1}^N \sum_{j=1}^N a_{ij}z_i z_j, \ \ \text{com} \ \ a_{ij} = \sqrt{a_i a_j}, \ \ \text{e} \ \ b_m = \sum_{i=1}^N b_{c_i} z_i. 
+\end{eqnarray}
+%
+Nas expressões anteriores $a_m$ e $b_m$, respectivamente o parâmetro de energia e o covolume de uma mistura, são dados pelas regras de mistura de substâncias onde $a_i$ e $b_{c_i}$ são o parâmetro de energia e o covolume da substância $i$, $z_i$ refere-se à fração molar do componente (substância) $i$, em qualquer das fases em equilíbrio, quer líquida quer vapor, $N$ é o número total de componentes da mistura e $a_{ij}$ representa o parâmetro de energia entre as componentes $i$ e $j$, dada pela regra de combinação --- assim chamada pois deriva uma expressão para um parâmetro ``cruzado" (obtido por uma média geométrica) entre os parâmetros de energia das duas substâncias --- enquanto as outras duas equações são as regras de mistura.
+
+Em que pese o notável desenvolvimento dos modelos termodinâmicos nas últimas décadas, a previsão acurada do comportamento das fases ainda depende de informações advindas de dados experimentais de fases em equilíbrio. Neste sentido, as regras de combinação frequentemente incorporam \textit{parâmetros de interação binária}, na seguinte forma:\\ \\ 
+%
+$a_{ij} = \sqrt{a_i a_j}(1 - c_{ij})$, \\ \\ 
+%
+onde $c_{ij}$ é chamado \textit{parâmetro de interação binária simétrico} (pois aqui $c_{ij} = c_{ji}$; há outros modelos com parâmetros de interação assimétricos).
+
+A obtenção de tais parâmetros é feita a partir de conjuntos de dados experimentais de equilíbrio líquido-vapor. Empregando-se procedimentos do tipo máxima verossimilhança são obtidos os parâmetros $c_{ij}$ que promovam a maior aderência do modelo aos dados experimentais. Tais parâmetros estão tabelados para muitos pares de substâncias encontradas nos óleos e são também disponibilizados em diversos simuladores de processo comerciais, como o Aspen Plus, Aspen HYSYS, CHEMCAD, Petrox (desenvolvido pela PETROBRAS), etc. Estes simuladores são extensamente empregados na indústria do petróleo, tanto em simulação quanto em projeto de equipamentos.
+
+\section{O problema do grande número de componentes}
+
+O cenário apresentado na seção anterior implica, portanto, no uso de equações de estado para problemas de equilíbrio líquido-vapor em óleos. Ora, tendo em conta que o número de componentes do petróleo é elevado, o número de equações de equilíbrio a serem resolvidas pode ser proibitivo do ponto de vista computacional. Ademais, a convergência de métodos numéricos pode também tornar-se mais sensível em sistemas de grande porte.
+
+Este livro insere-se, então, no estudo de técnicas de redução de dimensionalidade para problemas de equilíbrio de fases com muitas substâncias. Isto é, procura-se um modelo matemático que ainda representando a situação física de forma sufucientemente acurada, trabalhe com um número reduzido de variáveis. 
+
+O sistema de equações não-lineares a ser resolvido para o equilíbrio de fases escreve-se como:
+\begin{equation}
+f_i^V = f_i^L, \hspace{0.5in} i = 1,2,\ldots,N. \nonumber
+\end{equation}
+
+A grandeza $f_i$ é chamada \textit{fugacidade} do componente $i$ na fase em questão, conforme indicado pelo sobrescrito, sendo $L$ no caso da fase líquida e $V$ no caso da fase vapor. A obtenção das relações de equilíbrio é clássica e pode ser consultada em livros de Termodinâmica. O que deve ser ressaltado aqui é que a fugacidade está relacionada ao modelo de equação de estado escolhido. Assim, há uma estreita ligação entre o sistema a ser resolvido para determinação do equilíbrio e o modelo de equação de estado utilizado.
+
+Por exemplo, para a equação de estado de Peng-Robinson \cite{peng1976new}, o coeficiente de fugacidade de uma substância $i$, $\mathbf{\varphi}_i$ --- {\em i.e.}, a razão entre a fugacidade e a pressão parcial da substância --- satisfaz
+%
+\begin{eqnarray}
+\ln{\varphi_i} = \frac{1}{b_m}\left[\frac{\partial(n b_m)}{\partial n_i}\right](Z-1) - \log(Z-B) - \nonumber\\
+- \frac{a_m}{2\sqrt{2}b_mRT}\left[\frac{1}{a_m}\left(\frac{1}{n}\frac{\partial(n^2 a_m)}{\partial n_i}\right) - \frac{1}{b_m}\left(\frac{\partial(n b_m)}{\partial n_i}\right)\right]\ln\left(\frac{Z+2.414B}{Z-0.414B}\right), \nonumber
+\label{coeffug}
+\end{eqnarray}
+%
+sendo $n$ o número total de mols da mistura e $n_i$ o número de mols da substância $i$. As quantidades $Z$ e $B$ serão definidas posteriormente, mas o que importa neste ponto é que o coeficiente de fugacidade e, portanto, a fugacidade, dependem dos valores de $a_m$, $b_m$ e de suas derivadas em relação ao número de mols.
+
+Assim, considerando a necessidade de solução de problemas envolvendo um grande número de componentes (altos valores de $N$), surgem ideias para se reduzir o tamanho do problema. Há diversas alternativas, como por exemplo o uso de pseudocomponentes, mas este livro trata da  representação do problema de equilíbrio de fases em uma dimensão $r$ menor do que $N$, empregando-se técnicas de aproxima\c{c}\~ao de matrizes por matrizes de
+posto inferior aplicada à \textit{matriz de interação binária}, constituída pelos parâmetros de interação binários das componentes da mistura \cite{gaganis2013improved}.
+
+\section{Aproximação da matriz de interação binária}
+
+
+Considera-se agora a questão de como aproximar a matriz de interação binária. Uma abordagem possível foi apresentada por \cite{hendriks1988reduction}. Tal proposta baseia-se na aproximação da matriz de interação binária de modo a minimizar a norma de Frobenius entre a matriz original e uma matriz de posto inferior. A minimização pode 
+ser conduzida a partir da determina\c{c}\~ao da  decomposição em valores singulares da matriz de interação binária. 
+
+Mais recentemente, \cite{gaganis2013improved} apresentaram uma nova abordagem para a aproximação de tal matriz, com foco no parâmetro de energia $a_m$ em vez da matriz, \textit{per si}. A ideia é extremamente razoável, uma vez que a matriz de interação binária afeta somente o parâmetro de energia (e suas derivadas). Para tanto, tais autores definiram um erro consistindo na diferença entre o parâmetro de energia original e aquele aproximado e aplicaram técnicas de minimização a esse erro.
+
+As técnicas de aproximação em questão inserem-se no contexto das 
+chamadas ``aproximações de baixo posto''. Em inglês, conhecidas pelas primeiras letras das palavras \textit{low rank approximations}, ou LRA. Para o caso da aproximação da matriz de parâmetros de interação binária, baseada na
+obten\c{c}\~ao da decomposição em valores singulares, j\'a 
+mencionado,
+seleciona-se uma matriz de posto
+reduzido $r$ constru\'{\i}da focando nos $r$ maiores 
+valores singulares, a qual 
+minimiza a norma de Frobenius (que, em particular, não apresenta ponderação) da diferen\c{c}a entre a matriz original e a aproximada,
+  como é garantido pelo Teorema 
+ de Eckart-Young-Mirsk, veja \cite{golub}.  
+ Por outro lado, a minimização do erro do parâmetro de energia da equação de estado implica em uma ``aproximação de baixo posto ponderada'' ( em inglês ``weighted low rank approximation'',WLRA, \cite{lowrank}), uma vez que os parâmetros de energia das substâncias puras e a composição da fase agem como ponderadores na  medição da distância entre a matriz e sua aproximação.
+
+Embora tal formulação tenha sido apresentada por
+ \cite{gaganis2013improved}, há inúmeros pontos a serem elucidados. 
+A aproxima\c{c}\~ao ponderada por matrizes de posto fixo
+ de uma matriz dada divide-se em duas classes. Na primeira, o produto interno
+ subjacente ao cálculo da norma ponderada tem pondera\c{c}\~ao pontual, {\em i.e.}, 
+ em cada entrada da matriz e as aproximações de posto baixo têm sido alvo de 
+ investiga\c{c}\~oes h\'a mais tempo, \cite{lowrank}, sendo ainda 
+ capaz de um tratamento anal\'{\i}tico mais simples. 
+  Na outra classe, a pondera\c{c}\~ao envolve 
+acoplamento, duas a duas, das diferentes entradas da matriz.
+ Este \'ultimo tipo de pondera\c{c}\~ao e a respectiva noção de aproximação é a que se faz
+  necess\'aria para os problemas de equil\'{\i}brio de fases
+  e para a qual menos teoria tem sido 
+  desenvolvida e investiga\c{c}\~oes tem recebido. 
+  A formula\c{c}\~ao como um problema de minimiza\c{c}\~ao envolve 
+  muitos desafios, em particular pela falta de representa\c{c}\~ao
+  \'unica de matrizes de posto dado. Por este motivo, 
+  o problema passa a ter um cont\'{\i}nuo de minimizadores, o que
+  torna a tarefa de minimiza\c{c}\~ao \'ardua e estimulante.
+  Diversos m\'etodos de minimiza\c{c}\~ao livre ou com 
+  restri\c{c}\~oes podem ser testados nas aplica\c{c}\~oes 
+  de engenharia do equil\'{\i}brio de fases.
+  
+%Entre os métodos a serem investigados, pretende-se estender a abordagem introduzida por \cite{halko2011finding}(veja também  \citeonline{Mauro}), ao caso de aproximações medidas por normas ponderadas.
+
+No segundo capítulo introduz-se os conceitos termodinâmicos necessários para estabelecer o equilíbrio de fases, na forma tradicional (sem redução). Em capítulos posteriores, demonstra-se a nova abordagem proposta, aplicando a redução de dimsensionalidade. 

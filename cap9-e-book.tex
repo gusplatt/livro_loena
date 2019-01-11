@@ -1,0 +1,145 @@
+\chapter{Algoritmo de redução segundo a nova abordagem} \label{cap9}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+Neste capítulo apresenta-se como utilizar a proximação de posto reduzido da matriz de interação binária para obter um sistema de equações de estado com dimensão reduzida.
+
+Apresenta-se um algoritmo de redução análogo ao proposto pela abordagem segundo a norma de Frobenius no Capítulo \ref{cap5}, porém agora adaptado para a minimização na norma da energia.
+
+\section{Introdução}
+
+No capítulo anterior foi mostrado que existe $\mathbf{\chi}^{\star} = (\mu_1^{\star},...,\mu_r^{\star}, \mathbf{w}_1^{\star},...,\mathbf{w}_r^{\star})$ que minimiza a função $G$, isto é, um dos vetores que representa a matriz $\mathbf{C}^{\star}$ que mais se aproxima da matriz de interação binária na norma da energia. Então,
+%
+\begin{eqnarray*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \mu_j^{\star} \mathbf{w}_j^{\star} (\mathbf{w}_j^{\star})^t .
+\end{eqnarray*}
+ 
+Como $\mathbf{C}^{\star}$ é simétrica então, uma vez determinada pela equação anterior, pode-se obter a decomposição espectral
+%
+\begin{eqnarray*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \lambda_j \mathbf{v}_j (\mathbf{v}_j)^t ,
+\end{eqnarray*}
+%
+onde $\mathbf{v}_i$'s são ortonormais.
+
+Assim as equações de equilíbrios de fases (isofugacidades) e as equações de balanço material podem ser substituídas por um conjunto equivalente de $r+1$ equações em $r+3$ variáveis. \cite{hendriks1992application} ressaltam que o número de graus de liberdade do problema é mantido, ou seja, são necessárias duas especificações (tipicamente temperatura e pressão em um problema de flash). As entradas do vetor $\mathbf{Q}$ são chamados parâmetros de redução. Mais ainda, eles demonstram que, quando utilizada uma EDEC com regra de misturas VDW-1, a energia livre de Gibbs pode ser escrita conforme a Equação \ref{eq17}, de modo que a técnica de redução pode ser aplicada. 
+
+Em qualquer método de redução tem-se como ideia encontrar uma formulação diferente do problema, com base em um diferente conjunto de variáveis independentes, cujo número de variáveis seja menor, e de preferência muito menor, do que o número de variáveis do conjunto original. Vários procedimentos de redução, aplicados em problemas diversos, têm sido propostos por \cite{michelsen1986simplified}, \cite{hendriks1988reduction}, \cite{nichita2004efficient} e \cite{nichita2006reduction}. Em termos do cálculo de equilíbrio de fases, isto consiste em substituir as variáveis tradicionais (números de moles, frações molares, coeficientes de partição) por combinações lineares das mesmas. Por conseguinte, a solução não é mais procurada no espaço composicional, mas no espaço reduzido definido pelas novas variáveis introduzidas. 
+
+Se, para o método de redução, a dimensionalidade do problema (número de variáveis independentes) é muito menor do que a dimensionalidade para métodos clássicos espera-se uma importante diminuição do esforço computacional \cite{nichita2007phase}.
+
+\section{Aplicação do método}
+
+Nesta abordagem, a redução é efetivamente conseguida pela decomposição espectral da matriz $\mathbf{C}^{\star}$ que melhor aproxima a matriz de interação binária $\mathbf{C}$, na norma da energia. A dimensionalidade do problema depende somente do número de parâmetros de redução $r+1$ (onde $r$ é o posto da matriz $\mathbf{C}^{\star}$ e 1 é devido  ao parâmetro de covolume da mistura) e é independente do número de componentes $N$ da mistura. Reduzindo-se a dimensionalidade desta matriz, reduzem-se também a dependência dos parâmetros $a_m$ e $\psi_i$, visto que estes parâmetros estão escritos em função dos elementos  da matriz $\mathbf{C}$ e se utilizará em seu lugar a matriz $\mathbf{C}^{\star}$, representada por sua decomposição espectral. O parâmetro $b_m$ não sofre modificação, pois não depende de $\mathbf{C}$. Assim, estes parâmetros são os mesmos calculados para a fase vapor (onde não se aplica a redução).\\
+%
+\begin{center}ALGORITMO 3\end{center}
+%
+\textbf{1ª Etapa}:  Montar a matriz $\mathbf{W}$, como descrito na seção \ref{secEnergia}; \\
+%
+\textbf{2ª Etapa}:  Montar a matriz de interação binária, $\mathbf{C}$; \\
+%
+\textbf{3ª Etapa}: Obter  $\mathbf{\chi}^{\star} = (\mu_1^{\star},...,\mu_r^{\star},\mathbf{w}_1^{\star},...,\mathbf{w}_r^{\star})$ (que minimiza a função $G$ , conforme a Equação \ref{eme}) pelo método da evolução diferencial; \\
+%
+\textbf{4ª Etapa}: Construir a matriz $\mathbf{C}^{\star}$ a partir de $\mathbf{\chi}^{\star}$;\\
+%
+\textbf{5ª Etapa}:  Diagonalizar a matriz $\mathbf{C}^{\star}$ utilizando o teorema espectral. Obter os autovetores de $\mathbf{C}^{\star}$, $\mathbf{v}_j$, associados aos $r$ autovalores não-nulos de $\mathbf{C}^{\star}$, com $r = \text{posto}(\mathbf{C}^{\star})\leq{N}$, e aproximar a matriz de parâmetros de energia; \\
+%
+\textbf{6ª Etapa}: Escrever o parâmetro de redução $Q_k^L$, $k = 1,\cdots,r$  e $b_m$, que é dado por uma estimativa inicial;\\
+%
+\textbf{7ª Etapa}: Fornecer estimativa inicial para a pressão, gerando o vetor de incógnitas $\boldsymbol{\xi}$, que é o vetor $\mathbf{Q}^L$ concatenado com $b_m$ e a pressão; \\
+%
+\textbf{8ª Etapa}: Calcular em função de $\mathbf{Q}^L$ os valores de $a_m$  e $\psi_i$ na forma reduzida; \\
+%
+\textbf{9ª Etapa}: Calcular os parâmetros de mistura dados em função do parâmetro de redução $\mathbf{Q}^L$. Estes parâmetros são $A_m$ e $B_m$; \\
+% 
+\textbf{10ª Etapa}: Calcular as raízes da equação cúbica, escolhendo a menor raiz (uma vez que a fase incipiente é a fase líquida , cálculo de ponto de orvalho); \\
+%
+\textbf{11ª Etapa}: Calcular os coeficientes de fugacidade da fase líquida em função das coordenadas reduzidas; \\
+%
+\textbf{12ª Etapa}: Calcular os coeficientes de fugacidade da fase vapor, via abordagem tradicional (sem coordenadas reduzidas), apresentado no Capítulo \ref{cap3aux}; \\
+%
+\textbf{13ª Etapa}: Re-estimar a composição da fase líquida; \\
+%
+\textbf{14ª Etapa}: Calcular o erro das equações de equilíbrio; \\
+%
+\textbf{15ª Etapa}: Iterar via método Newton-Raphson multivariável para obter uma estimativa melhor para o parâmetro $\mathbf{Q}^L$ e para pressão, de maneira que a norma da diferença entre dois valores de $\mathbf{Q}^L$ consecutivos seja menor do que uma tolerância especificada. \\
+
+\begin{center}DESCRIÇÃO DAS ETAPAS DO ALGORITMO 3\end{center}   
+% 
+\textbf{1ª Etapa}: A matriz da energia é construída por $\mathbf{W} = \mathbf{\Psi}\bullet \mathbf{J}$, onde a estrutura das matrizes $ \mathbf{\Psi}$ e $\mathbf{J}$ são descritas na seção \ref{MatrizW}. 
+
+Para o cálculo das entradas  $\mathbf{\Psi}$ foi utilizado o método de integração de Monte Carlo, uma vez que os algoritmos usuais avaliam o integrando em uma grade regular, já o método de Monte Carlo permite escolher aleatoriamente os pontos em que o integrando é avaliado. 
+
+Para o cálculo da matriz $\mathbf{J}$, no caso isotérmico (sob temperatura constante e, portanto, sem integração), basta substituir os parâmetros da mistura utilizada e calcular as entradas da matriz. Para o caso não isotérmico, considera-se as seguintes relações \cite{gaganis2013improved}
+%
+\begin{equation*}
+\sqrt{a_i} = \sqrt{\frac{\Omega_a(RT_{c_i})^2}{P_{c_i}} \left( 1 + S_i \left( 1 - \sqrt{\frac{T}{T_{c_i}}} \right) \right) ^2} = \sigma_i + \tau_i \sqrt{T},
+\end{equation*} 
+% 
+onde $\sigma_i = \sqrt{\frac{\Omega_a}{P_{c_i}}} RT_{c_i}(1+S_i)$ e $\tau_i = -\sqrt{\frac{\Omega_a T_{c_i}}{P_{c_i}}}R S_i$ não dependem da temperatura. \\
+
+Logo, a integral de $\sqrt{a_i}\sqrt{a_j}\sqrt{a_k}\sqrt{a_l}$, com $i,j,k,l=1...N$, é dada por
+%
+\begin{eqnarray*}
+J_{ij} 
+&=& \int_{T_1}^{T_2}\sqrt{a_i}\sqrt{a_j}\sqrt{a_k}\sqrt{a_l} dT = \int_{T_1}^{T_2} \left( \prod_{r=(i,j,k,l)} (\sigma_p + \tau_p\sqrt{T}) \right) dT \\
+&=& \sum_{r=0}^{4}\frac{2\rho_r}{2+r}(T_2^{(2+r)/2}- T_1^{(2+r)/2}), 
+\end{eqnarray*}
+%
+onde \\ 
+%
+$\rho_0 =  \sigma_i\sigma_j\sigma_k\sigma_l$ \\
+$\rho_1 = \tau_i\sigma_j\sigma_k\sigma_l +  \sigma_i\tau_j\sigma_k\sigma_l +  \sigma_i\sigma_j\tau_k\sigma_l +  \sigma_i\sigma_j\sigma_k\tau_l$ \\
+$\rho_2 = \tau_i\tau_j\sigma_k\sigma_l +  \tau_i\sigma_j \tau_k \sigma_l +  \tau_i\sigma_j\sigma_k\tau_l +  \sigma_i\tau_j\tau_k\sigma_l + \sigma_i\tau_j\sigma_k\tau_l + \sigma_i\sigma_j\tau_k\tau_l$ \\
+$\rho_3 = \sigma_i\tau_j\tau_k\tau_l +  \tau_i\sigma_j \tau_k \tau_l +  \tau_i\tau_j\sigma_k\tau_l +  \tau_i\tau_j\tau_k\sigma_l$ \\
+$\rho_4 = \tau_i\tau_j\tau_k\tau_l$. \\ \\
+%
+\textbf{2ª Etapa}: Análoga a 1ª etapa do Algoritmo 2 da seção  \ref{algoritmo2}; \\ \\ 
+%
+\textbf{3ª Etapa}: Para uma mistura de $N$ componentes e $\mathbf{C}$ a matriz de interação binária, obtém-se $\mathbf{\chi}^{\star} = (\mu_1^{\star}, ..., \mu_r^{\star}, \mathbf{w}_1^{\star},...,\mathbf{w}_r^{\star})$ tal que  
+%
+\begin{equation*}
+\mathbf{\chi}^{\star} \ \text{minimiza} \ G(\mathbf{\chi}^{\star}) = \epsilon (\mathbf{C}^{\star}),
+\end{equation*}  
+%
+(conforme descrito na seção \ref{S3} do Capítulo \ref{cap7}) através do método da evolução diferencial. A estrutura da função $\epsilon$ é dada pelas Equações \ref{113} e \ref{139}, para processos isotérmicos e não-isotérmicos, respectivamente. 
+
+Ao obter-se o vetor de menor custo e de acordo com o posto $r$ da matriz de redução $\mathbf{C}^{\star}$, tomam-se as $r$ primeiras entradas como os autovalores e as demais entradas como os $r$ vetores correspondentes de dimensão $N \times 1$.   \\ \\
+%
+\textbf{4ª Etapa}: Em seguida, constrói-se a matriz
+%
+\begin{equation*}
+\mathbf{C}^{\star} = \sum_{j=1}^{r} \mu_j^{\star} \mathbf{w}_j^{\star} (\mathbf{w}_j^{\star})^t .
+\end{equation*}  
+%
+As próximas etapas são análogas as etapas do Algoritmo 2 da seção \ref{algoritmo2}; \\ \\ 
+%
+\textbf{5ª Etapa}: Análoga a 2ª etapa do algoritmo; \\ \\
+%
+\textbf{6ª Etapa}: Análoga a 3ª etapa do algoritmo;\\ \\
+%
+\textbf{7ª Etapa}:  Análoga a 4ª etapa do algoritmo;\\ \\
+%
+\textbf{8ª Etapa}:  Análoga a 5ª etapa do algoritmo;\\ \\
+%
+\textbf{9ª Etapa}: Análoga a 6ª etapa do algoritmo;\\ \\
+%
+\textbf{10ª Etapa}: Análoga a 7ª etapa do algoritmo; \\ \\
+% 
+\textbf{11ª Etapa}: Análoga a 8ª etapa do algoritmo; \\ \\
+%
+\textbf{12ª Etapa}: Análoga a 9ª etapa do algoritmo;\\ \\
+%
+\textbf{13ª Etapa}: Análoga a 10ª etapa do algoritmo;\\ \\
+%
+\textbf{14ª Etapa}: Análoga a 11ª etapa do algoritmo;\\ \\
+%
+\textbf{15ª Etapa}: Análoga a 12ª etapa do algoritmo;\\ \\

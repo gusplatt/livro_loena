@@ -1,0 +1,692 @@
+\chapter{Distância proveniente da energia}\label{cap6}
+%\pagenumbering{arabic}
+%\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antes de cada sessão, colocar o comando \markboth{nome do
+% capítulo}{nome da sessão}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\markboth{Preparação do Manuscrito usando o LaTeX}{Introdução}
+
+\thispagestyle{empty} % a primeira página de cada capítulo não deve ser numerada
+
+\section{Introdução}
+
+Neste capítulo introduz-se a noção de norma e distância no conjunto das matrizses $N \times N$ provenientes de uma medida das forças atrativas obtidas pelo parâmetro de energia. 
+
+Pela nova abordagem, proposta por \cite{gaganis2013improved}, a aproximação da matriz de interação binária tem como foco o parâmetro de energia $a_m$ em vez da matriz, \textit{per si}. Como a matriz de interação binária afeta somente o parâmetro de energia (e suas derivadas), o erro é definido pela diferença entre o parâmetro de energia original e aquele aproximado e aplica-se técnicas de minimização a esse erro.
+
+Essas técnicas de aproximação em questão inserem-se no contexto das 
+chamadas ``aproximações de baixo posto''. Em inglês, conhecidas pelas primeiras letras das palavras \textit{low rank approximations}, ou LRA. Para o caso da aproximação da matriz de parâmetros de interação binária, baseada na
+obten\c{c}\~ao da decomposição em valores singulares, j\'a 
+mencionado,
+seleciona-se uma matriz de posto
+reduzido $r$ constru\'{\i}da focando nos $r$ maiores 
+valores singulares, a qual 
+minimiza a norma de Frobenius (que, em particular, não apresenta ponderação) da diferen\c{c}a entre a matriz original e a aproximada,
+  como é garantido pelo Teorema 
+ de Eckart-Young-Mirsk, veja \cite{golub}.  
+ Por outro lado, a minimização do erro do parâmetro de energia da equação de estado implica em uma ``aproximação de baixo posto ponderada'' ( em inglês ``weighted low rank approximation'',WLRA, \cite{lowrank}), uma vez que os parâmetros de energia das substâncias puras e a composição da fase agem como ponderadores na  medição da distância entre a matriz e sua aproximação.
+
+%--------------------------------------------------------
+\section{Resíduo de aproximação}
+%--------------------------------------------------------
+
+Em geral denota-se $a_F$ o parâmetro de energia na fase incipiente $F$. Assim, quando a fase incipiente é o vapor, denota-se o parâmetro de energia para a fase vapor por $a_V$, e quando $F=L$, o parâmetro de energia para  a fase líquida é $a_L$.
+
+Pela Equação \ref{eq4a} introduz-se a função 
+%
+\begin{eqnarray*} \label{af}
+ a_F(\mathbf{R}) = \mathbf{z}^t (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t \bullet \mathbf{R})\mathbf{z}, 
+\end{eqnarray*}
+%
+onde $\mathbf{R}$ é uma matriz $N \times N$ qualquer, e $\mathbf{z} = (z_1, \cdots z_N)^t$ é o vetor das frações molares dos componentes. Seja também $e(\mathbf{R})$ o resíduo da aproximação, (adaptada de \cite{gaganis2013improved})
+%
+\begin{eqnarray*} \label{106}
+e(\mathbf{R}) = a_F(\mathbf{C}) - a_F(\mathbf{R})
+&=& \mathbf{z}^t (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t \bullet \mathbf{C})\mathbf{z} - \mathbf{z}^t (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t \bullet\mathbf{R})\mathbf{z} \nonumber\\
+&=&  \mathbf{z}^t (\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t \bullet (\mathbf{C} - \mathbf{R}))\mathbf{z} = \mathbf{z}^t (\bar{\mathbf{A}} \bullet \mathbf{D})\mathbf{z},
+\end{eqnarray*}
+%
+onde $\bar{\mathbf{A}} = \sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t$ e $\mathbf{D} = \mathbf{C} - \mathbf{R}$. Seja ainda $\bar{\mathbf{d}} = \text{vec}(\mathbf{D})$ e $\bar{\mathbf{z}} = \text{vec}(\mathbf{z}\ \mathbf{z}^t)$. O resíduo da aproximação pode ser reescrito na forma (adaptada de \cite{gaganis2013improved})
+%
+\begin{eqnarray*}\label{111}
+e(\mathbf{R})
+&=&\mathbf{z}^t (\bar{\mathbf{A}} \bullet \mathbf{D})\mathbf{z} = \openone^t \text{vec}((\mathbf{z}\mathbf{z}^t)\bullet (\bar{\mathbf{A}} \bullet \mathbf{D})) \nonumber \\
+&=& \openone^t (\text{vec}(\mathbf{z}\mathbf{z}^t)\bullet \text{vec}(\bar{\mathbf{A}}) \bullet \text{vec}(\mathbf{D})) = \openone^t (\bar{\mathbf{z}} \bullet \bar{\mathbf{a}} \bullet \bar{\mathbf{d}}),
+\end{eqnarray*}
+%
+onde a segunda igualdade é consequência do item 4 da proposição \ref{proposta}, a terceira é consequência do item 1 da mesma proposição aplicada duas vezes e a última é das definições de $\bar{\mathbf{z}}$ e $\bar{\mathbf{d}}$ dadas anteriormente, sendo ainda $\bar{\mathbf{a}}  = \text{vec}(\bar{\mathbf{A}})$.
+
+Nota-se que, 
+%
+\begin{eqnarray}\label{112}
+e(\mathbf{R})
+&=& \openone^t (\bar{\mathbf{z}} \bullet \bar{\mathbf{a}} \bullet \bar{\mathbf{d}}) = \langle \openone, \bar{\mathbf{z}} \bullet \bar{\mathbf{a}} \bullet \bar{\mathbf{d}}\rangle = \langle  \bar{\mathbf{z}} \bullet \bar{\mathbf{a}}, \bar{\mathbf{d}} \rangle = \bar{\mathbf{d}}^t (\bar{\mathbf{z}} \bullet \bar{\mathbf{a}})
+\end{eqnarray}
+%
+onde as segundas e última igualdades é da definição do produto interno, e a terceira é  pelo item 5 da referida proposição e, como $e$ é um escalar, transpondo-se obtem-se $e = (\bar{\mathbf{z}} \bullet \bar{\mathbf{a}})^t \bullet  \bar{\mathbf{d}}$. Assim, (adaptada de \cite{gaganis2013improved})
+%
+\begin{eqnarray}\label{e19}
+e^2(\mathbf{R})
+&=& \bar{\mathbf{d}}^t (\bar{\mathbf{z}} \bullet \bar{\mathbf{a}})(\bar{\mathbf{z}} \bullet \bar{\mathbf{a}})^t \bar{\mathbf{d}} = \bar{\mathbf{d}} ^t ((\bar{\mathbf{z}} \bar{\mathbf{z}}^t)\bullet (\bar{\mathbf{a}}\bar{\mathbf{a}}^t))\bar{\mathbf{d}},
+\end{eqnarray}
+%
+onde a segunda igualdade vem do item 6 da proposição \ref{proposta}.
+
+%--------------------------------------------------------
+\section{Resíduo de aproximação total}
+%--------------------------------------------------------
+
+A Equação \ref{e19} mostra que o quadrado do resíduo da aproximação, $e^2(\mathbf{R})$, varia de acordo com a composição, representada pelo vetor $\bar{\mathbf{z}} = \text{vec}(\mathbf{z}\mathbf{z}^t)$, e com a temperatura (ou com a pressão), através do parâmetro de energia, representado pelo vetor $\bar{\mathbf{a}} = \text{vec}(\bar{\mathbf{A}}) = \text{vec}(\sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t)$. 
+
+Para obter uma expressão que represente uma medida da distância entre a matriz $\mathbf{C}$ e, por exemplo, uma matriz genérica de posto $r$, $\mathbf{R}$, que não dependa da composição nem da temperatura (ou da pressão), é computada uma média de $e^2(\mathbf{R})$ --- por meio de integrais --- entre todas as composições possíveis e entre todas os valores da temperatura (ou pressão). É isso que é feito nesta seção. Inicialmente são apresentados o espaço composicional e o espaço dos parâmetros de energia e em seguida é representada a média e se define a distância. Por fim se apresenta a estrutura da matriz do produto interno. 
+
+%--------------------------------------------------------
+\subsection{Espaço composicional --- Simplexos}
+%--------------------------------------------------------
+
+Denota-se por $S_{N-1}$ o espaço ($N-1$)-dimensional das composições, que é dado por \\ \\
+%
+$S_{N-1} = \left\{\mathbf{z} \in [0,1]^N | \sum_{i=1}^{N} z_i = 1\right\}$. \\
+
+Este conjunto é um exemplo de um ($N-1$) simplexo. Assumindo-se $N=2$ e $N=3$ tem-se, respectivamente, $S_1= \left\{z \in [0,1]^2 |\ z_1 + z_2 = 1\right\}$, que é chamado conjunto 1-simplexo, e 
+$S_2= \left\{z \in [0,1]^3 | \ z_1 + z_2 + z_3 = 1\right\}$, chamado conjunto 2-simplexo, representados na Figura \ref{rotulo1}.
+%
+%\begin{figure}[!ht]{12cm}
+%  \caption{ Espaço composicional em $\mathbb{R}^2$, o 1-simplexo, e o espaço composicional em $\mathbb{R}^3$, o 2-simplexo.} \label{rotulo1}
+%  \fbox{\includegraphics[scale=0.7]{Figuras/Fig11.png}}
+%  \legend{Conjunto de possíveis composições para misturas de dois ou de três componentes.}
+%\end{figure}
+
+%--------------------------------------------------------
+\subsection{Espaço dos parâmetros de energia}
+%-------------------------------------------------------- 
+
+O vetor parâmetro de energia $\mathbf{a} = \mathbf{a}(T) = (a_1(T), \ldots, a_N(T))^t$, denota no espaço $n$-dimensional os possíveis valores de parâmetros de energia de cada substância e em cada temperatura (é uma função da temperatura). Assim, o espaço dos parâmetros de energia é $S_{\mathbf{a}} = \left\{\mathbf{a}(T)\in \mathbb{R}^N , \text{para \ todo} \ T_1\leq T \leq T_2 \right\} = \text{Im}(\mathbf{a})$.\\
+
+Uma ilustração de $S_{\mathbf{a}}$, quando $N=3$, é dada na Figura \ref{rotulo3}.
+%
+%\begin{figure}[!ht]{12cm}
+%  \caption{$S_{\mathbf{a}}$ para $N=3$.} \label{rotulo3}
+%  \fbox{\includegraphics[scale=0.7]{Figuras/Fig3.png}}
+%  \legend{Ilustração do vetor parâmetro de energia para um dado intervalo de temperatura [$T_1$, $T_2$].}
+%\end{figure}
+
+%Considerando $m$ o mínimo de $\epsilon $, o argumento mínimo de $\epsilon $ é dado por
+%%
+%\begin{eqnarray}\label{108}
+%\text{argmin} \ \epsilon = \left\{(\mu_1,...,\mu_r,\mathbf{w}_1,...,\mathbf{w}_r) \in \mathbb{R}^r \times (\mathbb{R}^N)^r | \ \epsilon ({\mu_1 ,\mu_2 ,...,\mu_r ,\mathbf{w}_1 ,\mathbf{w}_2, ..., \mathbf{w}_r}) = m \right\}.
+%\end{eqnarray}
+
+%--------------------------------------------------------
+\subsection{Média do resíduo}
+%-------------------------------------------------------- 
+
+Pode-se calcular a integral do erro quadrático, de acordo com o processo de equilíbrio termodinâmico, a ser analisado (se varia ou não com a temperatura). 
+
+A aproximação ótima da matriz $\mathbf{C}$ é obtida pela minimização do total do quadrado do resíduo de aproximação, $e^2$, dado pela Equação \ref{e19} para todos os valores possíveis de parâmetros de energia e todos os possíveis valores da composição, $\mathbf{z}$. Isto é, define-se o erro total $\epsilon$, por (adaptada de \cite{gaganis2013improved})
+%
+\begin{eqnarray*}\label{107}
+\epsilon(\mathbf{R}) = \int_{S_a} \int_{S_{N-1}} e^2(\mathbf{R})d \mathbf{z}d \mathbf{a}.
+\end{eqnarray*}
+%
+Assim, o erro total de aproximação, $\epsilon(\mathbf{R})$, é obtido pela média do total dos erros quadráticos de aproximação $e^2(\mathbf{R})$ para todo o espaço composicional, $S_{N-1}$, e todo o espaço do parâmetro de energia, $S_{\mathbf{a}}$, conforme é detalhado em seguida.   
+
+Como $\bar{\mathbf{d}}$, Equação \ref{e19}, não depende de $\mathbf{z}$ nem de $\mathbf{a}$ e nem $\mathbf{z}$ nem $\mathbf{a}$ dependem um do outro, pode-se escrever a equação do erro, em função de uma matriz arbitrária $\mathbf{R}$, como (adaptada de \cite{gaganis2013improved})
+%
+\begin{eqnarray}\label{dd}
+\epsilon(\mathbf{R})
+&=& \int_{S_{\mathbf{a}}} \int_{S_{N-1}} \bar{\mathbf{d}} ^t ((\bar{\mathbf{z}} \bar{\mathbf{z}}^t)\bullet (\bar{\mathbf{a}} \bar{\mathbf{a}}^t))\bar{\mathbf{d}} \ d\mathbf{z} d\mathbf{a} \nonumber \\
+&=&
+\bar{\mathbf{d}}^t  \left[ \int_{S_{\mathbf{a}}} \left(  \int_{S_{N-1}} (\bar{\mathbf{z}}  \bar{\mathbf{z}}^t) d\mathbf{z} \right)  \bullet \left(  \bar{\mathbf{a}}  \bar{\mathbf{a}}^t \right) \ d \mathbf{a} \right]  \bar{\mathbf{d}} \nonumber \\
+&=&
+\bar{\mathbf{d}}^t \left( \left( \int_{S_{N-1}}(\bar{\mathbf{z}} \bar{\mathbf{z}}^t) d\mathbf{z}\right)  \bullet \left( \int_{S_{\mathbf{a}}}(\bar{\mathbf{a}}  \bar{\mathbf{a}}^t  \ d\mathbf{a} \right) \right) \bar{\mathbf{d}} = \bar{\mathbf{d}}^t \left(   \mathbf{\Psi} \bullet \mathbf{J} \right) \bar{\mathbf{d}}
+\end{eqnarray}
+%
+onde , recorda-se, e define-se $\bar{\mathbf{d}} = \text{vec}(\mathbf{D}) = \text{vec}(\mathbf{C} - \mathbf{R})$,
+%
+\begin{eqnarray}\label{ja}
+\mathbf{\Psi} = \int_{S_{N-1}}\bar{\mathbf{z}} \bar{\mathbf{z}}^t d\mathbf{z} \  \text{e} \ 
+\mathbf{J} =  \int_{S_a}\bar{\mathbf{a}}  \bar{\mathbf{a}}^t \ d\mathbf{a}.
+\end{eqnarray}
+
+
+Como o parâmetro de energia está em função da temperatura, usando a parametrização de $S_{\mathbf{a}}$ tem-se que 
+%
+\begin{equation}\label{9j}
+\mathbf{J} =  \int_{S_a}\bar{\mathbf{a}}  \bar{\mathbf{a}}^t \ d\mathbf{a} = \int_{T_1}^{T_2} \bar{\mathbf{a}}  \bar{\mathbf{a}}^t \Vert\frac{d\mathbf{a}}{dT}\Vert \, dT,
+\end{equation}
+%   
+onde $T_1$ e $T_2$ indicam o intervalo de temperatura, como exemplificado na Figura \ref{rotulo3}.  
+
+%--------------------------------------------------------
+\subsection{Distância da energia}\label{secEnergia}
+%-------------------------------------------------------- 
+
+
+A Equação \ref{dd} sugere a definição de um produto interno ponderado no espaço das matrizes. Seja $\mathbf{X}$ e $\mathbf{Y}$ duas matrizes $N \times N$. Seja ainda $\mathbf{W} = \mathbf{\Psi}\bullet\mathbf{J}$, uma matriz $N^2 \times N^2$, onde $\mathbf{\Psi}$ e $\mathbf{J}$ são definidas na Equação \ref{ja}. Então define-se um produto interno motivado pela energia (forças atrativas) em $\mathcal{M}(N, N)$ por:
+%
+\begin{eqnarray*}
+\langle \mathbf{X}, \mathbf{Y}\rangle_E = \langle \mathrm{vec}(\mathbf{X}),\mathrm{vec}(\mathbf{Y}) \rangle_{\text{W}} = \mathrm{vec}(\mathbf{X})^t\mathbf{W}\mathrm{vec}(\mathbf{Y}).
+\end{eqnarray*}
+
+Como apresentado no Capítulo \ref{Cap3aux}, dado um produto interno é possível definir-se uma norma e em seguida uma distância. Assim, define-se a norma
+%
+\begin{equation} \label{xe}
+\Vert \mathbf{X}\Vert_E = (\langle \mathrm{vec}(\mathbf{X}), \mathrm{vec}(\mathbf{X})\rangle_{_{\text{W}}})^{1/2},
+\end{equation}
+%
+e a distância
+%
+\begin{eqnarray*}
+d_E(\mathbf{X}, \mathbf{Y}) = \Vert \mathbf{X} - \mathbf{Y}\Vert_E. 
+\end{eqnarray*}
+
+Portanto, dada a matriz de interação binária, $\mathbf{C}$, e uma matriz genérica (possivelmente de posto $r$), $\mathbf{R}$, pode-se calcular a distância entre as matrizes usando $d_E$,
+%
+\begin{eqnarray*}
+d_E(\mathbf{C}, \mathbf{R}) = \Vert \mathbf{C} - \mathbf{R}\Vert_E = \langle \mathbf{C} - \mathbf{R}, \mathbf{C} - \mathbf{R} \rangle_E^{1/2}, \nonumber
+\end{eqnarray*}
+%
+e, usando as definições, pode-se obter uma expressão mais detalhada desta distância (ao quadrado, por simplicidade), lembrando-se que $\mathbf{D} = \mathbf{C}-\mathbf{R}$
+%
+\begin{eqnarray*}
+(d_E(\mathbf{C}, \mathbf{R}))^2 = \langle \mathbf{D}, \mathbf{D} \rangle_E= \mathrm{vec}(\mathbf{D})^t \mathbf{W}\mathrm{vec}(\mathbf{D}) = \bar{\mathbf{d}}^t(\mathbf{\Psi}\bullet \mathbf{J})\bar{\mathbf{d}},
+\end{eqnarray*}
+%
+onde $\mathbf{\Psi}$ e $\mathbf{J}$ são dadas na Equação \ref{ja}, isto é, $\epsilon(\mathbf{R})$, na Equação \ref{dd}, nada mais é do que o quadrado da distância entre $\mathbf{C}$ e $\mathbf{R}$, considerando a distância $d_E$, ou seja, $\epsilon(\mathbf{R}) = (d_E(\mathbf{C}, \mathbf{R}))^2$.
+
+É a minimização desta distância entre as matrizes de posto $r$, para uma $\mathbf{C}$ dada, que é central na redução da dimensionalidade pretendida, como é visto nos capítulos subsequentes.  
+
+%=====================================================================
+\section{Estrutura da matriz do produto interno}\label{MatrizW}
+%======================================================
+
+%--------------------------------------------------------
+\subsection{Estrutura da matriz da composição}
+%--------------------------------------------------------
+
+É conveniente observar a estrutura de cada entrada do produto $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$  presente na definição de $\mathbf{\Psi}$, por causa das simetrias presentes, como é esmiuçado a partir de agora. Como 
+%
+\begin{eqnarray*}
+\mathbf{z}\mathbf{z}^t = \left( \begin{array}{clrr}
+z_1\\ z_2 \\ \vdots \\ z_N
+\end{array}\right) \left( \begin{array}{clrr}
+z_1 \ z_2 \ ... \ z_N 
+\end{array}\right) = \left(\begin{array}{cccc}
+ z_1 z_1 & z_1 z_2  & \ldots & z_1 z_N \\
+ z_2 z_1 & z_2 z_2 & \ldots & z_2 z_N \\
+\vdots & \vdots & \ddots & \vdots \\
+ z_N z_1 & z_N z_2 & \ldots & z_N z_N \\
+\end{array}\right)
+\end{eqnarray*}
+%
+a matriz $\mathbf{z}\mathbf{z}^t$ tem dimensão $N \times N$, \ e \ $\bar{\mathbf{z}} = \text{vec}(\mathbf{z}\mathbf{z}^t)$ é um vetor com $N^2$ entradas.  Esquematicamente, $\bar{\mathbf{z}}$ é dado por,
+%
+\begin{footnotesize}
+\begin{eqnarray}\label{zzz}
+\bar{\mathbf{z}}^t = \left(\begin{array}{cccc}z_1 z_1 \ z_2 z_1 \ ... \ z_N z_1 \ z_1 z_2 \ z_2 z_2 \ ... \ z_N z_2 \ ... \ z_1 z_N \ z_2 z_N \ ... \ z_N z_N.
+\end{array}\right)
+\end{eqnarray}
+\end{footnotesize}
+
+Observando-se o vetor $\bar{\mathbf{z}}$, pode-se concluir que 
+%
+\begin{eqnarray*}
+\bar{z}_k
+= \left\{\begin{array}{rll}
+z_k z_1, & \hbox{se} & 1 \leq k \leq N \\
+z_{k-N} z_2, & \hbox{se} & N+1 \leq k \leq 2N \\
+\vdots &  & \vdots \\
+z_{k-(N^2 -N)},  z_N & \hbox{se} & (N-1)(N+1) \leq k \leq N^2
+\end{array}\right.,
+\end{eqnarray*}
+%
+(veja  Figura \ref{rotulo4}). Ou seja, dado $k = 1,...,N^2$, existe um único $j = 1,...,N$ que corresponde à coluna de $\mathbf{z}\mathbf{z}^t$ donde $\bar{z}_k$ provém, tal que $1 + (j-1)N \leq k \leq jN$ e na coluna, a posição é $k-(j-1)N$. Assim, $\bar{z}_k = z_{k-(j-1)N}z_j$. Essa é a mesma estrutura que já surgiu no Capítulo anterior associado à transformação de uma matriz $M \times N$ em um vetor $MN$ através do operador vec, e vice-versa.
+%
+%\begin{figure}[h!]{12cm}
+%  \caption{Conjunto de índices do vetor $\bar{\mathbf{z}}$, {$i = 1,...,N^2$}.} \label{rotulo4}
+%  \fbox{\includegraphics[scale=0.5]{Figuras/Fig4.png}}
+%  \legend{O conjunto de índices é dividido em $N$ segmentos, denotados por $j$, com $j$ variando de $1,...,N$.}
+%\end{figure}
+
+A estrutura geométrica está esquematizada na Figura \ref{rotulo4}.
+
+Utilizando a notação estabelecida no capítulo anterior, pode-se verificar que o segmento (coluna) a que pertence o índice $k$ é dado por $i(k) = q(k-1, N)+1$. Dentro do segmento (linha) pode-se adotar uma numeração local, variando de $1$ a $N$, que para $k$ é $r(k-1,N)+1$. Assim, o elemento $\bar{z}_k$ é dado pelo produto de dois valores de $z$, um referente ao segmento ao qual $i$ pertence, $z_{q(k-1,N)+1}$, e outro referente à posição dentro do segmento, $z_{r(k-1,N)+1}$. Isto é,
+%
+\begin{eqnarray*}
+\bar{z}_k = z_{q(k-1,N)+1} z_{r(k-1,N)+1}.
+\end{eqnarray*}
+
+Agora $\bar{\mathbf{z}}\bar{\mathbf{z}}^t = \text{vec}(\mathbf{z}\mathbf{z}^t)\text{vec}(\mathbf{z}\mathbf{z}^t)^t$,onde $\bar{\mathbf{z}}$ é dada pela Equação \ref{zzz}, donde  $\bar{\mathbf{z}}\bar{\mathbf{z}}^t $ é uma matriz $N^2 \times N^2$ com a seguinte estrutura,
+%
+\pagebreak
+\begin{landscape}
+\begin{scriptsize}
+\begin{eqnarray*}
+\bar{\mathbf{z}}\bar{\mathbf{z}}^t 
+&=& \left(\begin{array}{ccccccccccccc}
+z_1 z_1 z_1 z_1  &  z_1 z_1 z_2 z_1 & \ldots & z_1 z_1 z_N z_1 &  z_1 z_1 z_1 z_2  &  z_1 z_1 z_2 z_2 & \ldots & z_1 z_1 z_N z_2  & \ldots & z_1 z_1 z_1 z_N &  z_1 z_1 z_2 z_N  & \ldots & z_1 z_1 z_N z_N \\
+z_2 z_1 z_1 z_1  &  z_2 z_1 z_2 z_1 & \ldots & z_2 z_1 z_N z_1  &  z_2 z_1 z_1 z_2 &  z_2 z_1 z_2 z_2 & \ldots & z_2 z_1 z_N z_2  & \ldots & z_2 z_1 z_1 z_N &  z_2 z_1 z_2 z_N  & \ldots & z_2 z_1 z_N z_N \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+z_N z_1 z_1 z_1 &  z_N z_1 z_2 z_1 & \ldots & z_N z_1 z_N z_1 &  z_N z_1 z_1 z_2  &  z_N z_1 z_2 z_2 & \ldots & z_N z_1 z_N z_2  & \ldots &  z_N z_1 z_1 z_N &  z_N z_1 z_2 z_N & \ldots & z_N z_1 z_N z_N \\
+z_1 z_2 z_1 z_1 &  z_1 z_2 z_2 z_1 & \ldots & z_1 z_2 z_N z_1 &  z_1 z_2 z_1 z_2 &  z_1 z_2 z_2 z_2 & \ldots & z_1 z_2 z_N z_2 & \ldots & z_1 z_2 z_1 z_N &  z_1 z_2 z_2 z_N  & \ldots & z_1 z_2 z_N z_N \\
+z_2 z_2 z_1 z_1  &  z_2 z_2 z_2 z_1 & \ldots & z_2 z_2 z_N z_1  &  z_2 z_2 z_1 z_2 &  z_2 z_2 z_2 z_2 & \ldots & z_2 z_2 z_N z_2  & \ldots & z_2 z_2 z_1 z_N &  z_2 z_2 z_2 z_N  &  \ldots &  z_2 z_2 z_N z_N \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+z_N z_2 z_1 z_1 &  z_N z_2 z_2 z_1 & \ldots & z_N z_2 z_N z_1  &  z_N z_2 z_1 z_2 &  z_N z_2 z_2 z_2 & \ldots & z_N z_2 z_N z_2  & \ldots &  z_N z_2 z_1 z_N &  z_N z_2 z_2 z_N & \ldots & z_N z_2 z_N z_N \\ 
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+z_1 z_N z_1 z_1 &  z_1 z_N z_2 z_1 & \ldots & z_1 z_N z_N z_1 &  z_1 z_N z_1 z_2 &  z_1 z_N z_2 z_2 & \ldots & z_1 z_N z_N z_2 & \ldots & z_1 z_N z_1 z_N &  z_1 z_N z_2 z_N & \ldots & z_1 z_N z_N z_N \\
+z_2 z_N z_1 z_1 &  z_2 z_N z_2 z_1 & \ldots & z_2 z_N z_N z_1 &  z_2 z_N z_1 z_2  &  z_2 z_N z_2 z_2 & \ldots & z_2 z_N z_N z_2 & \ldots & z_2 z_N z_1 z_N &  z_2 z_N z_2 z_N  & \ldots & z_2 z_N z_N z_N \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+z_N z_N z_1 z_1 &  z_N z_N z_2 z_1 & \ldots & z_N z_N z_N z_1 &  z_N z_N z_1 z_2 &  z_N z_N z_2 z_2 & \ldots & z_N z_N z_N z_2 & \ldots & z_N z_N z_1 z_N &  z_N z_N z_2 z_N & \ldots & z_N z_N z_N z_N\\ 
+\end{array}\right) ,
+\end{eqnarray*}
+\end{scriptsize} 
+\end{landscape}
+\pagebreak
+%
+ou ainda, em blocos de tamanho $N \times N$, de estrutura simples,
+%
+\begin{eqnarray}\label{120a}
+\bar{\mathbf{z}}\bar{\mathbf{z}}^t
+&=& \left(\begin{array}{cccc}
+ (\mathbf{z}\mathbf{z}^t)z_1 z_1 & (\mathbf{z}\mathbf{z}^t)z_1 z_2  & \ldots & (\mathbf{z}\mathbf{z}^t)z_1 z_N \\
+ (\mathbf{z}\mathbf{z}^t)z_2 z_1 & (\mathbf{z}\mathbf{z}^t)z_2 z_2 & \ldots & (\mathbf{z}\mathbf{z}^t)z_2 z_N \\
+\vdots & \vdots & \ddots & \vdots \\
+ (\mathbf{z}\mathbf{z}^t)z_N z_1 & (\mathbf{z}\mathbf{z}^t)z_N z_2 & \ldots & (\mathbf{z}\mathbf{z}^t)z_N z_N \\
+\end{array}\right).
+\end{eqnarray} 
+
+Observa-se que a matriz $\mathbf{z}\mathbf{z}^t$ aparece nos $N^2$ blocos da matriz $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$, veja Equação \ref{120a}. Seja 
+%
+\begin{eqnarray*}\label{121a}
+\mathbf{B}_{ij} = (\mathbf{z}\mathbf{z}^t)z_i z_j  =  \left(\begin{array}{cccc}
+ z_1z_1z_i z_j & z_1 z_2 z_i z_j  & \ldots & z_1z_N z_i z_j \\
+ z_2 z_1 z_i z_j & z_2 z_2 z_i z_j & \ldots & z_2 z_N z_i z_j \\
+\vdots & \vdots & \ddots & \vdots \\
+ z_N z_1 z_i z_j & z_N z_2 z_i z_j & \ldots & z_N z_N z_i z_j  \\
+\end{array}\right),
+\end{eqnarray*}
+%
+então, pode-se escrever
+%
+\begin{eqnarray*}\label{122a}
+\bar{\mathbf{z}}\bar{\mathbf{z}}^t =  \left(\begin{array}{cccc}
+ \mathbf{B}_{11} & \mathbf{B}_{12} & \ldots & \mathbf{B}_{1N} \\
+ \mathbf{B}_{21} & \mathbf{B}_{22} & \ldots & \mathbf{B}_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+ \mathbf{B}_{N1} & \mathbf{B}_{N2} & \ldots & \mathbf{B}_{NN}\\
+\end{array}\right),
+\end{eqnarray*} 
+%
+onde cada bloco tem dimensão $N \times N$.  
+
+Pela Tabela \ref{tab:Tabela3}, pode-se facilmente obter a posição de uma determinada entrada da matriz $\bar{\mathbf{z}} \bar{\mathbf{z}}^t$, {\em i.e.}, o elemento $(\bar{\mathbf{z}}\bar{\mathbf{z}}^t)_{ij} = \bar{z}_i \bar{z}_j$ também pode ser determinado de maneira análoga à que foi feita para as entradas de $\bar{\mathbf{z}}$. Assim, é possível saber em qual bloco $\mathbf{B}_{ij}$ e em que posição dentro desse bloco está esse elemento da matriz.  
+
+%--------------------------------------------------------
+\subsection{Média da matriz da composição} \label{ma} 
+%--------------------------------------------------------
+
+Conhecendo-se agora a estrutura de $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$, haverá grande redução de trabalho ao se calcular $\mathbf{\Psi}$ da Equação \ref{ja}, pois, observa-se que $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$ é uma matriz simétrica com inúmeras outras simetrias na sua triangular superior ou inferior. 
+
+A matriz $\mathbf{\Psi}$ é dada por
+%
+\begin{eqnarray}\label{123a}
+\mathbf{\Psi}
+&=& \int_{S_{N-1}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d\mathbf{z},
+\end{eqnarray}
+%
+onde a região de integração pode ser escrita explicitamente através de uma integral iterada,
+%
+\begin{eqnarray*}
+\mathbf{\Psi}
+&=& \int_{z_1=0}^1 \int_{z_2 = 0}^{1-z_1} ... \int_{z_{N-1} = 0}^{1-z_1 - ...- z_{N-2}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d_{N-1} ... dz_2dz_1,
+\end{eqnarray*}\\
+%
+com o valor $z_N = 1-\sum_{i=1}^{N-1} z_i$  substituído em $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$. 
+
+Esta integral deve ser calculada apenas para entradas diferentes entre si na matriz, visto que algumas se repetem. Como cada bloco tem dimensão $N \times N$, tem-se $N^2 \times N^2$ integrais a serem resolvidas. Considerando que são $N^2$ entradas na diagonal, tem-se  $(N^2 \times N^2 - N^2)/2 +N^2 = N^2(N^2+1)/2$ integrais a serem resolvidas, devido à redução permitida pela simetria da matriz. Pode-se ainda observar que, pela estrutura da matriz, maior redução no número de cálculos é possível. Isso pode ser melhor compreendido através de exemplos para a matriz $\mathbf{\Psi}$, quando $N$ é de baixo valor.
+%
+\begin{ex}\label{exem1} Cálculo de $\mathbf{\Psi}$ quando $N=2$. \end{ex}
+%
+Pelas definições,
+%
+\begin{eqnarray*}\label{124a}
+\mathbf{z}\mathbf{z}^t = \left( \begin{array}{clrr}
+z_1\\ z_2
+\end{array}\right) \left( \begin{array}{clrr}
+z_1 \ z_2
+\end{array}\right) = \left(\begin{array}{cccc}
+ z_1 z_1 & z_1 z_2 \\
+ z_2 z_1 & z_2 z_2 \\
+\end{array}\right),
+\end{eqnarray*}
+%
+\begin{eqnarray*}\label{125a}
+\bar{\mathbf{z}}\bar{\mathbf{z}}^t 
+&=& \left(\begin{array}{cccc}
+ (\mathbf{z}\mathbf{z}^t)z_1 z_1 & (\mathbf{z}\mathbf{z}^t)z_1 z_2 \\
+ (\mathbf{z}\mathbf{z}^t)z_2 z_1 & (\mathbf{z}\mathbf{z}^t)z_2 z_2 \\
+\end{array}\right) \nonumber \\
+&=&
+\left(\begin{array}{cccc}
+z_1 z_1 z_1 z_1  &  z_1 z_2 z_1 z_1  & z_1 z_1 z_1 z_2 &  z_1 z_2 z_1 z_2 \\
+z_2 z_1 z_1 z_1  &  z_2 z_2 z_1 z_1  & z_2 z_1 z_1 z_2  &  z_2 z_2 z_1 z_2 \\ 
+z_1 z_1 z_2 z_1  &  z_1 z_2 z_2 z_1  & z_1 z_1 z_2 z_2 &  z_1 z_2 z_2 z_2 \\
+z_2 z_1 z_2 z_1  &  z_2 z_2 z_2 z_1  & z_2 z_1 z_2 z_2  &  z_2 z_2 z_2 z_2 \\ 
+\end{array}\right) .
+\end{eqnarray*} 
+%
+Então,
+%
+\begin{eqnarray}\label{126a}
+\mathbf{\Psi}
+&=& \int_{S_1} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d\mathbf{z} \nonumber \\ 
+&=& \int_{S_1}  \left(\begin{array}{cccc}
+ z_1^4  &  z_1^3 z_2   & z_1^3 z_2 &  z_1^2 z_2^2 \\
+z_1^3 z_2  &  z_1^2 z_2^2  & z_1^2 z_2^2  &  z_1 z_2^3 \\ 
+z_1^3 z_2  &  z_1^2 z_2^2  & z_1^2 z_2^2 &  z_1 z_2^3 \\
+z_1^2 z_2^2  &  z_1 z_2^3  & z_1 z_2^3  &  z_2^4 \\ 
+\end{array}\right) d\mathbf{z} .
+\end{eqnarray}
+
+Como a matriz é simétrica, a região de integração é simétrica, e pode-se observar que alguns termos se repetem acima na matriz triangular superior ou inferior, então apenas algumas integrais são calculadas. Ainda que os cálculos para uma matriz $N^2 \times N^2$, sejam reduzidos de $N^2 \times N^2$ para $N^2(N^2+1)/2$, que no caso de $N=2$ são, respectivamente, 16 e 10, ainda existem termos de mesmo valor dentre estes que se deseja calcular, devido a simetrias que podem ser observadas dentro da matriz $\mathbf{\Psi}$. Pode-se, por exemplo, observar que $ \int_{S_1} z_1^4 dz =  \int_{S_1} z_2^4 dz$ e $ \int_{S_1} z_1^3z_2 dz =  \int_{S_1} z_1z_2^3 dz$. Explicitando, como resultado das simetrias, $\mathbf{\Psi}$ terá a forma geral
+%
+\begin{eqnarray}\label{matPsia}
+\mathbf{\Psi} 
+&=& \left(\begin{array}{cccc}
+ \alpha_1  &  \alpha_2  & \alpha_2 &  \alpha_3\\
+\alpha_2   &  \alpha_3  & \alpha_3  &  \alpha_3\\ 
+\alpha_2   &  \alpha_3   & \alpha_3 &  \alpha_3  \\
+\alpha_3   & \alpha_3   & \alpha_3   &  \alpha_1 \\ 
+\end{array}\right),
+\end{eqnarray}
+%
+onde $\alpha_1 = \int_{S_1} z_1^4 dz$, $\alpha_2 = \int_{S_1} z_1 z_2^3 dz$ e $\alpha_3 = \int_{S_1} z_1^2 z_2^2 dz$. Assim, das possíveis 16 integrais, apenas 3 são necessárias.
+
+Neste caso, calcula-se a integral de linha das funções $z_1^4, z_1z_2^3,\ \text{e} \  z_1^2z_2^2$, na reta $z_1 + z_2 = 1$, com $z_1,z_2  \in [0,1]$, onde a região de integração $S_1$ mostrada na Figura \ref{rotulo1}. Pela definição de integral de linha, parametrizando a equação $z_1 + z_2 = 1$ em função de $z_1$, obtém-se 
+$\gamma(z_1) = (\gamma_1(z_1),\gamma_2(z_1)) = (z_1, 1-z_1)$ com $0\leq z_1 \leq1$, $\gamma'(z_1) = (1, -1)$. Assim, $\Vert\gamma'\Vert = \sqrt{2}$ e a função integranda se torna $f(z_1,z_2) = f(\gamma(z_1))= f(\gamma_1(z_1), \gamma_2(z_1))$, donde,
+%
+\begin{eqnarray*}\label{127a}
+\alpha_1 =\int_{S_1} z_1^4 dz = \int_{0}^1 f(\gamma(z_1)) \Vert\gamma' \Vert dz_1 =  \int_{0}^1 \sqrt{2} z_1^4 dz_1 = \frac{\sqrt{2}}{5},
+\end{eqnarray*}
+%
+\begin{eqnarray*}\label{129a}
+\alpha_2 =  
+&=& \int_{S_1} z_1z_2^3 dz = \int_{0}^1 f(\gamma(z_1)) \Vert\gamma'\Vert dz_1 = \int_{0}^1 \sqrt{2} z_1(1-z_1)^3 dz_1 = \frac{\sqrt{2}}{20},
+\end{eqnarray*}
+%
+\begin{eqnarray*}\label{131a}
+\alpha_3 = 
+&=& \int_{S_1} z_1^2 z_2^2 dz = \int_{S_1} f(\gamma(z_1)) \Vert\gamma'\Vert dz_1 = \int_{0}^1 \sqrt{2} z_1^2(1-z_1)^2 dz_1 = \frac{\sqrt{2}}{30}.
+\end{eqnarray*}
+
+Finalmente, substituindo-se o valor dessas integrais na Equação \ref{matPsia} tem-se que a matriz $\mathbf{\Psi}$ é dada por
+%
+\begin{eqnarray*}\label{126aa}
+\mathbf{\Psi} =  \left(\begin{array}{cccc}
+ \sqrt{2}/5 & \sqrt{2}/20  & \sqrt{2}/20 &  \sqrt{2}/30 \\
+\sqrt{2}/20  &  \sqrt{2}/30  & \sqrt{2}/30  &  \sqrt{2}/20 \\ 
+\sqrt{2}/20  &  \sqrt{2}/30  & \sqrt{2}/30 &  \sqrt{2}/20 \\
+\sqrt{2}/30  &  \sqrt{2}/20  & \sqrt{2}/20  &  \sqrt{2}/5 \\ 
+\end{array}\right).
+\end{eqnarray*}
+\fim 
+
+\begin{ex}\label{exem2a} Cálculo de $\mathbf{\Psi}$ quando $N=3$. \end{ex}
+
+Independente do valor de $N$, o grau máximo para os termos $z_i$, $i=1,..N$, é 4. No caso de $N=3$, aparecem os termos $z_1^4$, $z_2^4$, $z_3^4$, $z_1z_2^3$, $z_1^3z_2$, $z_1^3z_3$, $z_1z_3^3$, $z_2^3z_3$, $z_2z_3^3$, $z_1^2z_3^2$, $z_2^2z_3^2$ $z_1^2z_2^2$, $z_1^2z_2z_3$, $z_1z_2^2z_3$, $z_1z_2z_3^2$. Mas, por simetria da região de integração, há apenas quatro integrais com valores potencialmente diferentes, $\alpha_1 = \int_{S_1} z_1^4 dz$, $\alpha_2 = \int_{S_1} z_1^3 z_2 dz$, $\alpha_3 = \int_{S_1} z_1^2 z_2^2 dz$ e  $\alpha_4 = \int_{S_1} z_1^2 z_2 z_3 dz$. Portanto, a estrutura geral de $\mathbf{\Psi}$ é 
+%
+\begin{eqnarray}\label{matPsigeral}
+\mathbf{\Psi} 
+&=& \left(\begin{array}{ccccccccc}
+ \alpha_1  &  \alpha_2  & \alpha_2 & \alpha_2  &  \alpha_3  & \alpha_4 & \alpha_2  &  \alpha_4  & \alpha_3  \\
+\alpha_2   &  \alpha_3  & \alpha_4  &   \alpha_3  &  \alpha_2  & \alpha_4  &  \alpha_4  &  \alpha_4  & \alpha_4 \\ 
+\alpha_2   &  \alpha_4  & \alpha_3  &   \alpha_4  &  \alpha_4  & \alpha_4  &  \alpha_3  &  \alpha_4  & \alpha_2 \\ 
+\alpha_2   &  \alpha_3  & \alpha_4  &   \alpha_3  &  \alpha_2  & \alpha_4  &  \alpha_4  &  \alpha_4  & \alpha_4 \\ 
+\alpha_3   &  \alpha_2  & \alpha_4  &   \alpha_2  &  \alpha_1  & \alpha_2  &  \alpha_4  &  \alpha_2  & \alpha_3 \\ 
+\alpha_4   &  \alpha_4  & \alpha_4  &   \alpha_4  &  \alpha_2  & \alpha_3  &  \alpha_4  &  \alpha_3  & \alpha_3 \\ 
+\alpha_2   &  \alpha_4  & \alpha_3  &   \alpha_4  &  \alpha_4  & \alpha_4  &  \alpha_3  &  \alpha_4  & \alpha_2 \\ 
+\alpha_4   &  \alpha_4  & \alpha_4  &   \alpha_4  &  \alpha_2  & \alpha_3  &  \alpha_4  &  \alpha_3  & \alpha_2 \\ 
+\alpha_3   &  \alpha_4  & \alpha_2  &   \alpha_4  &  \alpha_3  & \alpha_3  &  \alpha_2  &  \alpha_2  & \alpha_1. \\ 
+\end{array}\right).
+\end{eqnarray}
+
+Para efeitos de ilustração, calcula-se a integral da função $z_1^4$ no simplexo $S_2$ contido no plano $z_1+z_2+ z_3 = 1$, com $z_1,z_2,z_3 \in [0,1]$ como mostra a Figura \ref{rotulo1}. Parametriza-se $S_2$ como 
+%
+\begin{eqnarray*}
+(z_1, z_2) = \gamma(z_1,z_2) = (\gamma_1(z_1, z_2),\gamma_2(z_1, z_2), \gamma_3(z_1, z_2)) = (z_1,z_2 , 1-z_1-z_2).
+\end{eqnarray*}
+
+O vetor normal a $S_2$ é \\ 
+%
+\begin{eqnarray*}
+\frac{\partial \gamma}{\partial z_1} \times \frac{\partial \gamma}{\partial z_2} =  \left(\begin{array}{ccc}
+\hat{\i} & \hat{\j} & \hat{\j} \\
+ 1 & 0 & -1 \\
+ 0 & 1 & -1 \\
+\end{array}\right) 
+=  (+1)\hat{\i} + (+1)\hat{\j} + (+1)\hat{\j} = (1, 1, 1),
+\end{eqnarray*}
+%
+donde $\Vert \frac{\partial \gamma}{\partial z_1} \times \frac{\partial \gamma}{\partial z_2} \Vert = \Vert(1, 1, 1)\Vert = \sqrt{3}$ e a função integranda se escreve como
+%
+\begin{eqnarray*}
+f(z_1, z_2, z_3) 
+&=&  f(\gamma_1 (z_1, z_2), \ \gamma_2 (z_1, z_2), \ \gamma_3 (z_1, z_2)) = f(z_1, z_2, 1-z_1 - z_2).
+\end{eqnarray*}
+%
+Tem-se
+%
+\begin{eqnarray*}
+\alpha_1 =
+&=& \int_{S_1} z_1^4 dz = \int_{0}^{1} \int_{0}^{1-z_1} \int_{0}  ^{1-z_1 -z_2} \sqrt{3} z_1^4 dz_3 dz_2 dz_1 \\
+&=& \int_{0}^{1} \sqrt{3} z_1^4 ( \int_{0}^{1-z_1} \int_{0}^{1- z_1 -z_2} 1 dz_3 dz_2) dz_1\\ 
+&=& \int_{0}^{1} \sqrt{3} z_1^4 (\int_{0}^{1- z_1} (1- z_1 -z_2) dz_2) dz_1 = \int_{0}^{1} \sqrt{3} z_1^4 \frac{(1-z_1)^2}{2} dz_1 = \frac{\sqrt{3}}{210}.
+\end{eqnarray*}
+\fim
+ 
+De maneira análoga, pode-se obter a matriz $\mathbf{\Psi}$ para outras dimensões.
+
+%--------------------------------------------------------
+\subsection{Matriz do parâmetro de energia}
+%---------------------------------------------------
+
+Para calcular $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$, inicia-se com o cálculo de $\bar{\mathbf{A}}$. Como $\bar{\mathbf{A}} = \sqrt{\mathbf{a}}\sqrt{\mathbf{a}}^t$ então
+%
+\begin{eqnarray*}\label{132a}
+\bar{\mathbf{A}} 
+&=& \left(\begin{array}{cccc}
+ (\bar{\mathbf{A}})_{11} & (\bar{\mathbf{A}})_{12}  & \ldots & (\bar{\mathbf{A}})_{1N} \\
+ (\bar{\mathbf{A}})_{21} & (\bar{\mathbf{A}})_{22} & \ldots & (\bar{\mathbf{A}})_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+ (\bar{\mathbf{A}})_{N1} & (\bar{\mathbf{A}})_{N2} & \ldots & (\bar{\mathbf{A}})_{NN}  \\
+\end{array}\right) = \left(\begin{array}{cccc}
+ \sqrt{a_1} \sqrt{a_1} &  \sqrt{a_1} \sqrt{a_2}  & \ldots &  \sqrt{a_1} \sqrt{a_N} \\
+\sqrt{a_2} \sqrt{a_1} &  \sqrt{a_2} \sqrt{a_2} & \ldots &  \sqrt{a_2} \sqrt{a_N} \\
+\vdots & \vdots & \ddots & \vdots \\
+\sqrt{a_N} \sqrt{a_1} &  \sqrt{a_N} \sqrt{a_2} & \ldots &  \sqrt{a_N} \sqrt{a_N},
+\end{array}\right)
+\end{eqnarray*} 
+%
+de dimensão $N \times N$. Assim, $\bar{\mathbf{a}} = \mathrm{vec}(\bar{\mathbf{A}})$ é dada esquematicamente como,
+%
+\begin{equation}
+\label{eq133a}
+\bar{\mathbf{a}}^t = \left(\begin{array}{cccc}  (\bar{\mathbf{A}})_{11} \  (\bar{\mathbf{A}})_{21} \ ... \  (\bar{\mathbf{A}})_{N1} \  (\bar{\mathbf{A}})_{12} \  (\bar{\mathbf{A}})_{22} \ ... \  (\bar{\mathbf{A}})_{N2} \ ... \  (\bar{\mathbf{A}})_{1N} \  (\bar{\mathbf{A}})_{2N} \ ... \  (\bar{\mathbf{A}})_{NN}
+\end{array}\right),
+\end{equation} 
+%
+e tem-se que $\text{vec}(\bar{\mathbf{A}})\text{vec}(\bar{\mathbf{A}})^t = \bar{\mathbf{a}} \bar{\mathbf{a}}^t $.
+
+Observando-se o vetor $\bar{\mathbf{a}}$, pode-se notar que
+%
+\begin{equation*}
+\label{eq134a}
+\bar{a}_i
+= \left\{\begin{array}{rll}
+\sqrt{a_i}\sqrt{a_1}, & \hbox{se} & 1 \leq i \leq N \\
+\sqrt{a_{i-N}} \sqrt{a_2}, & \hbox{se} & N+1 \leq i \leq 2N \\
+\vdots &  & \vdots \\
+\sqrt{a_{i-(N^2 -N)}}  \sqrt{a_N}, & \hbox{se} & (N-1)(N+1) \leq i \leq N^2,
+\end{array}\right.
+\end{equation*} 
+%
+onde $a_i$, com $i = 1,...,N^2$, é o parâmetro de energia do composto $i$. A estrutura de $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$ é análoga à de $\bar{\mathbf{z}}\bar{\mathbf{z}}^t$. Assim, pode-se escrever  
+%
+\begin{equation}
+\label{eq135a}
+\bar{\mathbf{a}}\bar{\mathbf{a}}^t = \left(\begin{array}{cccc}
+ \bar{\mathbf{A}}\sqrt{a_1} \sqrt{a_1} & \bar{\mathbf{A}}\sqrt{a_1} \sqrt{a_2}  & \ldots & \bar{\mathbf{A}}\sqrt{a_1} \sqrt{a_N} \\
+ \bar{\mathbf{A}}\sqrt{a_2} \sqrt{a_1} & \bar{\mathbf{A}}\sqrt{a_2} \sqrt{a_2} & \ldots & \bar{\mathbf{A}}\sqrt{a_2} \sqrt{a_N} \\
+\vdots & \vdots & \ddots & \vdots \\
+ \bar{\mathbf{A}}\sqrt{a_N} \sqrt{a_1} & \bar{\mathbf{A}}\sqrt{a_N}\sqrt{a_2} & \ldots & \bar{\mathbf{A}}\sqrt{a_N}\sqrt{a_N} \\
+\end{array}\right).
+\end{equation} 
+%
+Em outras palavras, por exemplo, sendo a matriz $\mathbf{A}_{ij}$ de dimensão $N \times N$, dada por
+%
+\begin{eqnarray}\label{136a}
+\mathbf{A}_{ij} = \bar{\mathbf{A}}\sqrt{a_i}\sqrt{a_j}  =  \left(\begin{array}{cccc}
+ (\bar{\mathbf{A}})_{11}\sqrt{a_i}\sqrt{a_j} & (\bar{\mathbf{A}})_{12}\sqrt{a_i}\sqrt{a_j}  & \ldots & (\bar{\mathbf{A}})_{1N}\sqrt{a_i}\sqrt{a_j} \\
+ (\bar{\mathbf{A}})_{21}\sqrt{a_i}\sqrt{a_j} & (\bar{\mathbf{A}})_{22}\sqrt{a_i}\sqrt{a_j} & \ldots & (\bar{\mathbf{A}})_{2N}\sqrt{a_i}\sqrt{a_j} \\
+\vdots & \vdots & \ddots & \vdots \\
+ (\bar{\mathbf{A}})_{N1}\sqrt{a_i}\sqrt{a_j} & (\bar{\mathbf{A}})_{N2}\sqrt{a_i}\sqrt{a_j} & \ldots & (\bar{\mathbf{A}})_{NN}\sqrt{a_i}\sqrt{a_j} \\
+\end{array}\right)
+\end{eqnarray}
+%
+a matriz $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$ é,
+%
+\begin{eqnarray}\label{137a}
+\bar{\mathbf{a}}\bar{\mathbf{a}}^t =  \left(\begin{array}{cccc}
+ \mathbf{A}_{11} & \mathbf{A}_{12} & \ldots & \mathbf{A}_{1N} \\
+ \mathbf{A}_{21} & \mathbf{A}_{22} & \ldots & \mathbf{A}{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+ \mathbf{A}_{N1} & \mathbf{A}_{N2} & \ldots & \mathbf{A}_{NN}\\
+\end{array}\right).
+\end{eqnarray}   
+
+Para encontrar a localização das entradas de $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$ pode-se utilizar a Tabela \ref{tab:Tabela3}, adaptando as entradas da tabela para o parâmetro de energia $\mathbf{a}$. A análise é feita de forma análoga à que foi feita para a matriz das composições.
+
+Conhecendo-se a estrutura da matriz $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$ com a Equação \ref{137a}, da mesma forma nem todos os cálculos são necessários para se obter $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$, da Equação \ref{ja}, pois ela é uma matriz simétrica da mesma forma que foi observado para a matriz $\mathbf{\Psi}$. Além disso, devido a outras simetrias, nem todas as integrais precisam ser calculadas, visto que algumas terão o mesmo resultado dentre as $N^2(N^2+1)/2$, que em princípio precisam ser calculadas.
+
+%=====================================================================
+\subsection{Processos isotérmicos e não-isotérmicos --- média da matriz do parâmetro de energia} 
+%======================================================
+
+Nesta seção, detalha-se a determinação da matriz $\mathbf{J}$, que depende da natureza do processo termodinâmico. Em especial, considera-se processos isotérmicos e não-isotérmicos.  
+
+\textbf{Processos isotérmicos}: No caso de processos isotérmicos, isto é, que não dependem da temperatura, como nem $\mathbf{a}$ nem $\bar{\mathbf{d}}$ dependem de $\mathbf{z}$ (ou seja, são constantes em $\mathbf{z}$ e em $T$), então, a Equação \ref{dd} tem que ser reescrita porque não há integral no parâmetro de energia. Assim, 
+%
+\begin{eqnarray}\label{113}
+\epsilon(\mathbf{R}) =  \bar{\mathbf{d}}^t \left(\left(\int_{S_{N-1}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t \ d\mathbf{z} \right) \bullet \left( \int_{S_{\mathbf{a}}} \bar{\mathbf{a}}\bar{\mathbf{a}}^t \  d\mathbf{a} \right)\right) \bar{\mathbf{d}} = \bar{\mathbf{d}}^t (\mathbf{\Psi} \bullet \mathbf{J})\bar{\mathbf{d}},
+\end{eqnarray}
+%
+onde $\mathbf{\Psi} = \int_{S_{N-1}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d\mathbf{z}$ e $\mathbf{J} = \bar{\mathbf{a}}\bar{\mathbf{a}}^t$, uma vez que a integral em $\mathbf{a}$ desaparece.
+
+\textbf{Processos não-isotérmicos:} Para os processos não-isotérmicos, ou seja, que dependem da temperatura, o intervalo de variação da temperatura é denotado por [$T_1 , T_2$]. Assim, a integral do erro é calculada em função da composição $\mathbf{z}$ e da temperatura. Então
+%
+\begin{eqnarray}\label{139}
+\epsilon(\mathbf{R}) = \bar{\mathbf{d}}^t \left(\left(\int_{S_{N-1}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d\mathbf{z}\right) \bullet \left(\int_{T_1}^{T_2}\bar{\mathbf{a}} \bar{\mathbf{a}}^t \| \frac{d\mathbf{a}}{dT} \| \right)\right)\bar{\mathbf{d}} =  \bar{\mathbf{d}}^t \left(\mathbf{\Psi} \bullet \mathbf{J} \right)\bar{\mathbf{d}},
+\end{eqnarray}
+%
+na qual $\mathbf{\Psi}$ é dada pela Equação \ref{ja} igual à do caso isotérmico, e $\mathbf{J}$ é agora calculado integrando-se na temperatura. Ou seja,
+%
+\begin{equation}
+\label{eq140}
+\mathbf{J} = \int_{T_1}^{T_2}\bar{\mathbf{a}}\bar{\mathbf{a}}^t \| \frac{d\mathbf{a}}{dT}\| dT,
+\end{equation} 
+%
+onde $\mathbf{a}$ agora depende da temperatura. O intervalo de variação da temperatura é escolhido de acordo com o problema a ser avaliado e com a mistura utilizada. 
+
+Para efeitos de ilustração, apresenta-se o cálculo da estrutura da entrada 11 da matriz $\mathbf{J}$, $(\mathbf{J})_{11}$. Pela estrutura de $\bar{\mathbf{a}}\bar{\mathbf{a}}^t$, dada pela Equação \ref{eq135a}, e Equação \ref{eq3}, a integral da entrada $(\mathbf{J})_{11}$ é dada por
+%
+\begin{eqnarray*}\label{143}
+\int_{T_1}^{T_2}(\bar{\mathbf{A}})_{11}\sqrt{a_1} \sqrt{a_1}dT 
+&=&  \int_{T_1}^{T_2} a_1^2 dT = \int_{T_1}^{T_2}  \left(\frac{\Omega_a(RT_{c_1})^2}{P_{c_1}}\alpha_1(T)\right)^2dT \nonumber \\
+&=& \int_{T_1}^{T_2}  \left(\frac{\Omega_a(RT_{c_1})^2}{P_{c_1}}[1+S(1-T_r^{0,5})]^2\right)^2dT,
+\end{eqnarray*}
+%
+onde $T_r = \frac{T}{T_{c_i}}$ e $S = S_0 + S_1 \omega_i - S_2 \omega_i^2$.
+
+Os valores de $S_0, S_1, S_2$ e $\Omega_a$ variam de acordo com a equação de estado cúbica utilizada e podem ser encontrados na Tabela \ref{tab:Tabela1}. Os valores de $T_{c_i}$, $P_{c_i}$ e $\omega_i$ são dados de acordo com a mistura utilizada, e alguns exemplos de misturas são apresentados no Capítulo \ref{Cap7}. Assim, basta substituir os parâmetros conhecidos e a única variável desconhecida é a temperatura, que é a variável de integração. De forma análoga, obtem-se as demais entradas de $\mathbf{J}$.
+
+
+%--------------------------------------------------------
+\section{Média no espaço composicional restrito}
+%--------------------------------------------------
+
+Quando a concentração de um ou mais componentes $z_i$, com $i=1,...,N$, é limitada superiormente, basta integrar o erro $e^2$ apenas em uma parte do $(N-1)$ - simplexo $S_{N-1}$. 
+
+Assume-se que a composição do elemento $k$, $z_k$, é limitada superiormente, e seja $z_k^{max} < 1$ esse limitante. Assim, nem todas as composições descritas pelo complexo composicional (simplexo) são admitidas. Pode-se escrever que $z_k       \leq z_k^{max} <1$, $k \in \kappa$, onde $\kappa$ denota o conjunto de índices dos componentes para os quais o limite superior é aplicado. Para descrever geometricamente o conjunto das composições admitidas, introduz-se o conjunto $S_{(N-1)_k}$ \cite{gaganis2013improved}
+%
+\begin{eqnarray*}\label{144a}
+S_{(N-1)_k} = \left\{\mathbf{z} \in S_{N-1}: z_k^{max} \leq z_k \leq 1 \right\},
+\end{eqnarray*}
+%
+que consiste de composições não admitidas, dado que se assume que $z_k$ é limitado superiormente. Então, também  $\cup_{k \in \kappa} S_{(N-1)_k}$  consiste de composições não admitidas.
+
+Observa-se que, se $z_k^{max} + z_l^{max} > 1$, $\text{para todo} \ k,l \in \kappa$ , $k\neq l$, então $S_{(N-1)_k} \cap S_{(N-1)_l} = \emptyset$. 
+Para evitar isso, assume-se que $z_k^{max} + z_l^{max} \leq 1$, para todo $k,l \in \kappa , k\neq l$. Neste caso, o conjunto de composições admissíveis é dado pelo complementar em $S_{N-1}$ das composições não admitidas, {\em i.e.}
+%
+\begin{eqnarray*}\label{145a}
+S_{N-1} \ \backslash \ (\bigcup_{k \in \kappa} S_{(N-1)_k}),
+\end{eqnarray*}
+%
+e
+%
+\begin{eqnarray*}
+S_{N-1} = \left( S_{N-1} \ \backslash \ (\cup_{k \in \kappa} S_{(N-1)_k}) \right) \cup \ (\cup_{k \in \kappa} S_{(N-1)_k}),
+\end{eqnarray*}
+%
+onde a união é disjunta. Assim, o erro de aproximação é dado por 
+%
+\begin{eqnarray}\label{t35a}
+\epsilon^{\kappa}
+& = &  \epsilon  - \sum_{k \in \kappa}^{} \left( \int_{S_{\mathbf{a}}} \int_{S_{(N-1)_k}} e^2 d\mathbf{z}d\mathbf{a} \right) \nonumber \\
+& = & \int_{S_{\mathbf{a}}} \int_{S_{N-1}} e^2 d\mathbf{z}d\mathbf{a} - \sum_{k \in \kappa}^{} \left( \int_{S_{\mathbf{a}}} \int_{S_{(N-1)_k}} e^2 d\mathbf{z}d\mathbf{a} \right),
+\end{eqnarray}
+%
+com $\epsilon$ dado pela Equação \ref{dd}. Como visto anteriormente e de acordo com a Equação \ref{t35a}, considerando apenas o conjunto das composições não admitidas, tem-se 
+%
+\begin{eqnarray*}\label{147a}
+\int_{S_{\mathbf{a}}} \int_{S_{(N-1)_k}} e^2 d\mathbf{z}d\mathbf{a} = \bar{\mathbf{d}}^t \mathbf{W}_k \bar{\mathbf{d}},
+\end{eqnarray*}
+%
+onde $\mathbf{W}_k = \mathbf{\Psi}_k \bullet \mathbf{J}$ \ e \ $\mathbf{\Psi}_k = \int_{S_{(N-1)_k}} \bar{\mathbf{z}} \bar{\mathbf{z}}^t d \mathbf{z}$ é calculada conforme visto na seção \ref{ma}, considerando apenas o conjunto $S_{(N-1)_k}$. Assim,
+%
+\begin{eqnarray*}\label{148a}
+\mathbf{\Psi}_k 
+&=& \int_{S_{(N-1)_k}} \bar{\mathbf{z}}\bar{\mathbf{z}}^t d\mathbf{z} = \int_{z_k^{max}}^{1} \int_{z_1 = 0}^{1-z_k} ... \int_{z_{N-1} = 0}^{1- z_1 - ... - z_{N-2}}  \bar{\mathbf{z}}\bar{\mathbf{z}}^t \underbrace{dz_{N-1} ... dz_1}_{\text{sem}\ dz_k} dz_k.
+\end{eqnarray*}
+
+Portanto,
+%
+\begin{eqnarray*}
+\epsilon^{\kappa}
+&=& \bar{\mathbf{d}}^t\mathbf{W}_k \bar{\mathbf{d}} - \sum_{k \in \kappa}^{} \bar{\mathbf{d}}^t\mathbf{W}_k \bar{\mathbf{d}} = \bar{\mathbf{d}}^t(\mathbf{W} - \sum_{k \in \kappa}^{}\mathbf{W}_k)\bar{\mathbf{d}} = \bar{\mathbf{d}}^t \mathbf{W}^{\kappa} \bar{\mathbf{d}},
+\end{eqnarray*}
+%
+\begin{eqnarray*}
+\mathbf{W}^{\kappa} = \mathbf{W}-\sum_{k \in \kappa}^{}\mathbf{W}_k = \mathbf{\Psi}^{\kappa}\bullet \mathbf{J}, \ \text{e} \ \mathbf{\Psi}^{\kappa} = \mathbf{\Psi} - \sum_{k \in \kappa}^{}\mathbf{\Psi}_k. 
+\end{eqnarray*}
+%
+%\begin{figure}[!ht]{12cm}
+%  \caption{Composição em $\mathbb{R}^4$.} \label{rotulo5}
+%  \fbox{\includegraphics[scale=0.6]{Figuras/Fig5.png}}
+%  \legend{Simplexo tridimensional $S_3$ para misturas de 4 componentes. Aqui $0\leq z_i \leq1, \  0\leq z_1 + z_2 + z_3 \leq 1$ e $z_4$, que não é exibido, é tal que $z_4 = 1 - (z_1 + z_2 + z_3)$, ou seja, $ z_1 + z_2 + z_3 + z_4 = 1$}
+%\end{figure}
+%
+%\begin{figure}[!ht]{12cm}
+%  \caption{Composição em $\mathbb{R}^4$.} \label{rotulo6}
+%  \fbox{\includegraphics[scale=0.6]{Figuras/Fig6.png}}
+%  \legend{Simplexo tridimensional $S_3$ para misturas de 4 componentes.}
+%\end{figure}
+
+Existem muitas combinações de restrições que satisfazem o requisito de interseção vazia. Por exemplo, se $y_k^{\text{max}}>0,5$ para todo $k \in \kappa$, os espaços ``subtraídos", ou seja, das composições não admitidas, serão disjuntos dois a dois como sugere a Figura \ref{rotulo5}.
+
+Este requisito também pode ser observado para um baixo limite superior de um componente $k \in \kappa$, desde que para todos os outros componentes $l \neq k$, $l \in \kappa$, tenha-se que $z_l^{max} > 1 - z_k^{max}$, como sugere a Figura \ref{rotulo6}. 
+
+
