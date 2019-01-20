@@ -8,7 +8,7 @@ Este capítulo trata do equilíbrio de fases de sistemas não-reativos deduzindo as
 
 As condições de equilíbrio são modeladas e delas derivam certas relações que permitem, em algumas circunstâncias, determinar as propriedades termodinâmicas de um sistema quando o mesmo estiver em equilíbrio. 
  
-Em geral, um sistema é dito \textit{fechado} se está isolado do exterior, {\em i.e.}, não apresenta troca de quantidades físicas com o seu entorno. Um sistema está em \textit{equilíbrio} se não ocorrem alterações no seu interior. 
+Em geral, um sistema é dito \textit{fechado} se não apresenta troca de matéria entre o sistema e sua vizinhança. Um sistema está em \textit{equilíbrio} se não ocorrem alterações no seu interior. 
 
 Assim, um sistema fechado está em \textit{equilíbrio mecânico} se não ocorrem variações de pressão, em \textit{equilíbrio térmico} se não ocorrem variações de temperatura, em \textit{equilíbrio de fases} se não ocorrem transformações de uma fase em outra, em \textit{equilíbrio termodinâmico} se estiver em equilíbrio mecânico, térmico e de fases, e em \textit{equilíbrio químico} se não ocorrem variações na composição química do mesmo. As condições de equilíbrio mecânico e térmico são de mais simples formulação, ao passo que as condições de equilíbrio químico e de fases podem ser bastante elaboradas.
 
@@ -119,7 +119,7 @@ Observa-se que o sistema da eq. \ref{nxny} é equivalente ao sistema da eq. \ref{
 
 Para usar as composições ao invés dos números de mol das fases, deve-se incorporar as equações obtidas na proposição \ref{prop1} na formulação da conservação da massa, isto é, a eq. \ref{soma}. Nota-se que, conhecendo-se $n_i$, tem-se $z_i/n$ e tendo-se $z_i$ e $n$, obtém-se $n_i$, ou seja, são equivalentes. Estas considerações estão resumidas na tabela \ref{tab:4nova}. 
 
-Claramente, as equações de conservação da massa são insuficientes para deteerminar as frações molares da mistura. Assim, outras propriedades físicas da mistura precisam ser consideradas para resolver esse problema. É o que é feito na próxima seção.
+Claramente, as equações de conservação da massa são insuficientes para determinar as frações molares da mistura. Assim, outras propriedades físicas da mistura precisam ser consideradas para resolver esse problema. É o que é feito na próxima seção.
 %
 \begin{table}[h!]{}
 \centering
@@ -146,7 +146,7 @@ Ao se misturar diversos componentes (substâncias) em temperaturas, pressões e fa
 
 Durante este processo, o número de mols da componente $i$ na fase líquida, $n_i^L$, e na fase vapor, $n_i^V$, podem variar. Mas, pelo balanço de massa, a soma deles tem que ser constante, eq. \ref{ni}.  
 
-Para um sistema fechado em equilíbrio termodinâmico em que as temperaturas e pressões de equilíbrio sejam denotadas por $T$ e $P$, para um dado volume, $\bar{V}$, contendo um mol de uma mistura com $N$ componentes, devem ser satisfeitas a igualdade dos potenciais químicos das fases de cada componente, $\mu$, e o balanço de massa (de cada componente). Isso se expressa como
+Para um sistema fechado em equilíbrio termodinâmico em que as temperaturas e pressões de equilíbrio sejam denotadas por $T$ e $P$, para um dado volume, $\bar{V}$, contendo um mol de uma mistura com $N$ componentes, devem ser satisfeitas a igualdade dos potenciais químicos das fases de cada componente, $\mu$, e o balanço de massa (de cada componente). Isso se expressa como \cite{smith2000introducao}
 %
 \begin{subequations}\label{sistema1}
 \label{equilibrio}
@@ -212,9 +212,10 @@ constituindo um total de $2N+3$ equações e $2N+5$  variáveis ($\mathbf{x}_i$'s, 
 %--------------------------------------------------------
 \section{Fugacidade}
 \label{secFUG}
-%------------------------------------------------------			
+%------------------------------------------------------
 
-Considerando a dificuldade de se manipular os potenciais químicos, torna-se mais conveniente expressar o equilíbrio termodinâmico em função da fugacidade, exigindo a igualdade da fugacidade das fases -- isofugacidade -- para cada umas das componentes da mistura em questão. O potencial químico relaciona-se com a fugacidade pela equação
+A igualdade dos potenciais químicos foi o critério de equilíbrio estabelecido por Gibbs (mundo abstrato). Para voltar ao mundo real dos problemas físicos, \cite{Lewis} introduziu o conceito de fugacidade, que
+é uma propriedade que pode ser fisicamente medida, e estabeleceu novo critério de equilíbrio: a igualdade entre as fugacidades -- isofugacidade -- para cada uma das componentes da mistura em questão. O potencial químico relaciona-se com a fugacidade pela equação
 %
 \begin{equation}
 \label{eq11}
@@ -236,7 +237,7 @@ onde, por exemplo, $f_i^L$ é a fugacidade do componente $i$ na fase líquida da m
 f_i^L = f_i^{V}.
 \end{equation*}
 
-O coeficiente de fugacidade (ou coeficiente de atividade) da componente $i$ é definido pelo quociente
+O coeficiente de fugacidade da componente $i$ é definido pelo quociente
 %
 \begin{equation}
 \label{bb10}
@@ -254,18 +255,18 @@ Donde, a equação de isofugacidade para o componente $i$  é simplesmente
  \varphi_i^L x_i =  \varphi_i^V y_i, \ \ \text{com} \ \ i=1,\ldots, N.
 \end{equation}
 
-Em cada EDEC tem-se, devido às suas particularidades, uma expressão distinta para o coeficiente de fugacidade. Dentre as EDECs, a equação de PR é uma das equações de estado mais utilizadas atualmente em química e nas simulações da indústria do petróleo, devido à sua forma relativamente simples e boa acurácia. Por estes motivos, esta é utilizada nas simulações apresentadas neste livro. Na equação de PR, o logaritmo do coeficiente de fugacidade é dado pela equação
+Em cada EDEC tem-se, devido às suas particularidades, uma expressão distinta para o coeficiente de fugacidade. Dentre as EDECs, a equação de PR é uma das equações de estado mais utilizadas atualmente nas simulações da indústria do petróleo, devido à sua forma relativamente simples e boa acurácia. Por estes motivos, esta é utilizada nas simulações apresentadas neste livro. Na equação de PR, o logaritmo do coeficiente de fugacidade é dado pela equação \cite{terron2009termodinamica}
 %
 \begin{eqnarray}\label{eq15}
 \text{ln}\varphi_i &=& \frac{B_i}{B_m}(Z_m -1)-\text{ln}(Z_m -B_m) \nonumber \\
 &+& \frac{A_m}{2,282B_m}\left(\frac{B_i}{B_m}-2\frac{\psi_i}{a_m}\right)\text{ln}\left(\frac{Z_m +2,414B_m}{Z_m -0,414B_m}\right),
 \end{eqnarray}
 %
-onde $\psi_i = \sum_{j=1}^{N} a_{ij} z_j$ é o fator acêntrico, e o fator de compressibilidade, $Z_m$, é substituído (avaliado) por uma das raízes da eq. de estado termodinâmico \ref{eq7b22}, a menor, no caso da fase líquida, e a maior, no caso da fase vapor. Aqui, novamente $z_i$ representa a fração molar da componente $i$, em determinada fase. 
+onde $\psi_i = \sum_{j=1}^{N} a_{ij} z_j$, e o fator de compressibilidade, $Z_m$, é substituído (avaliado) por uma das raízes da eq. de estado termodinâmico \ref{eq7b22}, a menor, no caso da fase líquida, e a maior, no caso da fase vapor. Aqui, novamente $z_i$ representa a fração molar da componente $i$, em determinada fase. 
 
-Em outras palavras, conhecendo-se as raízes da equação de estado termodinãmico, eq. \ref{eq7b22}, pode-se  calcular os coeficientes de fugacidade do líquido e do vapor com a eq. \ref{eq15}. Se esses coeficientes produzirem fugacidades iguais, segundo a eq. \ref{eqf}, o equilíbrio termodinâmico ocorre.
+Em outras palavras, conhecendo-se as raízes da equação de estado, eq. \ref{eq7b22}, pode-se  calcular os coeficientes de fugacidade do líquido e do vapor com a eq. \ref{eq15}. Se esses coeficientes produzirem fugacidades iguais, segundo a eq. \ref{eqf}, o equilíbrio termodinâmico ocorre.
 
-A Tabela \ref{tab:Tabela2} mostra as equações do logaritmo do coeficiente de fugacidade para alguns tipos de EDECs. Recorda-se que os parâmetros de energia e covolume, $A_m$ e $B_m$, na eq. \ref{eq15} e também os coeficientes das EDEC's ($C$, $D$, $E$, eq.\ref{eq7b22}), são escritos em função das regras de misturas de VDW-1.
+A Tabela \ref{tab:Tabela2} mostra as equações do logaritmo do coeficiente de fugacidade para alguns tipos de EDECs. Recorda-se que os parâmetros de energia e covolume, $A_m$ e $B_m$, na eq. \ref{eq15} e também os coeficientes das EDEC's ($C$, $D$, $E$, eq.\ref{eq7b22}), são escritos em função das regras de misturas de VDW-1 \cite{terron2009termodinamica}.
 %
 \begin{table}[h!]{}
 	\caption{Expressão do logaritmo do coeficiente de fugacidade para o componente $i$ na mistura. }
@@ -373,7 +374,7 @@ x_N = 1- \sum_{j=1}^{N-1}x_j, \ \ \ y_N = 1- \sum_{j=1}^{N-1}y_j.
 
 Desta forma, $x_N$ e $y_N$ deixam de ser consideradas incógnitas (ou dados) em quaisquer dos problemas tratados, bastando para tanto substituir sua ocorrência pela representação dada pela eq. \ref{manter} em função das restantes composições. Denota-se por $\bar{\mathbf{x}}=(x_1,\cdots, x_{N-1})^t$ e analogamente $\bar{\mathbf{y}}=(y_1,\cdots, y_{N-1})^t$ os vetores da composição excluídas a última entrada de cada vetor composição. Assim, por exemplo, $\mathbf{x} = (\bar{\mathbf{x}}, x_N)^t$ e $x_N = 1- \sum_{i=1}^{N-1}x_i$, e as equações \ref{lab3.3} e \ref{lab4.4} passam a ser consideradas desnecessárias, sobrando apenas a eq. \ref{lab1.1}.
 
-Com o objetivo de propor um algoritmo para a obtenção dos pontos de bolha ou de orvalho, define-se a função vetorial $\mathbf{G}$, cujas entradas são  
+Com o objetivo de propor um algoritmo para a obtenção dos pontos de bolha ou de orvalho, define-se a função vetorial $\mathbf{S}$, cujas entradas são  
 %
 \begin{equation}
 \label{G}
@@ -397,12 +398,12 @@ ou simplesmente,
 \mathbf{G}(\bar{\mathbf{x}}, \bar{\mathbf{y}}, P, T) = 0,
 \end{equation} 
 %
-onde $\mathbf{G} = (G_1, \ldots, G_N)^t$.
+onde $\mathbf{G} = (S_1, \ldots, S_N)^t$.
 
 Retoma-se a discussão do cálculo do ponto de orvalho, onde $\bar{\mathbf{y}}= \bar{\mathbf{y}}_{\star} $ e $T=T_{\star}$ são assumidos conhecidos. Define-se então a função $\mathbf{F}$, dada por 
 %
 \begin{eqnarray}\label{sistema2_2}
-\mathbf{F}(\bar{\mathbf{x}},P) = \mathbf{G}(\bar{\mathbf{x}}, \bar{\mathbf{y}}_{\star}, P, T_{\star}).
+\mathbf{F}(\bar{\mathbf{x}},P) = \mathbf{S}(\bar{\mathbf{x}}, \bar{\mathbf{y}}_{\star}, P, T_{\star}).
 \end{eqnarray}
 
 Finalmente, o sistema a ser resolvido para o problema de orvalho, com $N$ equações e $N$ incógnitas, $\bar{\mathbf{x}}$ e $P$, é
@@ -425,7 +426,7 @@ Nesta seção são apresenta-se uma nova formulação da equação de equilíbrio termod
 
 Como já observado, o número de mols das substâncias nas fases líquida e vapor, $n_i^L$, $n_i^V$, $i=1,\ldots, N$, podem ser descritos alternativamente pelas composições $x_i$, $y_i$, e pelo número de mols das fases líquida e vapor, $n^L$, $n^V$, veja proposição \ref{prop11} e a tabela \ref{tab:Tabelaextra_nova}.
 
-Agora, mostra-se que $x_i$, $y_i$, $n^L$ e $n^V$, podem ser substituídas pela composição global $z_i$, pela razão das composições vapor/líquido, $\beta_i = y_i / x_i$ --- chamados de coeficientes de distribuição ---, pela fração molar da fase líquida $\phi^L=n^L/n$ e pelo total de mols da mistura, $n$. Ou seja, troca-se $2N+2$ variáveis por igual número de variáveis, conforme a seguinte proposição.
+Agora, mostra-se que $x_i$, $y_i$, $n^L$ e $n^V$, podem ser substituídas pela composição global $z_i$, pela razão das composições vapor/líquido, $\beta_i = y_i / x_i$ --- chamados de razão de equilíbrio líquido-vapor ---, pela fração molar da fase líquida $\phi^L=n^L/n$ e pelo total de mols da mistura, $n$. Ou seja, troca-se $2N+2$ variáveis por igual número de variáveis, conforme a seguinte proposição.
 %
 \begin{prop}\label{prop12} \begin{em} Conhecer $x_i$, $y_i$, com $i=1,\cdots,N$, $n^L$ e $n^V$ é equivalente a conhecer $z_i$, $\beta_i$, $\phi^L$ e $n$, com $i=1,\ldots,N$. Ou seja, sabendo-se $x_i$, $y_i$, com $i=1,\cdots,N$, $n^L$ e $n^V$, obtém-se $z_i$, $\beta_i$, $\phi^L$ e $n$, com $i=1,\ldots,N$, e vice-versa, explicitamente, 
 %

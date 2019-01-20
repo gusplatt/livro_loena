@@ -4,21 +4,23 @@
 
 \section{Introdução}
 
-Em sistemas multicomponentes é conveniente formulá-lo utilizando a energia livre de Gibbs. Como visto, o potencial químico está relacionado à fugacidade. Da mesma forma, o mesmo se relaciona com a energia livre de Gibbs, $\mathcal{G}$, (que portanto está relacionada a fugacidade), pela relação
+O teorema de redução para sistemas multicomponentes é formulado utilizando a energia livre de Gibbs \cite{hendriks1988reduction}. O potencial químico se relaciona com a energia livre de Gibbs, $\mathcal{G}$, (que portanto está relacionada à fugacidade), pela relação \cite{smith2000introduccao}
 %
 \begin{equation}\label{mui}
 \mu_i \equiv  \left(\frac{\partial \mathcal{G}}{\partial n_i}\right)_{P,T,n_{j\neq i}}.
 \end{equation}
 
-Assim, a igualdade dos potencias químicos das duas fases é equivalente à igualdade das derivadas energia livre de Gibbs nas mesmas duas fases para as componentes da mistura. Passa-se então para a análise baseada na energia livre de Gibbs, a fim de explanar o método de redução de dimensionalidade.  
+Assim, a igualdade dos potencias químicos das duas fases é equivalente à igualdade das derivadas da energia livre de Gibbs nas mesmas duas fases para as $n$ componentes da mistura. Passa-se então para a análise baseada na energia livre de Gibbs, a fim de explanar o método de redução de dimensionalidade.  
 
-A energia livre de Gibbs para as fases líquida e vapor são, respectivamente
+A energia livre de Gibbs para as fases líquida, de composição $\mathbf{x}$, e vapor, de composição $\mathbf{y}$, são respectivamente
 %
 \begin{equation}\label{Gibbstotal2}
-\mathcal{G}^L = nRT \left(\sum_{i=1}^{N} x_i  \text{ln}x_i + g(\mathbf{x},P,T)\right),  \ \  \mathcal{G}^V = nRT\left(\sum_{i=1}^{N} y_i  \text{ln}y_i + g(\mathbf{y},P,T)\right).
+\mathcal{G}^L = nRT \left(\sum_{i=1}^{N} x_i  \text{ln}x_i + g(\mathbf{x},P,T)\right),  \ \  \mathcal{G}^V = nRT\left(\sum_{i=1}^{N} y_i  \text{ln}y_i + g(\mathbf{y},P,T)\right),
 \end{equation}
+%
+onde a função $g$ representa a energia livre de Gibbs molar em excesso por $RT$.
 
-Com o objetivo de obter um sistema de equações para o equilíbrio termodinâmico com um número menor de incógnitas (variáveis), se considera novas variáveis ($\mathbf{q}$) para representar a composição das fases, relacionadas linearmente com a composição. A redução se dá quando não sejam necessárias todas as novas variáveis para descrever com boa aproximação a composição da fase.
+Com o objetivo de obter um sistema de equações para o equilíbrio termodinâmico com um número menor de incógnitas (variáveis), se considera novas variáveis ($\mathbf{q}=(q_1, \cdots, q_N)^t$) para representar a composição das fases, relacionadas linearmente com a composição. A redução se dá quando não sejam necessárias todas as novas variáveis para descrever com boa aproximação a composição da fase.
 
 Seja $\mathbf{u}^1, \ldots, \mathbf{u}^N$ uma base de $\mathbb{R}^N$, e define-se a matriz $U$, $N \times N$, cujas colunas são $\mathbf{u}^i$'s,
 %
@@ -32,7 +34,7 @@ Escrevendo-se a composição (na fase líquida ou vapor) $\mathbf{z}$ na nova base,
 \mathbf{z} = U\mathbf{q}, \ \ \text{ou} \ \ z_j =  \sum_{k=1}^{N} (U)_{jk} q_k,
 \end{equation} 
 %
-onde escolha apropriada da matriz mudança de base $U$, é discutida mais à frente. As entradas do vetor $\mathbf{q}$ são chamados \textit{parâmetros de redução} (da fase em questão, ou global, se $\mathbf{z}$ for a composição global).
+onde a escolha apropriada da matriz mudança de base $U$, é discutida mais à frente. As entradas do vetor $\mathbf{q}$ são chamados \textit{parâmetros de redução} (da fase em questão, ou global, se $\mathbf{z}$ for a composição global).
 
 Quando apenas $q_1, \ldots, q_r$ forem diferentes de zero, pode-se aplicar o teorema de redução \cite{hendriks1988reduction}, que será apresentado neste capítulo, para obter-se um sistema reduzido de equilíbrio termodinâmico. Mesmo quando os restantes termos de $\mathbf{q}$, $q_{r+1},\ldots, q_N$, não forem zero, mas forem suficientemente pequenos, pode-se considerá-los nulos e utilizar ainda essa redução.
 
