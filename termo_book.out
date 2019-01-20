@@ -1,0 +1,80 @@
+\BOOKMARK [0][-]{chapter*.3}{Pref\341cio}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Separa\347\343o de fases na ind\372stria de petr\363leo e g\341s}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Introdu\347\343o}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Uma demanda crescente por energia}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Equa\347\365es de estado e simuladores de processos de separa\347\343o}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.4}{O problema do grande n\372mero de componentes}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.5}{Aproxima\347\343o da matriz de intera\347\343o bin\341ria}{chapter.1}% 7
+\BOOKMARK [0][-]{chapter.2}{Equa\347\365es de estado}{}% 8
+\BOOKMARK [1][-]{section.2.1}{Modelagem termodin\342mica de uma subst\342ncia}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.2}{Formula\347\343o geral de equa\347\365es de estado c\372bicas para uma subst\342ncia}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{A equa\347\343o de Peng-Robinson}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.4}{Termodin\342mica de misturas}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.4.1}{Regras de mistura cl\341ssicas}{section.2.4}% 13
+\BOOKMARK [2][-]{subsection.2.4.2}{Formula\347\343o matricial das regras de mistura e regras de combina\347\343o}{section.2.4}% 14
+\BOOKMARK [2][-]{subsection.2.4.3}{Equa\347\343o de estado c\372bica para uma mistura}{section.2.4}% 15
+\BOOKMARK [1][-]{section.2.5}{Equa\347\343o de estado de Peng-Robinson para misturas}{chapter.2}% 16
+\BOOKMARK [0][-]{chapter.3}{Dist\342ncia entre matrizes}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Introdu\347\343o}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Norma, produto interno e dist\342ncia}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.3}{O operador vec}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.3.1}{Produtos internos no conjunto das matrizes}{section.3.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.2}{Propriedades do operador vec}{section.3.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Equil\355brio termodin\342mico l\355quido-vapor}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Balan\347o de massa}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Equil\355brio termodin\342mico}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{Fugacidade}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.4}{Equil\355brio l\355quido-vapor}{chapter.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.1}{Sistema n\343o-linear para o c\341lculo dos pontos de bolha e de orvalho}{section.4.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Uma formula\347\343o alternativa das equa\347\365es de equil\355brio termodin\342mico}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.5.1}{Vari\341veis para a descri\347\343o das fra\347\365es molares da mistura}{section.4.5}% 30
+\BOOKMARK [2][-]{subsection.4.5.2}{Equa\347\365es do equil\355brio segundo as novas vari\341veis}{section.4.5}% 31
+\BOOKMARK [1][-]{section.4.6}{Sistema n\343o-linear para o c\341lculo dos ponto de bolha e orvalho - vari\341veis alternativas}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.6.1}{ C\341lculo de ponto de bolha}{section.4.6}% 33
+\BOOKMARK [2][-]{subsection.4.6.2}{ C\341lculo de ponto de orvalho}{section.4.6}% 34
+\BOOKMARK [0][-]{chapter.5}{Teorema de redu\347\343o}{}% 35
+\BOOKMARK [1][-]{section.5.1}{Introdu\347\343o}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.2}{Potencial qu\355mico e a energia livre de Gibbs}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.3}{Aplica\347\343o do teorema de redu\347\343o ao problema f\355sico original}{chapter.5}% 38
+\BOOKMARK [0][-]{chapter.6}{Algoritmo de redu\347\343o}{}% 39
+\BOOKMARK [1][-]{section.6.1}{Introdu\347\343o}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.2}{Formula\347\343o variacional do m\351todo de redu\347\343o na norma de Frobenius}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.3}{Aplica\347\343o do m\351todo}{chapter.6}% 42
+\BOOKMARK [0][-]{chapter.7}{Dist\342ncia proveniente da energia}{}% 43
+\BOOKMARK [1][-]{section.7.1}{Introdu\347\343o}{chapter.7}% 44
+\BOOKMARK [1][-]{section.7.2}{Res\355duo de aproxima\347\343o}{chapter.7}% 45
+\BOOKMARK [1][-]{section.7.3}{Res\355duo de aproxima\347\343o total}{chapter.7}% 46
+\BOOKMARK [2][-]{subsection.7.3.1}{Espa\347o composicional \204 Simplexos}{section.7.3}% 47
+\BOOKMARK [2][-]{subsection.7.3.2}{Espa\347o dos par\342metros de energia}{section.7.3}% 48
+\BOOKMARK [2][-]{subsection.7.3.3}{M\351dia do res\355duo}{section.7.3}% 49
+\BOOKMARK [2][-]{subsection.7.3.4}{Dist\342ncia da energia}{section.7.3}% 50
+\BOOKMARK [1][-]{section.7.4}{Estrutura da matriz do produto interno}{chapter.7}% 51
+\BOOKMARK [2][-]{subsection.7.4.1}{Estrutura da matriz da composi\347\343o}{section.7.4}% 52
+\BOOKMARK [2][-]{subsection.7.4.2}{M\351dia da matriz da composi\347\343o}{section.7.4}% 53
+\BOOKMARK [2][-]{subsection.7.4.3}{Matriz do par\342metro de energia}{section.7.4}% 54
+\BOOKMARK [2][-]{subsection.7.4.4}{Processos isot\351rmicos e n\343o-isot\351rmicos \204 m\351dia da matriz do par\342metro de energia}{section.7.4}% 55
+\BOOKMARK [1][-]{section.7.5}{M\351dia no espa\347o composicional restrito}{chapter.7}% 56
+\BOOKMARK [0][-]{chapter.8}{Representa\347\343o de matrizes de posto fixo}{}% 57
+\BOOKMARK [1][-]{section.8.1}{Introdu\347\343o}{chapter.8}% 58
+\BOOKMARK [1][-]{section.8.2}{Considera\347\365es iniciais}{chapter.8}% 59
+\BOOKMARK [1][-]{section.8.3}{Soma de matrizes de posto um}{chapter.8}% 60
+\BOOKMARK [1][-]{section.8.4}{N\343o unicidade da representa\347\343o}{chapter.8}% 61
+\BOOKMARK [1][-]{section.8.5}{Compara\347\343o entre os problemas de minimiza\347\343o}{chapter.8}% 62
+\BOOKMARK [1][-]{section.8.6}{Compara\347\343o entre aproxima\347\365es de posto baixo}{chapter.8}% 63
+\BOOKMARK [0][-]{chapter.9}{Otimiza\347\343o do problema}{}% 64
+\BOOKMARK [1][-]{section.9.1}{Introdu\347\343o}{chapter.9}% 65
+\BOOKMARK [1][-]{section.9.2}{Conceitos b\341sicos de otimiza\347\343o de fun\347\343o}{chapter.9}% 66
+\BOOKMARK [1][-]{section.9.3}{Exist\352ncia de matrizes de posto menor aproximando a matriz de intera\347\343o bin\341ria}{chapter.9}% 67
+\BOOKMARK [1][-]{section.9.4}{Condi\347\365es de otimalidade}{chapter.9}% 68
+\BOOKMARK [1][-]{section.9.5}{M\351todo de Newton \204 dificuldades}{chapter.9}% 69
+\BOOKMARK [2][-]{subsection.9.5.1}{Singularidade da hessiana}{section.9.5}% 70
+\BOOKMARK [1][-]{section.9.6}{M\351todo da evolu\347\343o diferencial}{chapter.9}% 71
+\BOOKMARK [0][-]{chapter.10}{Algoritmo de redu\347\343o segundo a nova abordagem}{}% 72
+\BOOKMARK [1][-]{section.10.1}{Introdu\347\343o}{chapter.10}% 73
+\BOOKMARK [1][-]{section.10.2}{Aplica\347\343o do m\351todo}{chapter.10}% 74
+\BOOKMARK [0][-]{chapter.11}{Voltando das vari\341veis reduzidas \340s vari\341veis originais do problema}{}% 75
+\BOOKMARK [0][-]{chapter.12}{Resultados da aplica\347\343o para alguns exemplos de misturas}{}% 76
+\BOOKMARK [1][-]{section.12.1}{Introdu\347\343o}{chapter.12}% 77
+\BOOKMARK [1][-]{section.12.2}{Processo isot\351rmico}{chapter.12}% 78
+\BOOKMARK [1][-]{section.12.3}{Processo n\343o-isot\351rmico}{chapter.12}% 79
+\BOOKMARK [1][-]{section.12.4}{Conclus\365es}{chapter.12}% 80
